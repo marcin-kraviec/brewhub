@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header py-5">
+        <h1 style="text-align: center">Zaloguj się</h1>
+    </div>
+</div>
+<div class="container" style="max-width: 500px;">
+    <form>
+      <fieldset>
+        <div class="form-group">
+          <label for="exampleInputEmail1" class="form-label mt-4">Username</label>
+          <input class="form-control" placeholder="Enter username">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+          <input type="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1" class="form-label mt-4">Confirm password</label>
+          <input type="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="exampleSelect1" class="form-label mt-4">Select your age</label>
+          <select class="form-select" id="exampleSelect1">
+            <option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option>
+            <option>31</option><option>32</option><option>33</option><option>34</option><option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option>
+            <option>44</option><option>45</option><option>46</option><option>47</option><option>48</option><option>49</option><option>50</option><option>51</option><option>52</option><option>53</option><option>54</option><option>55</option><option>56</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleTextarea" class="form-label mt-4">Your bio</label>
+          <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+        </div>
+        <div class="form-check py-5">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+          I accept regulamin i pierdu pierdu
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%" >Register</button>
+      </fieldset>
+    </form>
+</div>
+
+{% endblock %}

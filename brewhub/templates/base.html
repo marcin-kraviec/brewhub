@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {%- block head %}
+        <meta charset="UTF-8">
+        <title>{% block title %}{{ title|default("Brewhub", true) }}{% endblock title %}</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/lux/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        {%- endblock head %}
+    </head>
+
+
+    <body>
+
+        {% block navbar %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container">
+              <a class="navbar-brand" href="#">Brewhub</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/test">Test</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/guestbook">Dupa1</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/chat">Dupa2</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/admin">Dupa3</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/logout">Log out</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/register">Registration</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/login">Sign in</a>
+                </li>
+              </ul>
+              <button type="button" class="btn btn-light"><img src="https://www.ordinatrix.com/wp-content/uploads/2018/06/user.png" style="max-height: 40px; max-width: 40px;"></button>
+              </div>
+          </div>
+        </nav>
+        {%- endblock navbar %}
+
+        {% block body -%}
+          {% block content -%}
+          {%- endblock content %}
+          {% block scripts %}
+          {%- endblock scripts %}
+        {%- endblock body %}
+
+        <div class="container">
+        <footer class="footer mt-auto py-3" style="background-color: white; position: absolute; bottom: auto;">
+            <span class="text-muted">Made by: Marcin Krawiec, Konrad Syrnik, Paulina Wieczorek</span>
+            | <a href="?lang=en">en</a>
+            | <a href="?lang=pl">pl</a>
+        </footer>
+        </div>
+
+    </body>
+</html>
+
