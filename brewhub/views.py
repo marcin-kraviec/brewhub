@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from brewhub import RegistrationForm
+from brewhub import RegistrationForm, LoginForm
 
 views = Blueprint('views', __name__)
 
@@ -26,4 +26,5 @@ def register():
 
 @views.route('/login')
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    return render_template('login.html', form=form)

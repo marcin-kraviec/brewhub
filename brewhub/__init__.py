@@ -16,6 +16,13 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField("Register")
 
 
+# Create a Login Form class
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField("Log in")
+
+
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "7&Fa2sa23j"
