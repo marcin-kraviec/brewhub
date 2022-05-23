@@ -3,7 +3,7 @@ from flask import Flask, render_template
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = "7&Fa2sa23j"
+
     app.debug = True
 
     @app.errorhandler(404)
