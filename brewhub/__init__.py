@@ -2,6 +2,11 @@ from flask import Flask, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, SelectField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired
+from flask import Flask, render_template, request, redirect, url_for, session
+import mysql.connector
+import logging
+import sys
+from brewhub.database_connector import DatabaseConnector
 
 
 # Create a Registration Form class
@@ -28,6 +33,7 @@ def create_app():
     app.config['SECRET_KEY'] = "7&Fa2sa23j"
     app.debug = True
 
+
     # Invalid URL
     @app.errorhandler(404)
     def page_not_found(e):
@@ -39,6 +45,9 @@ def create_app():
         return render_template('500.html'), 500
 
     from .views import views
+
+    db = DatabaseConnector
+    db.test()
 
     app.register_blueprint(views, url_prefix='/')
 

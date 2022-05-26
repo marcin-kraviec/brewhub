@@ -3,3 +3,4 @@ pyvenv.cfg
 Lib/
 Scripts/
 __pycache__/
+brewhub/database_config.py
