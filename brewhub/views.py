@@ -16,12 +16,13 @@ def test():
 
 @views.route('/register', methods=['GET', 'POST'])
 def register():
+    ages = list(range(18,100))
     username = None
     form = RegistrationForm()
     if form.validate_on_submit():
         username = form.username.data
         form.username.data = ''
-    return render_template('register.html', username=username, form=form)
+    return render_template('register.html', ages=ages, username=username, form=form)
 
 
 @views.route('/login')
