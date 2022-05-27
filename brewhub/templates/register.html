@@ -6,6 +6,7 @@
         <h1 style="text-align: center">Registration</h1>
     </div>
 </div>
+
 <div class="container" style="max-width: 500px;">
 {#    <form method="post">#}
 {#        {{  form.hidden_tag() }}#}
@@ -29,46 +30,48 @@
 {#        <br/><br/>#}
 {#        {{ form.submit(class="btn btn-primary", style="width: 100%") }}#}
 {#    </form>#}
-    <form>
+    <form action="{{ url_for('views.register') }}" method="post">
     <div class="form-group">
       <label for="exampleInputEmail1" class="form-label mt-4">Username</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+      <input type="text" name='username' class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username" required>
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input type="email" name='email' class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+      <input type="password" name='password' class="form-control" id="password" placeholder="Enter password" required>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1" class="form-label mt-4">Confirm password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Retype password">
+      <input type="password" name='confirm_password' class="form-control" id="confirm_password" placeholder="Retype password" required>
     </div>
     <div class="form-group">
-      <label for="exampleSelect1" class="form-label mt-4">Example select</label>
-      <select class="form-select" id="exampleSelect1">
+      <label for="exampleSelect1" class="form-label mt-4">Select Your age</label>
+      <select name='age' class="form-select" id="age">
           {% for i in ages %}
               <option>{{ i }}</option>
           {%  endfor %}
       </select>
+{#        <input type="number" name='age' class="form-control" id="age" placeholder="Your age" required>#}
     </div>
     <div class="form-group">
       <label for="exampleTextarea" class="form-label mt-4">Your bio</label>
-      <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+      <textarea class="form-control" name='bio' id="bio" rows="3"></textarea>
     </div>
         <br/>
     <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+    <input class="form-check-input" name='agreement' type="checkbox" value="" id="agreement" required>
     <label class="form-check-label" for="flexCheckDefault">
         <small> I agree to the Terms and Conditions </small>
     </label>
     </div>
         <br/>
+        <div class="msg"><a>{{ msg }}</a></div>
     <button type="submit" class="btn btn-primary" style="width: 100%">Register</button>
-    <br/><br/>
+    <br/><br/><br/><br/>
     </form>
 </div>
 

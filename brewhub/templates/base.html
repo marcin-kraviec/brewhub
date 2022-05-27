@@ -12,11 +12,11 @@
     </head>
 
     <body>
-
         {% block navbar %}
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container">
-              <a class="navbar-brand" href="/">Brewhub</a>
+              <a class="navbar-brandar" href="/"><div class="logo-image"><img src="https://cdn-icons-png.flaticon.com/512/184/184482.png" width="50" height="50"></div></a>
+              <a class="navbar-brand" href="/" style="font-size: 25px">&nbsp;&nbsp;Brewhub</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -37,33 +37,55 @@
                   <a class="nav-link" href="/admin">Dupa3</a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="/logout">Log out</a>
+                  <a class="nav-link" href="/beer_styles">Beer styles</a>
+                </li>
+                {% if session['logged_in'] == True %}
+                <li class="nav-item active">
+                  <a class="nav-link" href="/add_recipe">Add recipe</a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="/register">Registration</a>
+                  <a class="nav-link" href="/my_recipes">My recipes</a>
                 </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="/login">Sign in</a>
-                </li>
+                {% endif %}
               </ul>
-              <button type="button" class="btn btn-light"><img src="https://www.ordinatrix.com/wp-content/uploads/2018/06/user.png" style="max-height: 30px; max-width: 30px;"></button>
+              <div class="nav-item dropdown">
+              <button type="button" class="btn btn-light nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://www.ordinatrix.com/wp-content/uploads/2018/06/user.png" style="max-height: 30px; max-width: 30px;"></button>
+              <div class="dropdown-menu">
+              {% if session['logged_in'] == True %}
+              <a class="dropdown-item" style="font-size: 17px">Logged as: <strong style="font-size: 17px">{{ session['username'] }}</strong></a>
+              <a class="dropdown-item" href="/profile">View profile</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-muted"  href="/logout">Log out</a>
+              {% else %}
+              <a class="dropdown-item" disabled ><strong style="font-size: 17px">Not logged in</strong></a>
+              <a class="dropdown-item" href="/login">Log in</a>
+                  <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-muted" href="/register">Create account</a>
+              {% endif %}
+              </div>
+              </div>
               </div>
           </div>
         </nav>
         {%- endblock navbar %}
-
+        <br/>
         {% block body -%}
-          {% block content -%}
-          {%- endblock content %}
-          {% block scripts %}
-          {%- endblock scripts %}
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-dismissible fade show alert-warning" style="text-align: center" >
+          <button type="button" class="btn-close fade" data-bs-dismiss="alert" ></button>
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% block content -%}
+        {%- endblock content %}
+        {% block scripts %}
+        {%- endblock scripts %}
         {%- endblock body %}
-
-        <div class="container">
-        <footer class="footer py-4" style="background-color: white; position: absolute; bottom: auto;">
-            <span class="text-muted">Made by: Marcin Krawiec, Konrad Syrnik, Paulina Wieczorek</span>
-            | <a href="?lang=en">en</a>
-            | <a href="?lang=pl">pl</a>
+        <div class="container-fluid">
+        <hr class="my-4">
+        <footer class="footer py-3" style="background-color: white; bottom: auto; text-align: center">
+            <span class="text-muted" style="text-align: center">Made by: Marcin Krawiec, Konrad Syrnik, Paulina Wieczorek</span><br/>
+            <small class="text-muted" style="font-size: 10px; text-align: center">© 1999-2022, Brewhub Certification Program | <a href="/terms">Terms & Conditions</a></small>
         </footer>
         </div>
 
