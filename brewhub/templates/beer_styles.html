@@ -1,6 +1,177 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container">
-
+    <div class="element col-lg-3" style="display: inline-block; vertical-align: top;">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                1. STANDARD AMERICAN BEER
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+              <div class="accordion-body">
+                This category describes everyday American beers that have a wide public appeal. Containing both ales and lagers, the beers of this
+category are not typically complex, and have smooth, accessible flavors. The ales tend to have lager-like qualities, or are designed to
+appeal to mass-market lager drinkers as crossover beers. Mass-market beers with a more international appeal or origin are
+described in the International Lager category.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                2. INTERNATIONAL LAGER
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+              <div class="accordion-body">
+                International lagers are the premium, industrial, mass-market lagers produced in most countries in the world. Whether developed
+from American or European styles, they all tend to have a fairly uniform character and are heavily marketed. Loosely derived from
+original Pilsner-type lagers, with colored variations having additional malt flavors while retaining a broad appeal. In many
+countries, the styles will be referred to by their local country names. The use of the term “international” doesn’t mean that any beers
+are actually labeled as such, but is more of a categorization of similar beers produced worldwide.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                3. CZECH LAGER
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
+              <div class="accordion-body">
+                Czech lagers are generally divided by gravity class (draft, lager, special) and color (pale, amber, dark). The Czech names for these
+categories are světlé (pale), polotmavé (amber), and tmavé (dark). The gravity classes are výčepní (draft, 7–10 °P), ležák (lager, 11–12
+°P), and speciální (special, 13 °P+). Pivo is of course the Czech word for beer. The division into gravity classes is similar to the German
+groupings of schankbier, vollbier, and starkbier, although at different gravity ranges. Czech beers within the classes are often simply
+referenced by their gravity. There are often variations within the gravity-color groupings, particularly within the speciální class. The
+style guidelines combine some of these classes, while other beers in the Czech market are not described (such as the strong Czech
+Porter). This is not to imply that the categories below are the full coverage of Czech beers, simply a way of grouping some of the more
+commonly found types for judging purposes.
+Czech lagers in general are differentiated from German and other Western lagers in that German lagers are almost always fully
+attenuated, while Czech lagers can have a slight amount of unfermented extract remaining in the finished beer. This helps provide a
+slightly higher finishing gravity (and thus slightly lower apparent attenuation), slightly fuller body and mouthfeel, and a richer,
+slightly more complex flavor profile in equivalent color and strength beers. German lagers tend to have a cleaner fermentation
+profile, while Czech lagers are often fermented cooler (7–10 °C) and for a longer time, and can have a light, barely noticeable (near
+threshold) amount of diacetyl that often is perceived more as a rounded body than overtly in aroma and flavor [significant buttery
+diacetyl is a flaw]. Czech lager yeast strains are not always as clean and attenuative as German strains, which helps achieve the
+higher finishing gravity (along with the mashing methods and cooler fermentation). Czech lagers are traditionally made with
+decoction mashes (often double decoction), even with modern malts, while most modern German lagers are made with infusion or
+step infusion mashes. These differences characterize the richness, mouthfeel, and flavor profile that distinguishes Czech lagers.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                4. PALE MALTY EUROPEAN LAGER
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample" style="">
+              <div class="accordion-body">
+                This style category contains pale German lagers of vollbier to starkbier strength that emphasize the flavor of Pilsner malt in the
+balance while remaining well-attenuated.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                5. PALE BITTER EUROPEAN BEER
+              </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample" style="">
+              <div class="accordion-body">
+                This category describes German-origin beers that are pale and have an even to bitter balance with a mild to moderately strong hoppy
+character featuring traditional German hops. They are generally bottom-fermented or are lagered to provide a smooth profile, and
+are well-attenuated as are most German beers.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSix">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                6. AMBER MALTY EUROPEAN LAGER
+              </button>
+            </h2>
+            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample" style="">
+              <div class="accordion-body">
+                This category groups amber-colored, German-origin, bottom-fermented lagerbiers that have a malty balance and are vollbier to
+starkbier in strength.
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="element col-lg-8" style="display: inline-block;">
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">American Light Lager</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 1A</h6>
+            <p class="card-text">A highly carbonated, very light-bodied,
+nearly flavorless lager designed to be consumed very cold. Very
+refreshing and thirst-quenching.
+Aroma: Low malt aroma options<br/></p>
+            <a href="{{ url_for('views.beer_styles_2', s='American Light Lager') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        <div class="card" style="display: inline-block;">
+          <div class="card-body">
+            <h4 class="card-title">American Lager</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 1B</h6>
+            <p class="card-text">A very pale, highly-carbonated, lightbodied,
+well-attenuated lager with a very neutral flavor profile
+and low bitterness. Served very cold, it can be a very refreshing
+and thirst-quenching drink.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='American Lager') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Cream Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 1C</h6>
+            <p class="card-text">A clean, well-attenuated, highly
+carbonated, flavorful American “lawnmower” beer. Easily
+drinkable, smooth, and refreshing, with more character than
+typical American lagers, yet still subtle and restrained.</p>
+            <a href="#" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">American Wheat Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 1D</h6>
+            <p class="card-text">A pale, refreshing grainy, doughy, or
+bready wheat beer with a clean fermentation profile and a
+variable hop character and bitterness. Its lighter body and
+higher carbonation contribute to its easy-drinking nature.</p>
+            <a href="#" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">International Pale Lager</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 2A</h6>
+            <p class="card-text">A highly-attenuated pale lager without
+strong flavors, typically well-balanced and highly carbonated.
+Served cold, it is refreshing and thirst-quenching.</p>
+            <a href="#" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">International Amber Lager</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 2B</h6>
+            <p class="card-text">A smooth, easily-drinkable, malty
+amber lager with a flavorful caramel or toast character. Usually
+fairly well-attenuated, often with an adjunct quality and
+restrained bitterness.
+Aroma: Low to moderate</p>
+            <a href="#" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+    </div>
     </div>
 {% endblock %}

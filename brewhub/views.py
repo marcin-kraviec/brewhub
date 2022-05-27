@@ -113,6 +113,16 @@ def register():
     return render_template('register.html', ages=ages)
 
 
-@views.route('/beer_styles')
+@views.route('/beer_styles', methods=['GET', 'POST'])
 def beer_styles():
     return render_template('beer_styles.html')
+
+
+@views.route('/beer_styles/<string:s>', methods=['GET', 'POST'])
+def beer_styles_2(s=''):
+    print(s)
+    styles = list()
+    styles.append('American Light Lager')
+    styles.append('American Lager')
+    print(styles)
+    return render_template('beer_styles_2.html', s=s)
