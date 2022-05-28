@@ -39,6 +39,9 @@ def login():
             session['logged_in'] = True
             session['id'] = existing_users[0][0]
             session['username'] = existing_users[0][1]
+            session['email'] = existing_users[0][2]
+            session['age'] = existing_users[0][4]
+            session['bio'] = existing_users[0][5]
             # Redirect to home page
             flash('Logged in successfully!')
             return render_template('index.html')
@@ -54,6 +57,9 @@ def logout():
     session.pop('logged_in', None)
     session.pop('id', None)
     session.pop('username', None)
+    session.pop('email', None)
+    session.pop('age', None)
+    session.pop('bio', None)
     # Redirect to login page
     flash('Logged out...')
     return render_template('index.html')
@@ -115,14 +121,32 @@ def register():
 
 @views.route('/beer_styles', methods=['GET', 'POST'])
 def beer_styles():
-    return render_template('beer_styles.html')
+    american_light_lager = ['balanced', 'bottom-fermented', 'lagered', 'north-america', 'pale-color', 'pale-lager-family', 'session-strength', 'traditional-style']
+    filters = request.form.getlist('filter')
+    check_american_light_lager = all(item in american_light_lager for item in filters)
+    if not filters:
+        check_american_light_lager = False
+    print(filters)
+    print(check_american_light_lager)
+    return render_template('beer_styles.html', check_american_light_lager=check_american_light_lager)
 
 
 @views.route('/beer_styles/<string:s>', methods=['GET', 'POST'])
 def beer_styles_2(s=''):
     print(s)
-    styles = list()
-    styles.append('American Light Lager')
-    styles.append('American Lager')
-    print(styles)
+    # styles = list()
+    # styles.append('American Light Lager')
+    # styles.append('American Lager')
+    # print(styles)
     return render_template('beer_styles_2.html', s=s)
+
+
+@views.route('/profile')
+def view_profile():
+    return render_template('profile.html')
+
+
+@views.route('/edit_profile', methods=['GET', 'POST'])
+def edit_profile():
+    ages = list(range(18, 100))
+    return render_template('edit_profile.html', ages=ages)

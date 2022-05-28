@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h3>Edit Your Profile</h3>
+        <hr class="my-4">
+        <form action="{{ url_for('views.edit_profile') }}" method="post">
+            <div style="display: inline-block"><h5>Username:</h5></div>
+            <div class="form-group" style="display: inline-block">
+                <input type="text" name='username' class="form-control" id="username" aria-describedby="emailHelp" placeholder={{ session['username'] }} required>
+            </div>
+            <br/><br/>
+            <div style="display: inline-block"><h5>Email:</h5></div>
+            <div class="form-group" style="display: inline-block">
+                <input type="email" name='email' class="form-control" id="email" aria-describedby="emailHelp" placeholder={{ session['email'] }} required>
+            </div>
+            <br/><br/>
+            <div style="display: inline-block"><h5>Age:</h5></div>
+            <div class=form-group" style="display: inline-block">
+                <select name='age' class="form-select" id="age">
+                {% for i in ages %}
+                    {% if i != session['age'] %}
+                        <option>{{ i }}</option>
+                    {% else %}
+                        <option selected>{{ i }}</option>
+                    {% endif %}
+                {%  endfor %}
+                </select>
+            </div>
+            <br/><br/>
+            <div style="display: inline-block; vertical-align: center" ><h5>Bio:</h5></div>
+            <div class="form-group" style="display: inline-block">
+                <textarea class="form-control" name='bio' id="bio" rows="3" placeholder={{ session['bio'] }}></textarea>
+            </div>
+        <br/>
+        <hr class="my-4">
+        </form>
+        <h5>Your recipes:</h5>
+    </div>
+
+{% endblock %}

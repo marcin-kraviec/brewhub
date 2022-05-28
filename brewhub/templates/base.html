@@ -54,6 +54,7 @@
               {% if session['logged_in'] == True %}
               <a class="dropdown-item" style="font-size: 17px">Logged as: <strong style="font-size: 17px">{{ session['username'] }}</strong></a>
               <a class="dropdown-item" href="/profile">View profile</a>
+              <a class="dropdown-item" href="/edit_profile">Edit profile</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item text-muted"  href="/logout">Log out</a>
               {% else %}
