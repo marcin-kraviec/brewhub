@@ -35,7 +35,7 @@ def login():
         existing_users = db.select_from('users', "\'" + username + "\'", "\'" + str(password_hash_hex) + "\'")
         print(existing_users)
         # If account exists in accounts table in out database
-        if username == existing_users[0][1] and str(password_hash_hex) == existing_users[0][3]:
+        if existing_users != [] and username == existing_users[0][1] and str(password_hash_hex) == existing_users[0][3]:
             session['logged_in'] = True
             session['id'] = existing_users[0][0]
             session['username'] = existing_users[0][1]
