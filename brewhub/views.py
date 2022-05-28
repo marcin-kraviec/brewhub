@@ -121,14 +121,21 @@ def register():
 
 @views.route('/beer_styles', methods=['GET', 'POST'])
 def beer_styles():
+
     american_light_lager = ['balanced', 'bottom-fermented', 'lagered', 'north-america', 'pale-color', 'pale-lager-family', 'session-strength', 'traditional-style']
+    american_lager = ['balanced', 'bottom-fermented', 'lagered', 'north-america', 'pale-color', 'pale-lager-family', 'standard-strength', 'traditional-style']
+
     filters = request.form.getlist('filter')
+
     check_american_light_lager = all(item in american_light_lager for item in filters)
+    check_american_lager = all(item in american_lager for item in filters)
+
     if not filters:
         check_american_light_lager = False
+        check_american_lager = False
     print(filters)
     print(check_american_light_lager)
-    return render_template('beer_styles.html', check_american_light_lager=check_american_light_lager)
+    return render_template('beer_styles.html', check_american_light_lager=check_american_light_lager, check_american_lager=check_american_lager)
 
 
 @views.route('/beer_styles/<string:s>', methods=['GET', 'POST'])
