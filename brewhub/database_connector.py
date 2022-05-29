@@ -69,3 +69,14 @@ class DatabaseConnector:
             return data
         except (mysql.connector.Error, AttributeError) as e:
             logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def update(name, username, new_username, new_email, new_bio):
+        query = 'UPDATE %s SET username=%s, email=%s, bio=%s WHERE username=%s' %(name, new_username, new_email, new_bio, username)
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            DatabaseConnector.database.commit()
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))

@@ -45,6 +45,7 @@ def login():
             session['id'] = existing_users[0][0]
             session['username'] = existing_users[0][1]
             session['email'] = existing_users[0][2]
+            session['password'] = existing_users[0][3]
             session['age'] = existing_users[0][4]
             session['bio'] = existing_users[0][5]
             # Redirect to home page
@@ -126,15 +127,28 @@ def register():
 
 @views.route('/beer_styles', methods=['GET', 'POST'])
 def beer_styles():
-    american_light_lager = {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'country': 'north-america', 'color': 'pale-color', 'family': 'pale-lager-family', 'strength': 'session-strength', 'style': 'traditional-style'}
-    american_lager = {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'country': 'north-america', 'color': 'pale-color', 'family': 'pale-lager-family', 'strength': 'standard-strength', 'style': 'traditional-style'}
-    cream_ale = {'balance': 'balanced', 'fermentation': 'any-fermentation', 'country': 'north-america', 'color': 'pale-color', 'family': 'pale-ale-family', 'strength': 'standard-strength', 'style': 'traditional-style'}
-    american_wheat_beer = {'fermentation': 'any-fermentation', 'balance': 'balanced', 'style': 'craft-style', 'country': 'north-america', 'color': 'pale-color', 'strength': 'standard-strength', 'family': 'wheat-beer-family'}
-    international_pale_lager = {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'color': 'pale-color', 'family': 'pale-lager-family', 'strength': 'standard-strength', 'style': 'traditional-style'}
-    international_amber_lager = {'color': 'amber-color', 'family': 'amber-lager-family', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'malty': 'malty', 'strength': 'standard-strength', 'style': 'traditional-style'}
+    american_light_lager = {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered',
+                            'country': 'north-america', 'color': 'pale-color', 'family': 'pale-lager-family',
+                            'strength': 'session-strength', 'style': 'traditional-style'}
+    american_lager = {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered',
+                      'country': 'north-america', 'color': 'pale-color', 'family': 'pale-lager-family',
+                      'strength': 'standard-strength', 'style': 'traditional-style'}
+    cream_ale = {'balance': 'balanced', 'fermentation': 'any-fermentation', 'country': 'north-america',
+                 'color': 'pale-color', 'family': 'pale-ale-family', 'strength': 'standard-strength',
+                 'style': 'traditional-style'}
+    american_wheat_beer = {'fermentation': 'any-fermentation', 'balance': 'balanced', 'style': 'craft-style',
+                           'country': 'north-america', 'color': 'pale-color', 'strength': 'standard-strength',
+                           'family': 'wheat-beer-family'}
+    international_pale_lager = {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered',
+                                'color': 'pale-color', 'family': 'pale-lager-family', 'strength': 'standard-strength',
+                                'style': 'traditional-style'}
+    international_amber_lager = {'color': 'amber-color', 'family': 'amber-lager-family',
+                                 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'malty': 'malty',
+                                 'strength': 'standard-strength', 'style': 'traditional-style'}
 
     # put each beer style to one list
-    styles = [american_light_lager, american_lager, cream_ale, american_wheat_beer, international_pale_lager, international_amber_lager]
+    styles = [american_light_lager, american_lager, cream_ale, american_wheat_beer, international_pale_lager,
+              international_amber_lager]
 
     # get sectional parameters from html file
     balance = request.form.getlist('balance')
@@ -148,7 +162,8 @@ def beer_styles():
     style = request.form.getlist('style')
 
     # put all parameters into one dictionary
-    filters = {'balance': balance, 'fermentation': fermentation, 'lager': lager, 'malty': malty, 'country': country, 'color': color, 'family': family, 'strength': strength, 'style': style}
+    filters = {'balance': balance, 'fermentation': fermentation, 'lager': lager, 'malty': malty, 'country': country,
+               'color': color, 'family': family, 'strength': strength, 'style': style}
 
     check_american_light_lager = False
     check_american_lager = False
@@ -157,7 +172,8 @@ def beer_styles():
     check_international_pale_lager = False
     check_international_amber_lager = False
 
-    checks = [check_american_light_lager, check_american_lager, check_cream_ale, check_american_wheat_beer, check_international_pale_lager, check_international_amber_lager]
+    checks = [check_american_light_lager, check_american_lager, check_cream_ale, check_american_wheat_beer,
+              check_international_pale_lager, check_international_amber_lager]
 
     for i in range(len(styles)):
         if (styles[i].get('balance') in filters.get('balance') or filters.get('balance') == []) \
@@ -208,5 +224,22 @@ def view_profile():
 
 @views.route('/edit_profile', methods=['GET', 'POST'])
 def edit_profile():
-    ages = list(range(18, 100))
-    return render_template('edit_profile.html', ages=ages)
+    if request.method == 'POST':
+        new_username = request.form['username']
+        new_email = request.form['email']
+        new_bio = request.form['bio']
+        password = request.form['password']
+
+        password_hash = hashlib.sha256(password.encode('utf-8'))
+        password_hash_hex = password_hash.hexdigest()
+
+        if password_hash_hex == session['password']:
+            db.update('users', "\'" + session['username'] + "\'", "\'" + new_username + "\'", "\'" + new_email + "\'", "\'" + new_bio + "\'")
+            session['username'] = new_username
+            session['email'] = new_email
+            session['bio'] = new_bio
+            flash('The profile has been successfully updated')
+        else:
+            flash('Incorrect password')
+
+    return render_template('edit_profile.html')
