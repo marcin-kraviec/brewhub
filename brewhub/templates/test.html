@@ -1,1 +1,93 @@
-<h1>TEST</h1>
+<style>
+    body{
+  font-family:sans-serif;
+  font-weight:bold;
+  font-size: 30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+}
+.cont{
+  width:720px;
+}
+.container{
+  display:flex;
+  flex-wrap:wrap;
+  width:720px;
+  justify-content:flex-start;
+}
+.single-item{
+  width:200px;
+  height:200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background-color:#f3f3f3;
+  margin: 20px;
+  border-radius: 10px;
+  color:#888;
+}
+.pagination{
+
+  padding:20px;
+
+  &,
+  *{
+    user-select: none;
+  }
+
+  a{
+    display:inline-block;
+    padding:0 10px;
+    cursor:pointer;
+    &.disabled{
+      opacity:.3;
+      pointer-events: none;
+    cursor:not-allowed;
+    }
+    &.current{
+      background:#f3f3f3;
+    }
+  }
+}
+</style>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="jquery.easyPaginate.js"></script>
+
+<script>
+    $('#easyPaginate').easyPaginate({
+	paginateElement: 'single-item',
+	elementsPerPage: 3,
+	effect: 'climb'
+});
+</script>
+
+<div class="cont">
+  <div class="container">
+    <div class="single-item">1</div>
+    <div class="single-item">2</div>
+    <div class="single-item">3</div>
+    <div class="single-item">4</div>
+    <div class="single-item">5</div>
+    <div class="single-item">6</div>
+    <div class="single-item">7</div>
+    <div class="single-item">8</div>
+    <div class="single-item">9</div>
+    <div class="single-item">10</div>
+    <div class="single-item">11</div>
+    <div class="single-item">12</div>
+    <div class="single-item">13</div>
+    <div class="single-item">14</div>
+    <div class="single-item">15</div>
+    <div class="single-item">16</div>
+    <div class="single-item">17</div>
+    <div class="single-item">18</div>
+    <div class="single-item">19</div>
+    <div class="single-item">20</div>
+    <div class="single-item">21</div>
+    <div class="single-item">22</div>
+    <div class="single-item">23</div>
+  </div>
+</div>

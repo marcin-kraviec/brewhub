@@ -16,10 +16,19 @@
             <label class="form-check-label" for="flexCheckDefault">
                 <small> Bottom-fermented </small>
             </label><br/>
+        <input class="form-check-input" name='filter' type="checkbox" value="any-fermentation">
+            <label class="form-check-label" for="flexCheckDefault">
+                <small> Any-fermentation </small>
+            </label><br/>
             <br/>
         <input class="form-check-input" name='filter' type="checkbox" value="lagered">
             <label class="form-check-label" for="flexCheckDefault">
                 <small> Lagered </small>
+            </label><br/>
+            <br/>
+        <input class="form-check-input" name='filter' type="checkbox" value="malty">
+            <label class="form-check-label" for="flexCheckDefault">
+                <small> Malty </small>
             </label><br/>
             <br/>
         <input class="form-check-input" name='filter' type="checkbox" value="north-america">
@@ -31,10 +40,22 @@
             <label class="form-check-label" for="flexCheckDefault">
                 <small> Pale-color </small>
             </label><br/>
+        <input class="form-check-input" name='filter' type="checkbox" value="amber-color">
+            <label class="form-check-label" for="flexCheckDefault">
+                <small> Amber-color </small>
+            </label><br/>
             <br/>
         <input class="form-check-input" name='filter' type="checkbox" value="pale-lager-family">
             <label class="form-check-label" for="flexCheckDefault">
                 <small> Pale-lager-family </small>
+            </label><br/>
+        <input class="form-check-input" name='filter' type="checkbox" value="wheat-beer-family">
+            <label class="form-check-label" for="flexCheckDefault">
+                <small> Wheat-beer-family </small>
+            </label><br/>
+        <input class="form-check-input" name='filter' type="checkbox" value="amber-lager-family">
+            <label class="form-check-label" for="flexCheckDefault">
+                <small> Amber-lager-family </small>
             </label><br/>
             <br/>
         <input class="form-check-input" name='filter' type="checkbox" value="session-strength">
@@ -49,6 +70,10 @@
         <input class="form-check-input" name='filter' type="checkbox" value="traditional-style">
             <label class="form-check-label" for="flexCheckDefault">
                 <small> Traditional-style </small>
+            </label><br/>
+        <input class="form-check-input" name='filter' type="checkbox" value="craft-style">
+            <label class="form-check-label" for="flexCheckDefault">
+                <small> Craft-style </small>
             </label><br/>
             <br/>
         <button type="submit" class="btn btn-primary btn-sm" style="width: 150px">Filter</button>
@@ -189,6 +214,8 @@ and thirst-quenching drink.</p>
           </div>
         </div>
         {% endif %}
+
+        {% if check_cream_ale %}
         <div class="card" style="display: inline-block">
           <div class="card-body">
             <h4 class="card-title">Cream Ale</h4>
@@ -197,9 +224,12 @@ and thirst-quenching drink.</p>
 carbonated, flavorful American “lawnmower” beer. Easily
 drinkable, smooth, and refreshing, with more character than
 typical American lagers, yet still subtle and restrained.</p>
-            <a href="#" class="btn btn-primary btn-sm">More</a>
+            <a href="{{ url_for('views.beer_styles_2', s='Cream Ale') }}" class="btn btn-primary btn-sm">More</a>
           </div>
         </div>
+        {% endif %}
+
+        {% if check_american_wheat_beer %}
         <div class="card" style="display: inline-block">
           <div class="card-body">
             <h4 class="card-title">American Wheat Beer</h4>
@@ -208,9 +238,12 @@ typical American lagers, yet still subtle and restrained.</p>
 bready wheat beer with a clean fermentation profile and a
 variable hop character and bitterness. Its lighter body and
 higher carbonation contribute to its easy-drinking nature.</p>
-            <a href="#" class="btn btn-primary btn-sm">More</a>
+            <a href="{{ url_for('views.beer_styles_2', s='American Wheat Beer') }}" class="btn btn-primary btn-sm">More</a>
           </div>
         </div>
+        {% endif %}
+
+        {% if check_international_pale_lager %}
         <div class="card" style="display: inline-block">
           <div class="card-body">
             <h4 class="card-title">International Pale Lager</h4>
@@ -218,9 +251,12 @@ higher carbonation contribute to its easy-drinking nature.</p>
             <p class="card-text">A highly-attenuated pale lager without
 strong flavors, typically well-balanced and highly carbonated.
 Served cold, it is refreshing and thirst-quenching.</p>
-            <a href="#" class="btn btn-primary btn-sm">More</a>
+            <a href="{{ url_for('views.beer_styles_2', s='International Pale Lager') }}" class="btn btn-primary btn-sm">More</a>
           </div>
         </div>
+        {% endif %}
+
+        {% if check_international_amber_lager %}
         <div class="card" style="display: inline-block">
           <div class="card-body">
             <h4 class="card-title">International Amber Lager</h4>
@@ -230,9 +266,10 @@ amber lager with a flavorful caramel or toast character. Usually
 fairly well-attenuated, often with an adjunct quality and
 restrained bitterness.
 Aroma: Low to moderate</p>
-            <a href="#" class="btn btn-primary btn-sm">More</a>
+            <a href="{{ url_for('views.beer_styles_2', s='International Amber Lager') }}" class="btn btn-primary btn-sm">More</a>
           </div>
         </div>
+        {% endif %}
     </div>
     </div>
 

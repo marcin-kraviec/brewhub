@@ -124,18 +124,32 @@ def beer_styles():
 
     american_light_lager = ['balanced', 'bottom-fermented', 'lagered', 'north-america', 'pale-color', 'pale-lager-family', 'session-strength', 'traditional-style']
     american_lager = ['balanced', 'bottom-fermented', 'lagered', 'north-america', 'pale-color', 'pale-lager-family', 'standard-strength', 'traditional-style']
+    cream_ale = ['balanced', 'any-fermentation', 'north-america', 'pale-color', 'pale-ale-family', 'standard-strength', 'traditional-style']
+    american_wheat_beer = ['any-fermentation', 'balanced', 'craft-style', 'north-america', 'pale-color', 'standard-strength', 'wheat-beer-family']
+    international_pale_lager = ['balanced', 'bottom-fermented', 'lagered', 'pale-color', 'pale-lager-family', 'standard-strength', 'traditional-style']
+    international_amber_lager = ['amber-color', 'amber-lager-family', 'bottom-fermented', 'lagered', 'malty', 'standard-strength', 'traditional-style']
 
     filters = request.form.getlist('filter')
 
     check_american_light_lager = all(item in american_light_lager for item in filters)
     check_american_lager = all(item in american_lager for item in filters)
+    check_cream_ale = all(item in cream_ale for item in filters)
+    check_american_wheat_beer = all(item in american_wheat_beer for item in filters)
+    check_international_pale_lager = all(item in international_pale_lager for item in filters)
+    check_international_amber_lager = all(item in international_amber_lager for item in filters)
 
     if not filters:
         check_american_light_lager = False
         check_american_lager = False
+        check_cream_ale = False
+        check_american_wheat_beer = False
+        check_international_pale_lager = False
+        check_international_amber_lager = False
+
     print(filters)
     print(check_american_light_lager)
-    return render_template('beer_styles.html', check_american_light_lager=check_american_light_lager, check_american_lager=check_american_lager)
+    return render_template('beer_styles.html', check_american_light_lager=check_american_light_lager, check_american_lager=check_american_lager, check_cream_ale=check_cream_ale, check_american_wheat_beer=check_american_wheat_beer,
+                           check_international_pale_lager=check_international_pale_lager, check_international_amber_lager=check_international_amber_lager)
 
 
 @views.route('/beer_styles/<string:s>', methods=['GET', 'POST'])
