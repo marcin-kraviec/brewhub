@@ -14,6 +14,11 @@ def home():
     return render_template('index.html')
 
 
+@views.route('/categories')
+def categories():
+    return render_template('categories.html')
+
+
 @views.route('/test')
 def test():
     return render_template('test.html')
@@ -131,20 +136,20 @@ def beer_styles():
 
     filters = request.form.getlist('filter')
 
-    check_american_light_lager = all(item in american_light_lager for item in filters)
-    check_american_lager = all(item in american_lager for item in filters)
-    check_cream_ale = all(item in cream_ale for item in filters)
-    check_american_wheat_beer = all(item in american_wheat_beer for item in filters)
-    check_international_pale_lager = all(item in international_pale_lager for item in filters)
-    check_international_amber_lager = all(item in international_amber_lager for item in filters)
+    check_american_light_lager = any(item in american_light_lager for item in filters)
+    check_american_lager = any(item in american_lager for item in filters)
+    check_cream_ale = any(item in cream_ale for item in filters)
+    check_american_wheat_beer = any(item in american_wheat_beer for item in filters)
+    check_international_pale_lager = any(item in international_pale_lager for item in filters)
+    check_international_amber_lager = any(item in international_amber_lager for item in filters)
 
     if not filters:
-        check_american_light_lager = False
-        check_american_lager = False
-        check_cream_ale = False
-        check_american_wheat_beer = False
-        check_international_pale_lager = False
-        check_international_amber_lager = False
+        check_american_light_lager = True
+        check_american_lager = True
+        check_cream_ale = True
+        check_american_wheat_beer = True
+        check_international_pale_lager = True
+        check_international_amber_lager = True
 
     print(filters)
     print(check_american_light_lager)
