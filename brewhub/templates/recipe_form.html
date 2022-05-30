@@ -1,0 +1,308 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+      <form action="{{ url_for('views.add_recipe') }}" method="post">
+        <h4>Recipe info</h4>
+        <div>
+            <div class="form-group" style="display: inline-block; width:500px">
+                <input type="text" name="recipe_name" class="form-control" id="recipe_name" placeholder="Enter recipe name">
+            </div>
+            <div class="form-group" style="display: inline-block; width:320px">
+                <select class="form-select" id="exampleSelect1">
+                    <option selected>Choose style</option>
+                    {% for style in styles %}
+                        <option>{{ style }}</option>
+                    {%  endfor %}
+                </select>
+            </div>
+            <div class="form-group" style="display: inline-block; width:230px">
+                <select class="form-select" id="exampleSelect2">
+                    <option selected>Choose type</option>
+                    <option>All grain</option>
+                    <option>Partial mash</option>
+                    <option>Extract</option>
+                </select>
+            </div>
+            <div class="form-group" style="display: inline-block; width:230px">
+                <select class="form-select" id="exampleSelect2">
+                    <option selected>Choose visibility</option>
+                    <option>Public</option>
+                    <option>Private</option>
+                </select>
+            </div>
+        </div>
+        <hr class="my-4">
+        <h4>Batch info</h4>
+        <div>
+            <div class="form-group">
+                <div class="input-group mb-3" style="width:320px">
+                    <input type="text" class="form-control" placeholder="Enter batch size">
+                    <span class="input-group-text">L</span>
+                </div>
+            </div>
+            <div>
+                <div class="form-group" style="display: inline-block">
+                    <div class="input-group mb-3" style="width:320px">
+                        <input type="text" class="form-control" placeholder="Enter boiling time">
+                        <span class="input-group-text">min</span>
+                    </div>
+                </div>
+                <div class="form-group" style="display: inline-block">
+                    <div class="input-group mb-3" style="width:320px">
+                        <input type="text" class="form-control" placeholder="Enter evaporation">
+                        <span class="input-group-text">%/h</span>
+                    </div>
+                </div>
+                <div class="form-group" style="display: inline-block">
+                    <div class="input-group mb-3" style="width:320px">
+                        <input type="text" class="form-control" placeholder="Enter boiling losses">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="form-group" style="display: inline-block">
+                    <div class="input-group mb-3" style="width:320px">
+                        <input type="text" class="form-control" placeholder="Enter fermentation losses">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-warning">Calculate</button>
+        </div>
+
+        <hr class="my-4">
+        <p>Boil size: </p>
+        <p>Wort size: </p>
+        <hr class="my-4">
+        <h4>Fermentables</h4>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 800px">Ingredient</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-secondary">
+                        <th scope="row">
+                            <select class="form-select" id="exampleSelect1">
+                                <option selected>Choose ingredient</option>
+                                {% for style in styles %}
+                                <option>{{ style }}</option>
+                                {%  endfor %}
+                            </select>
+                        </th>
+                        <td>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Enter amount">
+                                <span class="input-group-text">kg</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-warning">Add row</button>
+        <hr class="my-4">
+        <h4>Hops</h4>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 450px">Hop</th>
+                        <th scope="col" style="width: 250px">Usage</th>
+                        <th scope="col" style="width: 300px">Time</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-secondary">
+                        <th scope="row">
+                            <select class="form-select" id="exampleSelect1">
+                                <option selected>Choose hop</option>
+                                {% for style in styles %}
+                                <option>{{ style }}</option>
+                                {%  endfor %}
+                            </select>
+                        </th>
+                        <td>
+                            <div class="input-group mb-3">
+                                <select class="form-select" id="exampleSelect1">
+                                    <option selected>Choose usage</option>
+                                    <option>Boil</option>
+                                    <option>Aroma</option>
+                                    <option>Dry</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Enter time">
+                                <select class="input-group-text" id="exampleSelect1" >
+                                    <option selected>min</option>
+                                    <option>days</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Enter amount">
+                                <span class="input-group-text">g</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-warning">Add row</button>
+        <hr class="my-4">
+        <h4>Others</h4>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 450px">Ingredient</th>
+                        <th scope="col" style="width: 280px">Amount</th>
+                        <th scope="col">Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-secondary">
+                        <th scope="row">
+                            <select class="form-select" id="exampleSelect1">
+                                <option selected>Choose ingredient</option>
+                                {% for style in styles %}
+                                <option>{{ style }}</option>
+                                {%  endfor %}
+                            </select>
+                        </th>
+                        <td>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Enter amount">
+                                <span class="input-group-text">g</span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-warning">Add row</button>
+        <hr class="my-4">
+        <h4>Fermentation</h4>
+        <div>
+            <div class="form-group" style="display: inline-block">
+                <div class="input-group mb-3" style="width:500px">
+                    <select class="form-select" id="exampleSelect1">
+                        <option selected>Choose yeast</option>
+                        {% for style in styles %}
+                         <option>{{ style }}</option>
+                        {%  endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" style="display: inline-block">
+                <div class="input-group mb-3" style="width:390px">
+                    <input type="text" class="form-control" placeholder="Enter primary fermentation time">
+                    <span class="input-group-text">days</span>
+                </div>
+            </div>
+            <div class="form-group" style="display: inline-block">
+                <div class="input-group mb-3" style="width:390px">
+                    <input type="text" class="form-control" placeholder="Enter secondary fermentation time">
+                    <span class="input-group-text">days</span>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <h4>Mash</h4>
+            <div class="form-group">
+                <div class="input-group mb-3" style="width:320px">
+                    <input type="text" class="form-control" placeholder="Enter expected efficiency">
+                    <span class="input-group-text">%</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3" style="width:320px">
+                    <input type="text" class="form-control" placeholder="Enter water/grain ratio">
+                    <span class="input-group-text">L/kg</span>
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Temperature</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-secondary">
+                        <th scope="row">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Enter Temperature">
+                                <span class="input-group-text">°C</span>
+                            </div>
+                        </th>
+                        <td>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Enter time">
+                                <span class="input-group-text">min</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-warning">Add step</button>
+
+        <hr class="my-4">
+        <h4>Details</h4>
+        <div>
+            <div>
+                <span>Original gravity: </span>
+                <span style="float: right;">1.020 - 1.030 </span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <br>
+            <div>
+                <span>Final gravity: </span>
+                <span style="float: right;">1.005 - 1.010 </span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <br>
+            <div>
+                <span>IBU: </span>
+                <span style="float: right;">20 - 30 </span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <br>
+            <div>
+                <span>SRM: </span>
+                <span style="float: right;">10 - 15</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <br>
+            <div>
+                <span>ABV: </span>
+                <span style="float: right;">4 - 5</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <h4>Notes</h4>
+        <div class="form-group">
+            <textarea class="form-control" id="exampleTextarea" rows="5"></textarea>
+        </div>
+      <br>
+      <button type="submit" class="btn btn-primary" style="width: 100%">Save recipe</button>
+      </form>
+    </div>
+
+
+{% endblock %}

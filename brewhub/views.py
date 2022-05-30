@@ -154,3 +154,9 @@ def edit_profile():
             flash('The profile has been successfully updated')
 
     return render_template('edit_profile.html')
+
+@views.route('/add_recipe')
+def add_recipe():
+    styles = ['American Light Lager', 'American Lager', 'Cream Ale', 'American Wheat Beer', 'International Pale Lager',
+              'International Amber Lager']
+    return render_template('recipe_form.html', styles=styles)
