@@ -70,6 +70,10 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Malty </small>
                                 </label><br/>
+                            <input class="form-check-input" name='malty' type="checkbox" value="hoppy">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Hoppy </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
@@ -84,6 +88,10 @@
                             <input class="form-check-input" name='country' type="checkbox" value="north-america">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> North-America </small>
+                                </label><br/>
+                            <input class="form-check-input" name='country' type="checkbox" value="central-europe">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Central-Europe </small>
                                 </label><br/>
                           </div>
                         </div>
@@ -126,6 +134,14 @@
                             <input class="form-check-input" name='family' type="checkbox" value="amber-lager-family">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Amber-lager-family </small>
+                                </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="dark-lager-family">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Dark-lager-family </small>
+                                </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="pilsner-family">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Pilsner-family </small>
                                 </label><br/>
                           </div>
                         </div>
@@ -257,6 +273,61 @@ fairly well-attenuated, often with an adjunct quality and
 restrained bitterness.
 Aroma: Low to moderate</p>
             <a href="{{ url_for('views.beer_styles_2', s='International Amber Lager') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[6] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">International Dark Lager</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 2C</h6>
+            <p class="card-text">A darker, richer, and somewhat sweeter version of international pale lager with a little more body and flavor, but equally restrained in bitterness. The low bitterness leaves the malt as the primary flavor element, and the low hop levels provide very little in the way of balance.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='International Dark Lager') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[7] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Czech Pale Lager</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 3A</h6>
+            <p class="card-text">A darker, richer, and somewhat sweeter version of international pale lager with a little more body and flavor, but equally restrained in bitterness. The low bitterness leaves the malt as the primary flavor element, and the low hop levels provide very little in the way of balance.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Czech Pale Lager') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[8] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Czech Premium Pale Lager</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 3B</h6>
+            <p class="card-text">A darker, richer, and somewhat sweeter version of international pale lager with a little more body and flavor, but equally restrained in bitterness. The low bitterness leaves the malt as the primary flavor element, and the low hop levels provide very little in the way of balance.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Czech Premium Pale Lager') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[9] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Czech Amber Lager</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 3C</h6>
+            <p class="card-text">A darker, richer, and somewhat sweeter version of international pale lager with a little more body and flavor, but equally restrained in bitterness. The low bitterness leaves the malt as the primary flavor element, and the low hop levels provide very little in the way of balance.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Czech Amber Lager') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[10] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Czech Dark Lager</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 3D</h6>
+            <p class="card-text">A darker, richer, and somewhat sweeter version of international pale lager with a little more body and flavor, but equally restrained in bitterness. The low bitterness leaves the malt as the primary flavor element, and the low hop levels provide very little in the way of balance.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Czech Dark Lager') }}" class="btn btn-primary btn-sm">More</a>
           </div>
         </div>
         {% endif %}

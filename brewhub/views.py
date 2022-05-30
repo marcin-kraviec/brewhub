@@ -44,10 +44,19 @@ def beer_styles():
     international_amber_lager = {'color': 'amber-color', 'family': 'amber-lager-family',
                                  'fermentation': 'bottom-fermented', 'lager': 'lagered', 'malty': 'malty',
                                  'strength': 'standard-strength', 'style': 'traditional-style'}
+    international_dark_lager = {'color': 'dark-color', 'family': 'dark-lager-family',
+                                'fermentation': 'bottom-fermented', 'lager': 'lagered', 'malty': 'malty',
+                                'strength': 'standard-strength', 'style': 'traditional-style'}
+    czech_pale_lager = {'color': 'pale-color', 'family': 'pale-lager-family', 'country': 'central-europe',
+                        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'malty': 'hoppy',
+                        'strength': 'session-strength', 'style': 'traditional-style'}
+    czech_premium_pale_lager = {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'country': 'central-europe', 'malty': 'hoppy', 'lager': 'lagered', 'color': 'pale-color', 'family': 'pilsner-family', 'strength': 'standard-strength', 'style': 'traditional-style'}
+    czech_amber_lager = {'color': 'amber-color', 'family': 'amber-lager-family', 'balance': 'balanced', 'fermentation': 'bottom-fermented', 'country': 'central-europe', 'lager': 'lagered', 'strength': 'standard-strength', 'style': 'traditional-style'}
+    czech_dark_lager = {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'country': 'central-europe', 'color': 'dark-color', 'family': 'dark-lager-family', 'lager': 'lagered', 'strength': 'standard-strength', 'style': 'traditional-style'}
 
     # put each beer style to one list
     styles = [american_light_lager, american_lager, cream_ale, american_wheat_beer, international_pale_lager,
-              international_amber_lager]
+              international_amber_lager, international_dark_lager, czech_pale_lager, czech_premium_pale_lager, czech_amber_lager, czech_dark_lager]
 
     # get sectional parameters from html file
     balance = request.form.getlist('balance')
@@ -70,9 +79,15 @@ def beer_styles():
     check_american_wheat_beer = False
     check_international_pale_lager = False
     check_international_amber_lager = False
+    check_international_dark_lager = False
+    check_czech_pale_lager = False
+    check_czech_premium_pale_lager = False
+    check_czech_amber_lager = False
+    check_czech_dark_lager = False
 
     checks = [check_american_light_lager, check_american_lager, check_cream_ale, check_american_wheat_beer,
-              check_international_pale_lager, check_international_amber_lager]
+              check_international_pale_lager, check_international_amber_lager, check_international_dark_lager,
+              check_czech_pale_lager, check_czech_premium_pale_lager, check_czech_amber_lager, check_czech_dark_lager]
 
     for i in range(len(styles)):
         if (styles[i].get('balance') in filters.get('balance') or filters.get('balance') == []) \
@@ -145,7 +160,8 @@ def edit_profile():
             flash('There is nothing to update')
 
         else:
-            db.update('users', "\'" + session['username'] + "\'", "\'" + new_username + "\'", "\'" + new_email + "\'", "\'" + new_bio + "\'")
+            db.update('users', "\'" + session['username'] + "\'", "\'" + new_username + "\'", "\'" + new_email + "\'",
+                      "\'" + new_bio + "\'")
 
             session['username'] = new_username
             session['email'] = new_email
@@ -154,6 +170,7 @@ def edit_profile():
             flash('The profile has been successfully updated')
 
     return render_template('edit_profile.html')
+
 
 @views.route('/add_recipe')
 def add_recipe():
