@@ -21,6 +21,10 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Balanced </small>
                                 </label><br/>
+                            <input class="form-check-input" name='balance' type="checkbox" value="bitter">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Bitter </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
@@ -39,6 +43,10 @@
                             <input class="form-check-input" name='fermentation' type="checkbox" value="any-fermentation">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Any-fermentation </small>
+                                </label><br/>
+                            <input class="form-check-input" name='fermentation' type="checkbox" value="top-fermented">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Top-fermented </small>
                                 </label><br/>
                           </div>
                         </div>
@@ -61,16 +69,16 @@
                 <div class="accordion-item" style="border: None">
                         <h2 class="accordion-header" id="headingFour">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                              Malty
+                              Feeling
                           </button>
                         </h2>
                         <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                           <div class="accordion-body">
-                            <input class="form-check-input" name='malty' type="checkbox" value="malty">
+                            <input class="form-check-input" name='feeling' type="checkbox" value="malty">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Malty </small>
                                 </label><br/>
-                            <input class="form-check-input" name='malty' type="checkbox" value="hoppy">
+                            <input class="form-check-input" name='feeling' type="checkbox" value="hoppy">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Hoppy </small>
                                 </label><br/>
@@ -80,16 +88,20 @@
                 <div class="accordion-item" style="border: None">
                         <h2 class="accordion-header" id="headingFive">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                              Country
+                              Region
                           </button>
                         </h2>
                         <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                           <div class="accordion-body">
-                            <input class="form-check-input" name='country' type="checkbox" value="north-america">
+                            <input class="form-check-input" name='region' type="checkbox" value="international">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> International </small>
+                                </label><br/>
+                            <input class="form-check-input" name='region' type="checkbox" value="north-america">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> North-America </small>
                                 </label><br/>
-                            <input class="form-check-input" name='country' type="checkbox" value="central-europe">
+                            <input class="form-check-input" name='region' type="checkbox" value="central-europe">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Central-Europe </small>
                                 </label><br/>
@@ -127,6 +139,10 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Pale-lager-family </small>
                                 </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="pale-ale-family">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Pale-ale-family </small>
+                                </label><br/>
                             <input class="form-check-input" name='family' type="checkbox" value="wheat-beer-family">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Wheat-beer-family </small>
@@ -142,6 +158,10 @@
                             <input class="form-check-input" name='family' type="checkbox" value="pilsner-family">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Pilsner-family </small>
+                                </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="bock-family">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Bock-family </small>
                                 </label><br/>
                           </div>
                         </div>
@@ -161,6 +181,10 @@
                             <input class="form-check-input" name='strength' type="checkbox" value="standard-strength">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Standard-strength </small>
+                                </label><br/>
+                            <input class="form-check-input" name='strength' type="checkbox" value="high-strength">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> High-strength </small>
                                 </label><br/>
                           </div>
                         </div>
@@ -293,7 +317,7 @@ Aroma: Low to moderate</p>
           <div class="card-body">
             <h4 class="card-title">Czech Pale Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 3A</h6>
-            <p class="card-text">A darker, richer, and somewhat sweeter version of international pale lager with a little more body and flavor, but equally restrained in bitterness. The low bitterness leaves the malt as the primary flavor element, and the low hop levels provide very little in the way of balance.</p>
+            <p class="card-text">A lighter-bodied, rich, refreshing, hoppy, bitter pale Czech lager having the familiar flavors of the stronger Czech Premium Pale Lager (Pilsner-type) beer but in a lower alcohol, lighter-bodied, and slightly less intense format.</p>
             <a href="{{ url_for('views.beer_styles_2', s='Czech Pale Lager') }}" class="btn btn-primary btn-sm">More</a>
           </div>
         </div>
@@ -304,7 +328,7 @@ Aroma: Low to moderate</p>
           <div class="card-body">
             <h4 class="card-title">Czech Premium Pale Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 3B</h6>
-            <p class="card-text">A darker, richer, and somewhat sweeter version of international pale lager with a little more body and flavor, but equally restrained in bitterness. The low bitterness leaves the malt as the primary flavor element, and the low hop levels provide very little in the way of balance.</p>
+            <p class="card-text">A refreshing pale Czech lager with considerable malt and hop character and a long finish. The malt flavors are complex for a Pilsner-type beer. The bitterness is strong and clean but lacks harshness, which gives a well-balanced, rounded flavor impression that enhances drinkability.</p>
             <a href="{{ url_for('views.beer_styles_2', s='Czech Premium Pale Lager') }}" class="btn btn-primary btn-sm">More</a>
           </div>
         </div>
@@ -315,7 +339,7 @@ Aroma: Low to moderate</p>
           <div class="card-body">
             <h4 class="card-title">Czech Amber Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 3C</h6>
-            <p class="card-text">A darker, richer, and somewhat sweeter version of international pale lager with a little more body and flavor, but equally restrained in bitterness. The low bitterness leaves the malt as the primary flavor element, and the low hop levels provide very little in the way of balance.</p>
+            <p class="card-text">A malty amber Czech lager with a hop character that can vary from low to quite significant. The malt flavors also can vary, leading to different interpretations and balances ranging from drier, bready, and slightly biscuity to sweeter and somewhat caramel-like.</p>
             <a href="{{ url_for('views.beer_styles_2', s='Czech Amber Lager') }}" class="btn btn-primary btn-sm">More</a>
           </div>
         </div>
@@ -326,11 +350,144 @@ Aroma: Low to moderate</p>
           <div class="card-body">
             <h4 class="card-title">Czech Dark Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 3D</h6>
-            <p class="card-text">A darker, richer, and somewhat sweeter version of international pale lager with a little more body and flavor, but equally restrained in bitterness. The low bitterness leaves the malt as the primary flavor element, and the low hop levels provide very little in the way of balance.</p>
+            <p class="card-text">A rich, dark, malty Czech lager with a roast character that can vary from almost absent to quite prominent. Malty balance and an interesting and complex flavor profile, with variable levels of hopping that provides a range of possible interpretations.</p>
             <a href="{{ url_for('views.beer_styles_2', s='Czech Dark Lager') }}" class="btn btn-primary btn-sm">More</a>
           </div>
         </div>
         {% endif %}
+
+        {% if checks[11] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Munich Helles</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 4A</h6>
+            <p class="card-text">A gold-colored German lager with a smooth, malty flavor and a soft, dry finish. Subtle spicy, floral, or herbal hops and restrained bitterness help keep the balance malty but not sweet, which helps make this beer a refreshing, everyday drink.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Munich Helles') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[12] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Festbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 4B</h6>
+            <p class="card-text">A smooth, clean, pale German lager with a moderately strong malty flavor and a light hop character. Deftly balances strength and drinkability, with a palate impression and finish that encourages drinking. Showcases elegant German malt flavors without becoming too heavy or filling.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Festbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[13] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Helles Bock</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 4C</h6>
+            <p class="card-text">A relatively pale, strong, malty German lager with a nicely attenuated finish that enhances drinkability. The hop character is generally more apparent and the malt character less deeply rich than in other Bocks.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Helles Bock') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[14] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">German Leichtbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 5A</h6>
+            <p class="card-text">A pale, highly-attenuated, light-bodied German lager with lower alcohol and calories than standard-strength beers. Moderately bitter with noticeable malt and hop flavors, the beer is still interesting to drink.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='German Leichtbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[15] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Kölsch</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 5B</h6>
+            <p class="card-text">A subtle, brilliantly clear, pale beer with a delicate balance of malt, fruit, and hop character, moderate bitterness, and a well-attenuated but soft finish. Freshness makes a huge difference with this beer, as the delicate character can fade quickly with age.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Kölsch') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[16] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">German Helles Exportbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 5C</h6>
+            <p class="card-text">A golden German lager balancing a smooth malty profile with a bitter, hoppy character in a slightly above-average body and strength beer.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='German Helles Exportbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[17] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">German Pils</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 5D</h6>
+            <p class="card-text">A pale, dry, bitter German lager featuring a prominent hop aroma. Crisp, clean, and refreshing, showing a brilliant gold color with excellent head retention.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='German Pils') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[18] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Märzen</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 6A</h6>
+            <p class="card-text">An amber, malty German lager with a clean, rich, toasty, bready malt flavor, restrained bitterness, and a well-attenuated finish. The overall malt impression is soft, elegant, and complex, with a rich malty aftertaste that is never cloying or heavy.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Märzen') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[19] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Rauchbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 6B</h6>
+            <p class="card-text">A beechwood-smoked, malty, amber German lager. The expected Märzen profile of toasty-rich malt, restrained bitterness, clean fermentation, and a relatively dry finish is enhanced by a noticeable to intense smoke character.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Rauchbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[20] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Dunkles Bock</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 6C</h6>
+            <p class="card-text">A strong, dark, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Dunkles Bock') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[21] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Vienna Lager</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 7A</h6>
+            <p class="card-text">A moderate-strength continental amber lager with a soft, smooth maltiness and a balanced, moderate bitterness, yet finishing relatively dry. The malt flavor is clean, bready-rich, and somewhat toasty, with an elegant impression derived from quality base malts and process, not specialty malts or adjuncts.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Vienna Lager') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[22] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Altbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 7B</h6>
+            <p class="card-text">A moderately colored, well-attenuated, bitter beer with a rich maltiness balancing a strong bitterness. Light and spicy hop character complements the malt. A dry beer with a firm body and smooth palate.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Altbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
     </div>
     </div>
 
