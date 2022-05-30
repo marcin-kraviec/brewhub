@@ -233,13 +233,29 @@ def edit_profile():
         password_hash = hashlib.sha256(password.encode('utf-8'))
         password_hash_hex = password_hash.hexdigest()
 
-        if password_hash_hex == session['password']:
+        if new_username != '' and not re.match(r'[A-Za-z0-9]+', new_username):
+            flash('Username must contain only characters and numbers!')
+
+        elif new_email != '' and not re.match(r'[^@]+@[^@]+\.[^@]+', new_email):
+            flash('Invalid email address!')
+
+        elif password_hash_hex != session['password']:
+            flash('Incorrect password')
+
+        else:
+            if new_username == '':
+                new_username = session['username']
+            if new_email == '':
+                new_email = session['email']
+            if new_bio == '':
+                new_bio = session['bio']
+
             db.update('users', "\'" + session['username'] + "\'", "\'" + new_username + "\'", "\'" + new_email + "\'", "\'" + new_bio + "\'")
+
             session['username'] = new_username
             session['email'] = new_email
             session['bio'] = new_bio
+
             flash('The profile has been successfully updated')
-        else:
-            flash('Incorrect password')
 
     return render_template('edit_profile.html')

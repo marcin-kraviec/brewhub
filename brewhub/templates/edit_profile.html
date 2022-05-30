@@ -7,12 +7,12 @@
         <form action="{{ url_for('views.edit_profile') }}" method="post">
             <div class="form-group" style="display: inline-block">
                 <div style="display: inline-block"><h5>Username:</h5></div>
-                <input type="text" name='username' class="form-control" id="username" aria-describedby="emailHelp" placeholder={{ session['username'] }} required>
+                <input type="text" name='username' class="form-control" id="username" aria-describedby="emailHelp" placeholder={{ session['username'] }}>
             </div>
             <br/><br/>
             <div class="form-group" style="display: inline-block">
                 <div style="display: inline-block"><h5>Email:</h5></div>
-                <input type="email" name='email' class="form-control" id="email" aria-describedby="emailHelp" placeholder={{ session['email'] }} required>
+                <input name='email' class="form-control" id="email" aria-describedby="emailHelp" placeholder={{ session['email'] }}>
             </div>
             <br/><br/>
             <div class="form-group" style="display: inline-block">
