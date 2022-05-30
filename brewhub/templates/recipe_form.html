@@ -75,7 +75,7 @@
         <p>Wort size: </p>
         <hr class="my-4">
         <h4>Fermentables</h4>
-            <table class="table table-hover">
+            <table class="table table-hover" id="fermentablesTable">
                 <thead>
                     <tr>
                         <th scope="col" style="width: 800px">Ingredient</th>
@@ -101,10 +101,11 @@
                     </tr>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-warning">Add row</button>
+            <button type="button" class="btn btn-warning" onclick="add_row('fermentablesTable')" style="width: 150px">Add row</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('fermentablesTable')" style="width: 150px">Delete row</button>
         <hr class="my-4">
         <h4>Hops</h4>
-            <table class="table table-hover">
+            <table class="table table-hover" id="hopTable">
                 <thead>
                     <tr>
                         <th scope="col" style="width: 450px">Hop</th>
@@ -151,10 +152,11 @@
                     </tr>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-warning">Add row</button>
+            <button type="button" class="btn btn-warning" onclick="add_row('hopTable')" style="width: 150px">Add row</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('hopTable')" style="width: 150px">Delete row</button>
         <hr class="my-4">
         <h4>Others</h4>
-            <table class="table table-hover">
+            <table class="table table-hover" id="othersTable">
                 <thead>
                     <tr>
                         <th scope="col" style="width: 450px">Ingredient</th>
@@ -184,7 +186,8 @@
                     </tr>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-warning">Add row</button>
+            <button type="button" class="btn btn-warning" onclick="add_row('othersTable')" style="width: 150px">Add row</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('othersTable')" style="width: 150px">Delete row</button>
         <hr class="my-4">
         <h4>Fermentation</h4>
         <div>
@@ -225,7 +228,7 @@
                     <span class="input-group-text">L/kg</span>
                 </div>
             </div>
-            <table class="table table-hover">
+            <table class="table table-hover" id="mashTable">
                 <thead>
                     <tr>
                         <th scope="col">Temperature</th>
@@ -249,7 +252,8 @@
                     </tr>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-warning">Add step</button>
+            <button type="button" class="btn btn-warning" onclick="add_row('mashTable')" style="width: 150px">Add step</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('mashTable')" style="width: 150px">Delete row</button>
 
         <hr class="my-4">
         <h4>Details</h4>
@@ -259,7 +263,7 @@
                 <span style="float: right;">1.020 - 1.030 </span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
             <div>
@@ -267,7 +271,7 @@
                 <span style="float: right;">1.005 - 1.010 </span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
             <div>
@@ -275,7 +279,7 @@
                 <span style="float: right;">20 - 30 </span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
             <div>
@@ -283,7 +287,7 @@
                 <span style="float: right;">10 - 15</span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
             <div>
@@ -291,7 +295,7 @@
                 <span style="float: right;">4 - 5</span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div>
         <hr class="my-4">
@@ -303,6 +307,19 @@
       <button type="submit" class="btn btn-primary" style="width: 100%">Save recipe</button>
       </form>
     </div>
+
+    <script>
+    function add_row(tableID){
+        var table=document.getElementById(tableID)
+            var cl = table.tBodies[0].rows[0].cloneNode(true)
+            table.tBodies[0].appendChild( cl )
+    }
+    function delete_row(tableID){
+        var table=document.getElementById(tableID)
+            table.tBodies[0].rows[1].remove()
+
+    }
+    </script>
 
 
 {% endblock %}
