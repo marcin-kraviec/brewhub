@@ -242,17 +242,10 @@ def edit_profile():
         elif password_hash_hex != session['password']:
             flash('Incorrect password')
 
-        elif new_username == '' and new_email == '' and new_bio == '':
-            flash('Fill in at least one field to update')
+        elif new_username == session['username'] and new_email == session['email'] and new_bio == session['bio']:
+            flash('There is nothing to update')
 
         else:
-            if new_username == '':
-                new_username = session['username']
-            if new_email == '':
-                new_email = session['email']
-            if new_bio == '':
-                new_bio = session['bio']
-
             db.update('users', "\'" + session['username'] + "\'", "\'" + new_username + "\'", "\'" + new_email + "\'", "\'" + new_bio + "\'")
 
             session['username'] = new_username

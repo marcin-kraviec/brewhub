@@ -7,17 +7,17 @@
         <form action="{{ url_for('views.edit_profile') }}" method="post">
             <div class="form-group" style="display: inline-block">
                 <div style="display: inline-block"><h5>Username:</h5></div>
-                <input type="text" name='username' class="form-control" id="username" aria-describedby="emailHelp" placeholder={{ session['username'] }}>
+                <input type="text" name='username' class="form-control" id="username" aria-describedby="emailHelp" value={{ session['username'] }}>
             </div>
             <br/><br/>
             <div class="form-group" style="display: inline-block">
                 <div style="display: inline-block"><h5>Email:</h5></div>
-                <input name='email' class="form-control" id="email" aria-describedby="emailHelp" placeholder={{ session['email'] }}>
+                <input name='email' class="form-control" id="email" aria-describedby="emailHelp" value={{ session['email'] }}>
             </div>
             <br/><br/>
             <div class="form-group" style="display: inline-block">
                 <div style="display: inline-block;"><h5>Bio:</h5></div>
-                <textarea class="form-control" name='bio' id="bio" rows="3" placeholder={{ session['bio'] }}></textarea>
+                <textarea class="form-control" name='bio' id="bio" rows="3">{{ session['bio'] }}</textarea>
             </div>
             <hr class="my-4">
             <div style="display: inline-block"><h5>Enter password to submit changes: </h5></div>
