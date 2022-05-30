@@ -25,10 +25,12 @@ def create_app():
         return render_template('500.html'), 500
 
     from .views import views
+    from .auth import auth
 
     db = DatabaseConnector
     db.test()
 
     app.register_blueprint(views, url_prefix='/')
+    app.register_blueprint(auth, url_prefix='/')
 
     return app
