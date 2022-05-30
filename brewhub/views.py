@@ -49,10 +49,12 @@ def beer_styles():
     dunkles_bock =              {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'amber-color', 'family': 'bock-family',        'strength': 'high-strength',     'style': 'traditional-style'}
     vienna_lager =              {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-lager-family', 'strength': 'standard-strength', 'style': 'traditional-style'}
     altbier =                   {'balance': 'bitter',   'fermentation': 'top-fermented',    'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-ale-family',   'strength': 'standard-strength', 'style': 'traditional-style'}
+    munich_dunkel =             {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'dark-color',  'family': 'dark-lager-family',  'strength': 'standard-strength', 'style': 'traditional-style'}
+    schwarzbier =               {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'dark-color',  'family': 'dark-lager-family',  'strength': 'standard-strength', 'style': 'traditional-style'}
 
     # put each beer style to one list
     styles = [american_light_lager, american_lager, cream_ale, american_wheat_beer, international_pale_lager, international_amber_lager, international_dark_lager, czech_pale_lager, czech_premium_pale_lager, czech_amber_lager, czech_dark_lager, munich_helles, festbier, helles_bock,
-              german_leichtbier, kolsch, german_helles_exportbier, german_pils, marzen, rauchbier, dunkles_bock, vienna_lager, altbier]
+              german_leichtbier, kolsch, german_helles_exportbier, german_pils, marzen, rauchbier, dunkles_bock, vienna_lager, altbier, munich_dunkel, schwarzbier]
 
     # get sectional parameters from html file
     balance = request.form.getlist('balance')
@@ -91,10 +93,12 @@ def beer_styles():
     check_dunkles_bock = False
     check_vienna_lager = False
     check_altbier = False
+    munich_dunkel = False
+    check_schwarzbier = False
 
     checks = [check_american_light_lager, check_american_lager, check_cream_ale, check_american_wheat_beer, check_international_pale_lager, check_international_amber_lager, check_international_dark_lager, check_czech_pale_lager, check_czech_premium_pale_lager,
               check_czech_amber_lager, check_czech_dark_lager, check_munich_helles, check_festbier, check_helles_bock, check_german_leichtbier, check_kolsch, check_german_helles_exportbier, check_german_pils, check_marzen, check_rauchbier, check_dunkles_bock,
-              check_vienna_lager, check_altbier]
+              check_vienna_lager, check_altbier, munich_dunkel, check_schwarzbier]
 
     for i in range(len(styles)):
         if (styles[i].get('balance') in filters.get('balance') or filters.get('balance') == []) \

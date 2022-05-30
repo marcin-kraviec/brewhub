@@ -124,6 +124,10 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Amber-color </small>
                                 </label><br/>
+                            <input class="form-check-input" name='color' type="checkbox" value="dark-color">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Dark-color </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
@@ -484,6 +488,28 @@ Aroma: Low to moderate</p>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 7B</h6>
             <p class="card-text">A moderately colored, well-attenuated, bitter beer with a rich maltiness balancing a strong bitterness. Light and spicy hop character complements the malt. A dry beer with a firm body and smooth palate.</p>
             <a href="{{ url_for('views.beer_styles_2', s='Altbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[23] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Munich Dunkel</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 8A</h6>
+            <p class="card-text">A traditional malty brown lager from Bavaria. Deeply toasted, bready malt flavors without any roasty or burnt flavors. Smooth and rich, with a restrained bitterness and a relatively dry finish that allows for drinking in quantity.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Munich Dunkel') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[24] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Schwarzbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 8B</h6>
+            <p class="card-text">A dark German lager that balances roasted yet smooth malt flavors with moderate hop bitterness. The lighter body, dryness, and lack of a harsh, burnt, or heavy aftertaste helps make this beer quite drinkable.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Schwarzbier') }}" class="btn btn-primary btn-sm">More</a>
           </div>
         </div>
         {% endif %}
