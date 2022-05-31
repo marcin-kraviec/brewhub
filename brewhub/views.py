@@ -26,35 +26,59 @@ def test():
 
 @views.route('/beer_styles', methods=['GET', 'POST'])
 def beer_styles():
-    american_light_lager =      {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'north-america',  'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'session-strength',  'style': 'traditional-style'}
-    american_lager =            {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'north-america',  'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'standard-strength', 'style': 'traditional-style'}
-    cream_ale =                 {'balance': 'balanced', 'fermentation': 'any-fermentation', 'lager': '-',       'feeling': '-',     'region': 'north-america',  'color': 'pale-color',  'family': 'pale-ale-family',    'strength': 'standard-strength', 'style': 'traditional-style'}
-    american_wheat_beer =       {'balance': 'balanced', 'fermentation': 'any-fermentation', 'lager': '-',       'feeling': '-',     'region': 'north-america',  'color': 'pale-color',  'family': 'wheat-beer-family',  'strength': 'standard-strength', 'style': 'craft-style'}
-    international_pale_lager =  {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'international',  'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'standard-strength', 'style': 'traditional-style'}
-    international_amber_lager = {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'international',  'color': 'amber-color', 'family': 'amber-lager-family', 'strength': 'standard-strength', 'style': 'traditional-style'}
-    international_dark_lager =  {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'international',  'color': 'dark-color',  'family': 'dark-lager-family',  'strength': 'standard-strength', 'style': 'traditional-style'}
-    czech_pale_lager =          {'balance': 'bitter',   'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'hoppy', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'session-strength',  'style': 'traditional-style'}
-    czech_premium_pale_lager =  {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'hoppy', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pilsner-family',     'strength': 'standard-strength', 'style': 'traditional-style'}
-    czech_amber_lager =         {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-lager-family', 'strength': 'standard-strength', 'style': 'traditional-style'}
-    czech_dark_lager =          {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'dark-color',  'family': 'dark-lager-family',  'strength': 'standard-strength', 'style': 'traditional-style'}
-    munich_helles =             {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'standard-strength', 'style': 'traditional-style'}
-    festbier =                  {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'standard-strength', 'style': 'traditional-style'}
-    helles_bock =               {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'pale-color',  'family': 'bock-family',        'strength': 'high-strength',     'style': 'traditional-style'}
-    german_leichtbier =         {'balance': 'bitter',   'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'hoppy', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'session-strength',  'style': 'traditional-style'}
-    kolsch =                    {'balance': 'balanced', 'fermentation': 'top-fermented',    'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-ale-family',    'strength': 'standard-strength', 'style': 'traditional-style'}
-    german_helles_exportbier =  {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'standard-strength', 'style': 'traditional-style'}
-    german_pils =               {'balance': 'bitter',   'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'hoppy', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pilsner-family',     'strength': 'standard-strength', 'style': 'traditional-style'}
-    marzen =                    {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-lager-family', 'strength': 'standard-strength', 'style': 'traditional-style'}
-    rauchbier =                 {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-lager-family', 'strength': 'standard-strength', 'style': 'traditional-style'}
-    dunkles_bock =              {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'amber-color', 'family': 'bock-family',        'strength': 'high-strength',     'style': 'traditional-style'}
-    vienna_lager =              {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-lager-family', 'strength': 'standard-strength', 'style': 'traditional-style'}
-    altbier =                   {'balance': 'bitter',   'fermentation': 'top-fermented',    'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-ale-family',   'strength': 'standard-strength', 'style': 'traditional-style'}
-    munich_dunkel =             {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'dark-color',  'family': 'dark-lager-family',  'strength': 'standard-strength', 'style': 'traditional-style'}
-    schwarzbier =               {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'dark-color',  'family': 'dark-lager-family',  'strength': 'standard-strength', 'style': 'traditional-style'}
+    american_light_lager =      {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'north-america',  'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'session-strength',   'style': 'traditional-style', 'others': '-'}
+    american_lager =            {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'north-america',  'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    cream_ale =                 {'balance': 'balanced', 'fermentation': 'any-fermentation', 'lager': '-',       'feeling': '-',     'region': 'north-america',  'color': 'pale-color',  'family': 'pale-ale-family',    'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    american_wheat_beer =       {'balance': 'balanced', 'fermentation': 'any-fermentation', 'lager': '-',       'feeling': '-',     'region': 'north-america',  'color': 'pale-color',  'family': 'wheat-beer-family',  'strength': 'standard-strength',  'style': 'craft-style',       'others': '-'}
+    international_pale_lager =  {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'international',  'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    international_amber_lager = {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'international',  'color': 'amber-color', 'family': 'amber-lager-family', 'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    international_dark_lager =  {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'international',  'color': 'dark-color',  'family': 'dark-lager-family',  'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    czech_pale_lager =          {'balance': 'bitter',   'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'hoppy', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'session-strength',   'style': 'traditional-style', 'others': '-'}
+    czech_premium_pale_lager =  {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'hoppy', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pilsner-family',     'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    czech_amber_lager =         {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-lager-family', 'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    czech_dark_lager =          {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'dark-color',  'family': 'dark-lager-family',  'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    munich_helles =             {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    festbier =                  {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    helles_bock =               {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'pale-color',  'family': 'bock-family',        'strength': 'high-strength',      'style': 'traditional-style', 'others': '-'}
+    german_leichtbier =         {'balance': 'bitter',   'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'hoppy', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'session-strength',   'style': 'traditional-style', 'others': '-'}
+    kolsch =                    {'balance': 'balanced', 'fermentation': 'top-fermented',    'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-ale-family',    'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    german_helles_exportbier =  {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    german_pils =               {'balance': 'bitter',   'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'hoppy', 'region': 'central-europe', 'color': 'pale-color',  'family': 'pilsner-family',     'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    marzen =                    {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-lager-family', 'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    rauchbier =                 {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-lager-family', 'strength': 'standard-strength',  'style': 'traditional-style', 'others': 'smoke'}
+    dunkles_bock =              {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'amber-color', 'family': 'bock-family',        'strength': 'high-strength',      'style': 'traditional-style', 'others': '-'}
+    vienna_lager =              {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-lager-family', 'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    altbier =                   {'balance': 'bitter',   'fermentation': 'top-fermented',    'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'amber-color', 'family': 'amber-ale-family',   'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    munich_dunkel =             {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'dark-color',  'family': 'dark-lager-family',  'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    schwarzbier =               {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'central-europe', 'color': 'dark-color',  'family': 'dark-lager-family',  'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    doppelbock =                {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'amber-color', 'family': 'bock-family',        'strength': 'high-strength',      'style': 'traditional-style', 'others': '-'}
+    eisbock =                   {'balance': '-',        'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': 'malty', 'region': 'central-europe', 'color': 'amber-color', 'family': 'bock-family',        'strength': 'very-high-strength', 'style': 'traditional-style', 'others': '-'}
+    baltic_porter =             {'balance': '-',        'fermentation': 'any-fermented',    'lager': 'lagered', 'feeling': '-',     'region': 'eastern-europe', 'color': 'dark-color',  'family': 'porter-family',      'strength': 'high-strength',      'style': 'traditional-style', 'others': '-'}
+    weissbier =                 {'balance': '-',        'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'malty', 'region': 'central-europe', 'color': 'pale-color',  'family': 'wheat-beer-family',  'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    dunkles_weissbier =         {'balance': '-',        'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'malty', 'region': 'central-europe', 'color': 'amber-color', 'family': 'wheat-beer-family',  'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    weizenbock =                {'balance': '-',        'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'malty', 'region': 'central-europe', 'color': 'pale-color',  'family': 'wheat-beer-family',  'strength': 'high-strength',      'style': 'traditional-style', 'others': '-'}
+    ordinary_bitter =           {'balance': 'bitter',   'fermentation': 'top-fermented',    'lager': '-',       'feeling': '-',     'region': 'british-isles',  'color': 'amber-color', 'family': 'amber-ale-family',   'strength': 'session-strength',   'style': 'traditional-style', 'others': '-'}
+    best_bitter =               {'balance': 'bitter',   'fermentation': 'top-fermented',    'lager': '-',       'feeling': '-',     'region': 'british-isles',  'color': 'amber-color', 'family': 'amber-ale-family',   'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    strong_bitter =             {'balance': 'bitter',   'fermentation': 'top-fermented',    'lager': '-',       'feeling': '-',     'region': 'british-isles',  'color': 'amber-color', 'family': 'amber-ale-family',   'strength': 'session-strength',   'style': 'traditional-style', 'others': '-'}
+    british_golden_ale =        {'balance': 'bitter',   'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'hoppy', 'region': 'british-isles',  'color': 'pale-color',  'family': 'pale-ale-family',    'strength': 'standard-strength',  'style': 'craft-style',       'others': '-'}
+    australian_sparkling_ale =  {'balance': 'bitter',   'fermentation': 'top-fermented',    'lager': '-',       'feeling': '-',     'region': 'pacific',        'color': 'pale-color',  'family': 'pale-ale-family',    'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    english_ipa =               {'balance': 'bitter',   'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'hoppy', 'region': 'british-isles',  'color': 'pale-color',  'family': 'ipa-family',         'strength': 'high-strength',      'style': 'traditional-style', 'others': '-'}
+    dark_mild =                 {'balance': '-',        'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'malty', 'region': 'british-isles',  'color': 'dark-color',  'family': 'brown-ale-family',   'strength': 'session-strength',   'style': 'traditional-style', 'others': '-'}
+    british_brown_ale =         {'balance': '-',        'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'malty', 'region': 'british-isles',  'color': 'amber-color', 'family': 'brown-ale-family',   'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    english_porter =            {'balance': '-',        'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'malty', 'region': 'british-isles',  'color': 'dark-color',  'family': 'porter-family',      'strength': 'standard-strength',  'style': 'traditional-style', 'others': 'roasty'}
+    scottish_light =            {'balance': '-',        'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'malty', 'region': 'british-isles',  'color': 'amber-color', 'family': 'amber-ale-family',   'strength': 'session-strength',   'style': 'traditional-style', 'others': '-'}
+    scottish_heavy =            {'balance': '-',        'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'malty', 'region': 'british-isles',  'color': 'amber-color', 'family': 'amber-ale-family',   'strength': 'session-strength',   'style': 'traditional-style', 'others': '-'}
+    scottish_export =           {'balance': '-',        'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'malty', 'region': 'british-isles',  'color': 'amber-color', 'family': 'amber-ale-family',   'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    irish_red_ale =             {'balance': 'balanced', 'fermentation': 'top-fermented',    'lager': '-',       'feeling': '-',     'region': 'british-isles',  'color': 'amber-color', 'family': 'amber-ale-family',   'strength': 'standard-strength',  'style': 'traditional-style', 'others': '-'}
+    irish_stout =               {'balance': 'bitter',   'fermentation': 'top-fermented',    'lager': '-',       'feeling': '-',     'region': 'british-isles',  'color': 'dark-color',  'family': 'stout-family',       'strength': 'standard-strength',  'style': 'traditional-style', 'others': 'roasty'}
+    irish_extra_stout =         {'balance': 'bitter',   'fermentation': 'top-fermented',    'lager': '-',       'feeling': '-',     'region': 'british-isles',  'color': 'dark-color',  'family': 'stout-family',       'strength': 'high-strength',      'style': 'traditional-style', 'others': 'roasty'}
+    sweet_stout =               {'balance': 'sweet',    'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'malty', 'region': 'british-isles',  'color': 'dark-color',  'family': 'stout-family',       'strength': 'standard-strength',  'style': 'traditional-style', 'others': 'roasty'}
+    oatmeal_stout =             {'balance': 'balanced', 'fermentation': 'top-fermented',    'lager': '-',       'feeling': '-',     'region': 'british-isles',  'color': 'dark-color',  'family': 'stout-family',       'strength': 'standard-strength',  'style': 'traditional-style', 'others': 'roasty'}
 
     # put each beer style to one list
     styles = [american_light_lager, american_lager, cream_ale, american_wheat_beer, international_pale_lager, international_amber_lager, international_dark_lager, czech_pale_lager, czech_premium_pale_lager, czech_amber_lager, czech_dark_lager, munich_helles, festbier, helles_bock,
-              german_leichtbier, kolsch, german_helles_exportbier, german_pils, marzen, rauchbier, dunkles_bock, vienna_lager, altbier, munich_dunkel, schwarzbier]
+              german_leichtbier, kolsch, german_helles_exportbier, german_pils, marzen, rauchbier, dunkles_bock, vienna_lager, altbier, munich_dunkel, schwarzbier, doppelbock, eisbock, baltic_porter, weissbier, dunkles_weissbier, weizenbock, ordinary_bitter, best_bitter, strong_bitter,
+              british_golden_ale, australian_sparkling_ale, english_ipa, dark_mild, british_brown_ale, english_porter, scottish_light, scottish_heavy, scottish_export, irish_red_ale, irish_stout, irish_extra_stout, sweet_stout, oatmeal_stout]
 
     # get sectional parameters from html file
     balance = request.form.getlist('balance')
@@ -66,39 +90,47 @@ def beer_styles():
     family = request.form.getlist('family')
     strength = request.form.getlist('strength')
     style = request.form.getlist('style')
+    others = request.form.getlist('others')
 
     # put all parameters into one dictionary
-    filters = {'balance': balance, 'fermentation': fermentation, 'lager': lager, 'feeling': feeling, 'region': region, 'color': color, 'family': family, 'strength': strength, 'style': style}
+    filters = {'balance': balance, 'fermentation': fermentation, 'lager': lager, 'feeling': feeling, 'region': region, 'color': color, 'family': family, 'strength': strength, 'style': style, 'others': others}
 
-    check_american_light_lager = False
-    check_american_lager = False
-    check_cream_ale = False
-    check_american_wheat_beer = False
-    check_international_pale_lager = False
-    check_international_amber_lager = False
-    check_international_dark_lager = False
-    check_czech_pale_lager = False
-    check_czech_premium_pale_lager = False
-    check_czech_amber_lager = False
-    check_czech_dark_lager = False
-    check_munich_helles = False
-    check_festbier = False
-    check_helles_bock = False
-    check_german_leichtbier = False
-    check_kolsch = False
-    check_german_helles_exportbier = False
-    check_german_pils = False
-    check_marzen = False
-    check_rauchbier = False
-    check_dunkles_bock = False
-    check_vienna_lager = False
-    check_altbier = False
-    munich_dunkel = False
-    check_schwarzbier = False
+    # check_american_light_lager = False
+    # check_american_lager = False
+    # check_cream_ale = False
+    # check_american_wheat_beer = False
+    # check_international_pale_lager = False
+    # check_international_amber_lager = False
+    # check_international_dark_lager = False
+    # check_czech_pale_lager = False
+    # check_czech_premium_pale_lager = False
+    # check_czech_amber_lager = False
+    # check_czech_dark_lager = False
+    # check_munich_helles = False
+    # check_festbier = False
+    # check_helles_bock = False
+    # check_german_leichtbier = False
+    # check_kolsch = False
+    # check_german_helles_exportbier = False
+    # check_german_pils = False
+    # check_marzen = False
+    # check_rauchbier = False
+    # check_dunkles_bock = False
+    # check_vienna_lager = False
+    # check_altbier = False
+    # munich_dunkel = False
+    # check_schwarzbier = False
+    # check_doppelbock = False
+    # check_eisbock = False
+    # check_baltic_porter = False
 
-    checks = [check_american_light_lager, check_american_lager, check_cream_ale, check_american_wheat_beer, check_international_pale_lager, check_international_amber_lager, check_international_dark_lager, check_czech_pale_lager, check_czech_premium_pale_lager,
-              check_czech_amber_lager, check_czech_dark_lager, check_munich_helles, check_festbier, check_helles_bock, check_german_leichtbier, check_kolsch, check_german_helles_exportbier, check_german_pils, check_marzen, check_rauchbier, check_dunkles_bock,
-              check_vienna_lager, check_altbier, munich_dunkel, check_schwarzbier]
+    # checks = [check_american_light_lager, check_american_lager, check_cream_ale, check_american_wheat_beer, check_international_pale_lager, check_international_amber_lager, check_international_dark_lager, check_czech_pale_lager, check_czech_premium_pale_lager,
+    #           check_czech_amber_lager, check_czech_dark_lager, check_munich_helles, check_festbier, check_helles_bock, check_german_leichtbier, check_kolsch, check_german_helles_exportbier, check_german_pils, check_marzen, check_rauchbier, check_dunkles_bock,
+    #           check_vienna_lager, check_altbier, munich_dunkel, check_schwarzbier, check_doppelbock, check_eisbock, check_baltic_porter]
+
+    checks = []
+    for i in range(len(styles)):
+        checks.append(False)
 
     for i in range(len(styles)):
         if (styles[i].get('balance') in filters.get('balance') or filters.get('balance') == []) \
@@ -109,7 +141,8 @@ def beer_styles():
                 and (styles[i].get('color') in filters.get('color') or filters.get('color') == []) \
                 and (styles[i].get('family') in filters.get('family') or filters.get('family') == []) \
                 and (styles[i].get('strength') in filters.get('strength') or filters.get('strength') == []) \
-                and (styles[i].get('style') in filters.get('style') or filters.get('style') == []):
+                and (styles[i].get('style') in filters.get('style') or filters.get('style') == [])\
+                and (styles[i].get('others') in filters.get('others') or filters.get('others') == []):
             checks[i] = True
 
     return render_template('beer_styles.html', checks=checks)

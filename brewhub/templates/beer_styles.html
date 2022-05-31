@@ -25,6 +25,10 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Bitter </small>
                                 </label><br/>
+                            <input class="form-check-input" name='balance' type="checkbox" value="sweet">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Sweet </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
@@ -105,6 +109,18 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Central-Europe </small>
                                 </label><br/>
+                            <input class="form-check-input" name='region' type="checkbox" value="eastern-europe">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Eastern-Europe </small>
+                                </label><br/>
+                            <input class="form-check-input" name='region' type="checkbox" value="pacific">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Pacific </small>
+                                </label><br/>
+                            <input class="form-check-input" name='region' type="checkbox" value="british-isles">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> British-isles </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
@@ -167,6 +183,26 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Bock-family </small>
                                 </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="porter-family">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Porter-family </small>
+                                </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="ipa-family">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Ipa-family </small>
+                                </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="brown-ale-family">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Brown-ale-family </small>
+                                </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="amber-ale-family">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Amber-ale-family </small>
+                                </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="stout-family">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Stout-family </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
@@ -190,6 +226,10 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> High-strength </small>
                                 </label><br/>
+                            <input class="form-check-input" name='strength' type="checkbox" value="very-high-strength">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Very-high-strength </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
@@ -208,6 +248,25 @@
                             <input class="form-check-input" name='style' type="checkbox" value="craft-style">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Craft-style </small>
+                                </label><br/>
+                          </div>
+                        </div>
+                </div>
+                <div class="accordion-item" style="border: None">
+                        <h2 class="accordion-header" id="headingTen">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                              Others
+                          </button>
+                        </h2>
+                        <div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="headingTen" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <input class="form-check-input" name='others' type="checkbox" value="smoke">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Smoke </small>
+                                </label><br/>
+                            <input class="form-check-input" name='others' type="checkbox" value="roasty">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Roasty </small>
                                 </label><br/>
                           </div>
                         </div>
@@ -514,6 +573,258 @@ Aroma: Low to moderate</p>
         </div>
         {% endif %}
 
+        {% if checks[25] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Doppelbock</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 9A</h6>
+            <p class="card-text">A strong, rich, and very malty German lager that can have both pale and dark variants. The darker versions have more richly-developed, deeper malt flavors, while the paler versions have slightly more hops and dryness.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Doppelbock') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[26] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Eisbock</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 9B</h6>
+            <p class="card-text">A strong, full-bodied, rich, and malty dark German lager often with a viscous quality and strong flavors. Even though flavors are concentrated, the alcohol should be smooth and warming, not burning.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Eisbock') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[27] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Baltic Porter</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 9C</h6>
+            <p class="card-text">A strong, dark, malty beer with different interpretations within the Baltic region. Smooth, warming, and richly malty, with complex dark fruit flavors and a roasted flavor without burnt notes.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Baltic Porter') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[28] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Weissbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 10A</h6>
+            <p class="card-text">A pale, refreshing, lightly-hopped German wheat beer with high carbonation, dry finish, fluffy mouthfeel, and a distinctive banana-and-clove weizen yeast fermentation profile.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Weissbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[29] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Dunkles Weissbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 10B</h6>
+            <p class="card-text">A moderately dark German wheat beer with a distinctive banana-and-clove weizen yeast fermentation profile, supported by a toasted bread or caramel malt flavor. Highly carbonated and refreshing, with a creamy, fluffy texture and light finish.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Dunkles Weissbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[30] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Weizenbock</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 10C</h6>
+            <p class="card-text">A strong and malty German wheat beer combining the best wheat and yeast flavors of a Weissbier with the rich maltiness, strength, and body of a Bock. The style range includes Bock and Doppelbock strength, with variations for pale and dark color.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Weizenbock') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[31] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Ordinary Bitter</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 11A</h6>
+            <p class="card-text">Low gravity, alcohol, and carbonation make this an easy-drinking session beer. The malt profile can vary in flavor and intensity, but should never override the overall bitter impression. Drinkability is a critical component of the style.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Ordinary Bitter') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[32] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Best Bitter</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 11B</h6>
+            <p class="card-text">A flavorful, yet refreshing, session beer. Some examples can be more malt balanced, but this should not override the overall bitter impression. Drinkability is a critical component of the style.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Best Bitter') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[33] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Strong Bitter</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 11C</h6>
+            <p class="card-text">An average-strength to moderately-strong British bitter ale. The balance may vary between fairly even between malt and hops to somewhat bitter. Drinkability is a critical component of the style. A rather broad style that allows for considerable interpretation by the brewer.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Strong Bitter') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[34] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">British Golden Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 12A</h6>
+            <p class="card-text">A hop-forward, average-strength to moderately-strong pale bitter. Drinkability and a refreshing quality are critical components of the style, as it was initially a summer seasonal beer.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='British Golden Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[35] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Australian Sparkling Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 12B</h6>
+            <p class="card-text">A well-balanced, pale, highly-carbonated, and refreshing ale suitable for drinking in a hot climate. Fairly bitter, with a moderate herbal-spicy hop and pome fruit ester profile. Smooth, neutral malt flavors with a fuller body but a crisp, highly-attenuated finish.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Australian Sparkling Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[36] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">English IPA</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 12C</h6>
+            <p class="card-text">A bitter, moderately-strong, very well-attenuated pale British ale with a dry finish and a hoppy aroma and flavor. Classic British ingredients provide the most authentic flavor profile.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='English IPA') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[37] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Dark Mild</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 13A</h6>
+            <p class="card-text">A dark, low-gravity, malt-focused British session ale readily suited to drinking in quantity. Refreshing, yet flavorful for its strength, with a wide range of dark malt or dark sugar expression.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Dark Mild') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[38] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">British Brown Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 13B</h6>
+            <p class="card-text">A malty, caramelly, brown British ale without the roasted flavors of a Porter. Balanced and flavorful, but usually a little stronger than most average UK beers.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='British Brown Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[39] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">English Porter</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 13C</h6>
+            <p class="card-text">Simply called “Porter” in Britain, the name “English Porter” is used to differentiate it from other derivative porters described in these guidelines.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='English Porter') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[40] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Scottish Light</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 14A</h6>
+            <p class="card-text">A low-alcohol, malty beer with light caramel, toast, toffee, and fruit flavors. A slight roast dryness offsets the residual sweetness in the finish, with the bitterness perceived only to keep the beer from being cloying.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Scottish Light') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[41] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Scottish Heavy</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 14B</h6>
+            <p class="card-text">A lower-alcohol, malty beer with light caramel, toast, toffee, and fruity flavors. A slight roast dryness offsets the residual sweetness in the finish, with the bitterness perceived only to keep the beer from being cloying.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Scottish Heavy') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[42] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Scottish Export</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 14C</h6>
+            <p class="card-text">A moderate-strength, malty beer with light caramel, toast, toffee, and fruit flavors. A slight roast dryness offsets the residual sweetness in the finish, with the bitterness perceived only to keep the beer from being cloying.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Scottish Export') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[43] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Irish Red Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 15A</h6>
+            <p class="card-text">An easy-drinking pint, often with subtle flavors. Slightly malty in the balance sometimes with an initial soft toffee or caramel sweetness, a slightly grainy-biscuity palate, and a touch of roasted dryness in the finish. Some versions can emphasize the caramel and sweetness more, while others will favor the grainy palate and roasted dryness.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Irish Red Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[44] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Irish Stout</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 15B</h6>
+            <p class="card-text">A black beer with a pronounced roasted flavor, often similar to coffee. The balance can range from fairly even to quite bitter, with the more balanced versions having a little malty sweetness and the bitter versions being quite dry. Draught versions typically are creamy from a nitro pour, but bottled versions will not have this dispense-derived character. The roasted flavor</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Irish Stout') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[45] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Irish Extra Stout</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 15C</h6>
+            <p class="card-text">A fuller-bodied black beer with a pronounced roasted flavor, often similar to coffee and dark chocolate with some malty complexity. The balance can range from moderately bittersweet to bitter, with the more balanced versions having up to moderate malty richness and the bitter versions being quite dry.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Irish Extra Stout') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[46] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Sweet Stout</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 16A</h6>
+            <p class="card-text">A very dark, sweet, full-bodied, slightly roasty stout that can suggest coffee-and-cream, or sweetened espresso.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Sweet Stout') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[47] %}
+        <div class="card" style="display: inline-block">
+          <div class="card-body">
+            <h4 class="card-title">Oatmeal Stout</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 16B</h6>
+            <p class="card-text">A dark, roasty, full-bodied stout with enough sweetness to support the oat backbone. The sweetness, balance, and oatmeal impression can vary considerably.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Oatmeal Stout') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
     </div>
     </div>
 
