@@ -75,10 +75,14 @@ def beer_styles():
     sweet_stout =               {'balance': 'sweet',    'fermentation': 'top-fermented',    'lager': '-',       'feeling': 'malty', 'region': 'british-isles',  'color': 'dark-color',  'family': 'stout-family',       'strength': 'standard-strength',  'style': 'traditional-style', 'others': 'roasty'}
     oatmeal_stout =             {'balance': 'balanced', 'fermentation': 'top-fermented',    'lager': '-',       'feeling': '-',     'region': 'british-isles',  'color': 'dark-color',  'family': 'stout-family',       'strength': 'standard-strength',  'style': 'traditional-style', 'others': 'roasty'}
 
-    # put each beer style to one list
-    styles = [american_light_lager, american_lager, cream_ale, american_wheat_beer, international_pale_lager, international_amber_lager, international_dark_lager, czech_pale_lager, czech_premium_pale_lager, czech_amber_lager, czech_dark_lager, munich_helles, festbier, helles_bock,
-              german_leichtbier, kolsch, german_helles_exportbier, german_pils, marzen, rauchbier, dunkles_bock, vienna_lager, altbier, munich_dunkel, schwarzbier, doppelbock, eisbock, baltic_porter, weissbier, dunkles_weissbier, weizenbock, ordinary_bitter, best_bitter, strong_bitter,
-              british_golden_ale, australian_sparkling_ale, english_ipa, dark_mild, british_brown_ale, english_porter, scottish_light, scottish_heavy, scottish_export, irish_red_ale, irish_stout, irish_extra_stout, sweet_stout, oatmeal_stout]
+
+
+    styles = {'american_light_lager': american_light_lager, 'american_lager': american_lager, 'cream_ale': cream_ale, 'american_wheat_beer': american_wheat_beer, 'international_pale_lager': international_pale_lager, 'international_amber_lager': international_amber_lager, 'international_dark_lager': international_dark_lager,
+    'czech_pale_lager': czech_pale_lager, 'czech_premium_pale_lager': czech_premium_pale_lager, 'czech_amber_lager': czech_amber_lager, 'czech_dark_lager': czech_dark_lager, 'munich_helles': munich_helles, 'festbier': festbier, 'helles_bock': helles_bock, 'german_leichtbier': german_leichtbier, 'kolsch': kolsch,
+    'german_helles_exportbier': german_helles_exportbier, 'german_pils': german_pils, 'marzen': marzen, 'rauchbier': rauchbier, 'dunkles_bock': dunkles_bock, 'vienna_lager': vienna_lager, 'altbier': altbier, 'munich_dunkel': munich_dunkel, 'schwarzbier': schwarzbier, 'doppelbock': doppelbock, 'eisbock': eisbock,
+    'baltic_porter': baltic_porter, 'weissbier': weissbier, 'dunkles_weissbier': dunkles_weissbier, 'weizenbock': weizenbock, 'ordinary_bitter': ordinary_bitter, 'best_bitter': best_bitter, 'strong_bitter': strong_bitter, 'british_golden_ale': british_golden_ale, 'australian_sparkling_ale': australian_sparkling_ale,
+    'english_ipa': english_ipa, 'dark_mild': dark_mild, 'british_brown_ale': british_brown_ale, 'english_porter': english_porter, 'scottish_light': scottish_light, 'scottish_heavy': scottish_heavy, 'scottish_export': scottish_export, 'irish_red_ale': irish_red_ale, 'irish_stout': irish_stout, 'irish_extra_stout': irish_extra_stout,
+    'sweet_stout': sweet_stout, 'oatmeal_stout': oatmeal_stout}
 
     # get sectional parameters from html file
     balance = request.form.getlist('balance')
@@ -95,55 +99,22 @@ def beer_styles():
     # put all parameters into one dictionary
     filters = {'balance': balance, 'fermentation': fermentation, 'lager': lager, 'feeling': feeling, 'region': region, 'color': color, 'family': family, 'strength': strength, 'style': style, 'others': others}
 
-    # check_american_light_lager = False
-    # check_american_lager = False
-    # check_cream_ale = False
-    # check_american_wheat_beer = False
-    # check_international_pale_lager = False
-    # check_international_amber_lager = False
-    # check_international_dark_lager = False
-    # check_czech_pale_lager = False
-    # check_czech_premium_pale_lager = False
-    # check_czech_amber_lager = False
-    # check_czech_dark_lager = False
-    # check_munich_helles = False
-    # check_festbier = False
-    # check_helles_bock = False
-    # check_german_leichtbier = False
-    # check_kolsch = False
-    # check_german_helles_exportbier = False
-    # check_german_pils = False
-    # check_marzen = False
-    # check_rauchbier = False
-    # check_dunkles_bock = False
-    # check_vienna_lager = False
-    # check_altbier = False
-    # munich_dunkel = False
-    # check_schwarzbier = False
-    # check_doppelbock = False
-    # check_eisbock = False
-    # check_baltic_porter = False
+    checks = {}
+    for key in styles:
+        checks[key] = False
 
-    # checks = [check_american_light_lager, check_american_lager, check_cream_ale, check_american_wheat_beer, check_international_pale_lager, check_international_amber_lager, check_international_dark_lager, check_czech_pale_lager, check_czech_premium_pale_lager,
-    #           check_czech_amber_lager, check_czech_dark_lager, check_munich_helles, check_festbier, check_helles_bock, check_german_leichtbier, check_kolsch, check_german_helles_exportbier, check_german_pils, check_marzen, check_rauchbier, check_dunkles_bock,
-    #           check_vienna_lager, check_altbier, munich_dunkel, check_schwarzbier, check_doppelbock, check_eisbock, check_baltic_porter]
-
-    checks = []
-    for i in range(len(styles)):
-        checks.append(False)
-
-    for i in range(len(styles)):
-        if (styles[i].get('balance') in filters.get('balance') or filters.get('balance') == []) \
-                and (styles[i].get('fermentation') in filters.get('fermentation') or filters.get('fermentation') == []) \
-                and (styles[i].get('lager') in filters.get('lager') or filters.get('lager') == []) \
-                and (styles[i].get('feeling') in filters.get('feeling') or filters.get('feeling') == []) \
-                and (styles[i].get('region') in filters.get('region') or filters.get('region') == []) \
-                and (styles[i].get('color') in filters.get('color') or filters.get('color') == []) \
-                and (styles[i].get('family') in filters.get('family') or filters.get('family') == []) \
-                and (styles[i].get('strength') in filters.get('strength') or filters.get('strength') == []) \
-                and (styles[i].get('style') in filters.get('style') or filters.get('style') == [])\
-                and (styles[i].get('others') in filters.get('others') or filters.get('others') == []):
-            checks[i] = True
+    for key in styles:
+        if (styles[key].get('balance') in filters.get('balance') or filters.get('balance') == []) \
+                and (styles[key].get('fermentation') in filters.get('fermentation') or filters.get('fermentation') == []) \
+                and (styles[key].get('lager') in filters.get('lager') or filters.get('lager') == []) \
+                and (styles[key].get('feeling') in filters.get('feeling') or filters.get('feeling') == []) \
+                and (styles[key].get('region') in filters.get('region') or filters.get('region') == []) \
+                and (styles[key].get('color') in filters.get('color') or filters.get('color') == []) \
+                and (styles[key].get('family') in filters.get('family') or filters.get('family') == []) \
+                and (styles[key].get('strength') in filters.get('strength') or filters.get('strength') == []) \
+                and (styles[key].get('style') in filters.get('style') or filters.get('style') == [])\
+                and (styles[key].get('others') in filters.get('others') or filters.get('others') == []):
+            checks[key] = True
 
     return render_template('beer_styles.html', checks=checks)
 
