@@ -203,6 +203,10 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Stout-family </small>
                                 </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="strong-ale-family">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Strong-ale-family </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
@@ -268,6 +272,10 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Roasty </small>
                                 </label><br/>
+                            <input class="form-check-input" name='others' type="checkbox" value="aged">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Aged </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
@@ -282,7 +290,7 @@
 
     <div class="element col-lg-8" style="display: inline-block;">
         {% if checks['american_light_lager'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">American Light Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 1A</h6>
@@ -295,7 +303,7 @@ Aroma: Low malt aroma options<br/></p>
         </div>
         {% endif %}
         {% if checks['american_lager'] %}
-        <div class="card" style="display: inline-block;">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">American Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 1B</h6>
@@ -309,7 +317,7 @@ and thirst-quenching drink.</p>
         {% endif %}
 
         {% if checks['cream_ale'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Cream Ale</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 1C</h6>
@@ -323,7 +331,7 @@ typical American lagers, yet still subtle and restrained.</p>
         {% endif %}
 
         {% if checks['american_wheat_beer'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">American Wheat Beer</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 1D</h6>
@@ -337,7 +345,7 @@ higher carbonation contribute to its easy-drinking nature.</p>
         {% endif %}
 
         {% if checks['international_pale_lager'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">International Pale Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 2A</h6>
@@ -350,7 +358,7 @@ Served cold, it is refreshing and thirst-quenching.</p>
         {% endif %}
 
         {% if checks['international_amber_lager'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">International Amber Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 2B</h6>
@@ -365,7 +373,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['international_dark_lager'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">International Dark Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 2C</h6>
@@ -376,7 +384,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['czech_pale_lager'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Czech Pale Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 3A</h6>
@@ -387,7 +395,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['czech_premium_pale_lager'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Czech Premium Pale Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 3B</h6>
@@ -398,7 +406,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['czech_amber_lager'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Czech Amber Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 3C</h6>
@@ -409,7 +417,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['czech_dark_lager'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Czech Dark Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 3D</h6>
@@ -420,7 +428,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['munich_helles'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Munich Helles</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 4A</h6>
@@ -431,7 +439,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['festbier'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Festbier</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 4B</h6>
@@ -442,7 +450,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['helles_bock'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Helles Bock</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 4C</h6>
@@ -453,7 +461,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['german_leichtbier'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">German Leichtbier</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 5A</h6>
@@ -464,7 +472,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['kolsch'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Kölsch</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 5B</h6>
@@ -475,7 +483,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['german_helles_exportbier'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">German Helles Exportbier</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 5C</h6>
@@ -486,7 +494,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['german_pils'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">German Pils</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 5D</h6>
@@ -497,7 +505,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['marzen'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Märzen</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 6A</h6>
@@ -508,7 +516,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['rauchbier'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Rauchbier</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 6B</h6>
@@ -519,7 +527,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['dunkles_bock'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Dunkles Bock</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 6C</h6>
@@ -530,7 +538,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['vienna_lager'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Vienna Lager</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 7A</h6>
@@ -541,7 +549,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['altbier'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Altbier</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 7B</h6>
@@ -552,7 +560,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['munich_dunkel'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Munich Dunkel</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 8A</h6>
@@ -563,7 +571,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['schwarzbier'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Schwarzbier</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 8B</h6>
@@ -574,7 +582,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['doppelbock'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Doppelbock</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 9A</h6>
@@ -585,7 +593,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['eisbock'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Eisbock</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 9B</h6>
@@ -596,7 +604,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['baltic_porter'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Baltic Porter</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 9C</h6>
@@ -607,7 +615,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['weissbier'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Weissbier</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 10A</h6>
@@ -618,7 +626,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['dunkles_weissbier'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Dunkles Weissbier</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 10B</h6>
@@ -629,7 +637,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['weizenbock'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Weizenbock</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 10C</h6>
@@ -640,7 +648,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['ordinary_bitter'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Ordinary Bitter</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 11A</h6>
@@ -651,7 +659,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['best_bitter'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Best Bitter</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 11B</h6>
@@ -662,7 +670,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['strong_bier'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Strong Bitter</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 11C</h6>
@@ -673,7 +681,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['british_golden_ale'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">British Golden Ale</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 12A</h6>
@@ -684,7 +692,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['australian_sparkling_ale'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Australian Sparkling Ale</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 12B</h6>
@@ -695,7 +703,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['english_ipa'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">English IPA</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 12C</h6>
@@ -706,7 +714,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['dark_mild'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Dark Mild</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 13A</h6>
@@ -717,7 +725,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['british_brown_ale'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">British Brown Ale</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 13B</h6>
@@ -728,7 +736,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['english_porter'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">English Porter</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 13C</h6>
@@ -739,7 +747,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['scottish_light'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Scottish Light</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 14A</h6>
@@ -750,7 +758,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['scottish_heavy'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Scottish Heavy</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 14B</h6>
@@ -761,7 +769,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['scottish_export'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Scottish Export</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 14C</h6>
@@ -772,7 +780,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['irish_red_ale'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Irish Red Ale</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 15A</h6>
@@ -783,7 +791,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['irish_stout'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Irish Stout</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 15B</h6>
@@ -794,7 +802,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['irish_extra_stout'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Irish Extra Stout</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 15C</h6>
@@ -805,7 +813,7 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['sweet_stout'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Sweet Stout</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 16A</h6>
@@ -816,12 +824,144 @@ Aroma: Low to moderate</p>
         {% endif %}
 
         {% if checks['oatmeal_stout'] %}
-        <div class="card" style="display: inline-block">
+        <div class="card" style="display: inline-block; width: 900px;">
           <div class="card-body">
             <h4 class="card-title">Oatmeal Stout</h4>
             <h6 class="card-subtitle mb-2 text-muted">CODE: 16B</h6>
             <p class="card-text">A dark, roasty, full-bodied stout with enough sweetness to support the oat backbone. The sweetness, balance, and oatmeal impression can vary considerably.</p>
             <a href="{{ url_for('views.beer_styles_2', s='Oatmeal Stout') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['tropical_stout'] %}
+        <div class="card" style="display: inline-block; width: 900px;">
+          <div class="card-body">
+            <h4 class="card-title">Tropical Stout</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 16C</h6>
+            <p class="card-text">A very dark, sweet, fruity, moderately strong stout with smooth, roasty flavors, yet no burnt harshness.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Tropical Stout') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['foreign_extra_stout'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Foreign Extra Stout</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 16D</h6>
+            <p class="card-text">A very dark, rich, moderately strong, fairly dry stout with prominent roast flavors.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Foreign Extra Stout') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['british_strong_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">British Strong Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 17A</h6>
+            <p class="card-text">An ale of respectable alcoholic strength, traditionally bottled-conditioned and cellared. Can have a wide range of interpretations, but most will have varying degrees of malty richness, late hops and bitterness, fruity esters, and alcohol warmth. The malt and adjunct flavors and intensity can vary widely, but any combination should result in an agreeable palate experience.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='British Strong Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['old_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Old Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 17B</h6>
+            <p class="card-text">A stronger-than-average English ale, though usually not as strong or rich as an English Barley Wine, but usually malty. Warming. Shows positive maturation effects of a well-kept, aged beer.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Old Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['wee_heavy'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Wee Heavy</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 17C</h6>
+            <p class="card-text">Rich, sweet malt depth with caramel, toffee, and fruity flavors. Full-bodied and chewy, with warming alcohol. Restrained bitterness, but not cloying or syrupy.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Wee Heavy') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['english_barleywine'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">English Barleywine</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 17D</h6>
+            <p class="card-text">A strong and richly malty ale with a pleasant fruity or hoppy depth. A wintertime sipper with a full, chewy body and warming alcohol.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='English Barleywine') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['blonde_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Blonde Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 18A</h6>
+            <p class="card-text">Easy-drinking, approachable, malt-oriented American craft beer, often with interesting fruit, hop, or character malt notes. Well-balanced and clean, is a refreshing pint without aggressive flavors.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Blonde Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['american_pale_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">American Pale Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 18B</h6>
+            <p class="card-text">An average-strength, hop-forward, pale American craft beer with sufficient supporting malt to make the beer balanced and drinkable. The clean hop presence can reflect classic or modern American or New World hop varieties with a wide range of characteristics.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='American Pale Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['american_amber_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">American Amber Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 19A</h6>
+            <p class="card-text">An amber, hoppy, moderate-strength American craft beer with a malty caramel flavor. The balance can vary quite a bit, with some versions being fairly malty and others being aggressively hoppy. Hoppy and bitter versions should not have clashing flavors with the caramel malt profile.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='American Amber Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['california_common'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">California Common</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 19B</h6>
+            <p class="card-text">A toasty and caramelly, fairly bitter, standard-strength beer with an interesting fruitiness and rustic, woody hop character. Smooth and well carbonated.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='California Common') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['american_brown_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">American Brown Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 19C</h6>
+            <p class="card-text">A malty but hoppy standard-strength American ale frequently with chocolate and caramel flavors. The hop flavor and aroma complement and enhance the malt rather than clashing with it.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='American Brown Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['american_porter'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">American Porter</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 20A</h6>
+            <p class="card-text">A malty, bitter, and often somewhat hoppy dark beer with a balanced, roasted, and frequently chocolatey character.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='American Porter') }}" class="btn btn-primary btn-sm">More</a>
           </div>
         </div>
         {% endif %}
