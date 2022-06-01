@@ -129,7 +129,12 @@ def beer_styles():
                 and (styles[key].get('others') in filters.get('others') or filters.get('others') == []):
             checks[key] = True
 
-    return render_template('beer_styles.html', checks=checks)
+    counter = 0
+    for key in checks:
+        if checks.get(key):
+            counter += 1
+
+    return render_template('beer_styles.html', checks=checks, counter=counter)
 
 
 @views.route('/beer_styles/<string:s>', methods=['GET', 'POST'])
