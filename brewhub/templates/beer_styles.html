@@ -965,7 +965,30 @@ Aroma: Low to moderate</p>
           </div>
         </div>
         {% endif %}
+
+        <br/><br/>
+        <div id="pagination" class="pagination" style="justify-content: right"></div>
+
     </div>
     </div>
+
+
+    <script>
+        $(".element .card").slice(10).hide();
+        $('#pagination').pagination({
+
+            // Total number of items present
+            // in wrapper class
+            items: 100,
+
+            // Items allowed on a single page
+            itemsOnPage: 10,
+            onPageClick: function (noofele) {
+                $(".element .card").hide()
+                    .slice(10*(noofele-1),
+                    10+ 10* (noofele - 1)).show();
+            }
+        });
+    </script>
 
 {% endblock %}
