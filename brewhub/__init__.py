@@ -26,11 +26,13 @@ def create_app():
 
     from .views import views
     from .auth import auth
+    from .recipes import recipes
 
     db = DatabaseConnector
     db.test()
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(recipes, url_prefix='/')
 
     return app
