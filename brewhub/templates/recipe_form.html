@@ -87,8 +87,8 @@
                         <th scope="row">
                             <select class="form-select" id="exampleSelect1" name="fermentable">
                                 <option selected>Choose ingredient</option>
-                                {% for style in styles %}
-                                <option>{{ style }}</option>
+                                {% for fermentable in fermentables %}
+                                <option>{{ fermentable }}</option>
                                 {%  endfor %}
                             </select>
                         </th>
@@ -119,8 +119,8 @@
                         <th scope="row">
                             <select class="form-select" id="exampleSelect1" name="hop">
                                 <option selected>Choose hop</option>
-                                {% for style in styles %}
-                                <option>{{ style }}</option>
+                                {% for hop in hops %}
+                                <option>{{ hop }}</option>
                                 {%  endfor %}
                             </select>
                         </th>
@@ -169,8 +169,8 @@
                         <th scope="row">
                             <select class="form-select" id="exampleSelect1" name="other">
                                 <option selected>Choose ingredient</option>
-                                {% for style in styles %}
-                                <option>{{ style }}</option>
+                                {% for other in others %}
+                                <option>{{ other }}</option>
                                 {%  endfor %}
                             </select>
                         </th>
@@ -195,8 +195,8 @@
                 <div class="input-group mb-3" style="width:500px">
                     <select class="form-select" id="exampleSelect1" name="yeast">
                         <option selected>Choose yeast</option>
-                        {% for style in styles %}
-                         <option>{{ style }}</option>
+                        {% for yeast in yeasts %}
+                         <option>{{ yeast }}</option>
                         {%  endfor %}
                     </select>
                 </div>

@@ -9,8 +9,44 @@ recipes = Blueprint('recipes', __name__)
 
 @recipes.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
+    db = DatabaseConnector()
+    user_id = session['id']
+    print(user_id)
+
     styles = ['American Light Lager', 'American Lager', 'Cream Ale', 'American Wheat Beer', 'International Pale Lager',
               'International Amber Lager']
+
+    fermentables = db.select_from_fermentables(user_id)
+    print(fermentables)
+    fermentables_for_combobox = []
+    for i in range(len(fermentables)):
+        (name, color, gravity_contibution, price) = fermentables[i]
+        fermentable = str(name) + ' ' + str(float(color)) + ' SRM'
+        fermentables_for_combobox.append(fermentable)
+
+    hops = db.select_from_hops(user_id)
+    print(hops)
+    hops_for_combobox = []
+    for i in range(len(hops)):
+        (name, alpha_acids, price) = hops[i]
+        hop = str(name) + ' AA. ' + str(float(alpha_acids)) + ' %'
+        hops_for_combobox.append(hop)
+
+    others = db.select_from_others(user_id)
+    print(others)
+    others_for_combobox = []
+    for i in range(len(others)):
+        (name, info, price) = others[i]
+        other = str(name) + ' ' + str(info)
+        others_for_combobox.append(other)
+
+    yeasts = db.select_from_yeasts(user_id)
+    print(yeasts)
+    yeasts_for_combobox = []
+    for i in range(len(yeasts)):
+        (name, attenuation, price) = yeasts[i]
+        yeast = str(name) + ' ' + str(float(attenuation)) +' %'
+        yeasts_for_combobox.append(yeast)
 
     if request.method == 'POST':
 
@@ -107,11 +143,73 @@ def add_recipe():
         print(notes)
 
 
-    return render_template('recipe_form.html', styles=styles)
+    return render_template('recipe_form.html', styles=styles, fermentables=fermentables_for_combobox, hops=hops_for_combobox, others=others_for_combobox, yeasts=yeasts_for_combobox)
 
 
 @recipes.route('/add_ingredients', methods=['GET', 'POST'])
 def add_ingredients():
+
+    db = DatabaseConnector()
+    user_id = session['id']
+    print(user_id)
+
+    if request.method == 'POST' and 'fermentable_name' in request.form:
+
+        fermentable_name = request.form['fermentable_name']
+        print(fermentable_name)
+
+        fermentable_color = request.form['fermentable_color']
+        print(fermentable_color)
+
+        gravity_contribution = request.form['gravity_contribution']
+        print(gravity_contribution)
+
+        fermentable_price = request.form['fermentable_price']
+        print(fermentable_price)
+
+        db.insert_into_fermentables(user_id, "\'" + fermentable_name + "\'", fermentable_color, gravity_contribution, fermentable_price)
+
+    if request.method == 'POST' and 'hop_name' in request.form:
+
+        hop_name = request.form['hop_name']
+        print(hop_name)
+
+        alpha_acids = request.form['alpha_acids']
+        print(alpha_acids)
+
+        hop_price = request.form['hop_price']
+        print(hop_price)
+
+        db.insert_into_hops(user_id, "\'" + hop_name + "\'", alpha_acids, hop_price)
+
+    if request.method == 'POST' and 'yeast_name' in request.form:
+
+        yeast_name = request.form['yeast_name']
+        print(yeast_name)
+
+        yeast_attenuation = request.form['yeast_attenuation']
+        print(yeast_attenuation)
+
+        yeast_price = request.form['yeast_price']
+        print(yeast_price)
+
+        db.insert_into_yeasts(user_id, "\'" + yeast_name + "\'", "\'" + yeast_attenuation + "\'", yeast_price)
+
+    if request.method == 'POST' and 'other_name' in request.form:
+
+        other_name = request.form['other_name']
+        print(other_name)
+
+        optional_info = request.form['optional_info']
+        print(optional_info)
+
+        other_price = request.form['other_price']
+        print(other_price)
+
+        db.insert_into_others(user_id, "\'" + other_name + "\'", "\'" + optional_info + "\'", other_price)
+
+
+
     return render_template('ingredients_form.html')
 
 

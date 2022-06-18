@@ -105,8 +105,7 @@ def register():
 
         else:
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
-            db.insert_into('users', "\'" + username + "\'", "\'" + email + "\'",
-                           "\'" + str(password_hash_hex) + "\'",
+            db.insert_into_users('users', "\'" + username + "\'", "\'" + email + "\'", "\'" + str(password_hash_hex) + "\'",
                            "\'" + str(age) + "\'", "\'" + bio + "\'")
             flash('You have successfully registered!')
             return render_template('login.html')
