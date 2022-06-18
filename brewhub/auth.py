@@ -8,6 +8,7 @@ auth = Blueprint('auth', __name__)
 
 db = DatabaseConnector()
 
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     # Check if "username" and "password" POST requests exist (user submitted form)
@@ -20,24 +21,30 @@ def login():
         password_hash_hex = password_hash.hexdigest()
         print(password_hash_hex)
 
-        # Check if account exists using MySQL
-        existing_users = db.select_from('users', "\'" + username + "\'", "\'" + str(password_hash_hex) + "\'")
-        print(existing_users)
-        # If account exists in accounts table in out database
-        if existing_users != [] and username == existing_users[0][1] and str(password_hash_hex) == existing_users[0][3]:
-            session['logged_in'] = True
-            session['id'] = existing_users[0][0]
-            session['username'] = existing_users[0][1]
-            session['email'] = existing_users[0][2]
-            session['password'] = existing_users[0][3]
-            session['age'] = existing_users[0][4]
-            session['bio'] = existing_users[0][5]
-            # Redirect to home page
-            flash('Logged in successfully!')
-            return render_template('index.html')
-        else:
-            # Account doesnt exist or username/password incorrect
+        if '\'--' in username or '\'--' in password:
             flash('Incorrect username/password!')
+            print(" '-- protect from sql comment ")
+
+        else:
+            # Check if account exists using MySQL
+            existing_users = db.select_from('users', "\'" + username + "\'", "\'" + str(password_hash_hex) + "\'")
+            print(existing_users)
+            # If account exists in accounts table in out database
+            if existing_users != [] and username == existing_users[0][1] and str(password_hash_hex) == \
+                    existing_users[0][3]:
+                session['logged_in'] = True
+                session['id'] = existing_users[0][0]
+                session['username'] = existing_users[0][1]
+                session['email'] = existing_users[0][2]
+                session['password'] = existing_users[0][3]
+                session['age'] = existing_users[0][4]
+                session['bio'] = existing_users[0][5]
+                # Redirect to home page
+                flash('Logged in successfully!')
+                return render_template('index.html')
+            else:
+                # Account doesnt exist or username/password incorrect
+                flash('Incorrect username/password!')
     return render_template('login.html')
 
 
@@ -74,32 +81,38 @@ def register():
         password_hash_hex = password_hash.hexdigest()
         print(password_hash_hex)
 
-        # Check if account exists using MySQL
-        existing_users = db.select_from_registration('users')
-        print(existing_users)
-
-        # If account exists show error and validation checks
-        if username in existing_users:
-            flash('Account already exists!')
-
-        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            flash('Invalid email address!')
-
-        elif not re.match(r'[A-Za-z0-9]+', username):
-            flash('Username must contain only characters and numbers!')
-
-        elif password != confirm_password:
-            flash('Retyped password is not correct!')
-
-        elif not username or not password or not email:
-            flash('Please fill out the form!')
+        if '\'--' in username or '\'--' in password or '\'--' in confirm_password or '\'--' in email or '\'--' in bio:
+            flash('Incorrect input data')
+            print(" '-- protect from sql comment ")
 
         else:
-            # Account doesnt exists and the form data is valid, now insert new account into accounts table
-            db.insert_into('users', "\'" + username + "\'", "\'" + email + "\'", "\'" + str(password_hash_hex) + "\'",
-                           "\'" + str(age) + "\'", "\'" + bio + "\'")
-            flash('You have successfully registered!')
-            return render_template('login.html')
+            # Check if account exists using MySQL
+            existing_users = db.select_from_registration('users')
+            print(existing_users)
+
+            # If account exists show error and validation checks
+            if username in existing_users:
+                flash('Account already exists!')
+
+            elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+                flash('Invalid email address!')
+
+            elif not re.match(r'[A-Za-z0-9]+', username):
+                flash('Username must contain only characters and numbers!')
+
+            elif password != confirm_password:
+                flash('Retyped password is not correct!')
+
+            elif not username or not password or not email:
+                flash('Please fill out the form!')
+
+            else:
+                # Account doesnt exists and the form data is valid, now insert new account into accounts table
+                db.insert_into('users', "\'" + username + "\'", "\'" + email + "\'",
+                               "\'" + str(password_hash_hex) + "\'",
+                               "\'" + str(age) + "\'", "\'" + bio + "\'")
+                flash('You have successfully registered!')
+                return render_template('login.html')
 
     elif request.method == 'POST':
         # Form is empty... (no POST data)
