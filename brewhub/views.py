@@ -202,5 +202,3 @@ def edit_profile():
 
     return render_template('edit_profile.html')
 
-
-
