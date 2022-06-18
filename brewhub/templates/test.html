@@ -1,93 +1,15 @@
-<style>
-    body{
-  font-family:sans-serif;
-  font-weight:bold;
-  font-size: 30px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:30px;
-}
-.cont{
-  width:720px;
-}
-.container{
-  display:flex;
-  flex-wrap:wrap;
-  width:720px;
-  justify-content:flex-start;
-}
-.single-item{
-  width:200px;
-  height:200px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background-color:#f3f3f3;
-  margin: 20px;
-  border-radius: 10px;
-  color:#888;
-}
-.pagination{
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-  padding:20px;
-
-  &,
-  *{
-    user-select: none;
-  }
-
-  a{
-    display:inline-block;
-    padding:0 10px;
-    cursor:pointer;
-    &.disabled{
-      opacity:.3;
-      pointer-events: none;
-    cursor:not-allowed;
-    }
-    &.current{
-      background:#f3f3f3;
-    }
-  }
-}
-</style>
-
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="jquery.easyPaginate.js"></script>
-
+<input type="text" id="nameValidation" value="HelloWorld"/>
+<button id="button" onclick="addMessage()">hehehe</button>
+<div id="hehe"></div>
 <script>
-    $('#easyPaginate').easyPaginate({
-	paginateElement: 'single-item',
-	elementsPerPage: 3,
-	effect: 'climb'
-});
-</script>
+    function addMessage() {
+        let content = $('#nameValidation').val(); // get message content
 
-<div class="cont">
-  <div class="container">
-    <div class="single-item">1</div>
-    <div class="single-item">2</div>
-    <div class="single-item">3</div>
-    <div class="single-item">4</div>
-    <div class="single-item">5</div>
-    <div class="single-item">6</div>
-    <div class="single-item">7</div>
-    <div class="single-item">8</div>
-    <div class="single-item">9</div>
-    <div class="single-item">10</div>
-    <div class="single-item">11</div>
-    <div class="single-item">12</div>
-    <div class="single-item">13</div>
-    <div class="single-item">14</div>
-    <div class="single-item">15</div>
-    <div class="single-item">16</div>
-    <div class="single-item">17</div>
-    <div class="single-item">18</div>
-    <div class="single-item">19</div>
-    <div class="single-item">20</div>
-    <div class="single-item">21</div>
-    <div class="single-item">22</div>
-    <div class="single-item">23</div>
-  </div>
-</div>
+        if (content) {
+            console.log(`Adding message: ${content}`);
+        }
+        $('#hehe').append('<p>huhuhuhuh ' + content + '</p>')
+    }
+</script>

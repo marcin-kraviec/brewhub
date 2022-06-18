@@ -19,6 +19,7 @@ def add_recipe():
         user_id = session['id']
         print(user_id)
 
+
         recipe_name = request.form['recipe_name']
         print(recipe_name)
 
