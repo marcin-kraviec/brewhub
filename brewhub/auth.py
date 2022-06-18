@@ -21,12 +21,14 @@ def login():
         password_hash_hex = password_hash.hexdigest()
         print(password_hash_hex)
 
+
         if not re.match(r'^[A-Za-z0-9]+[A-Za-z0-9]$', username):
             flash('Incorrect input data')
             print("Protecting from sqp bypass")
+
         else:
             # Check if account exists using MySQL
-            existing_users = db.select_from('users', "\'" + username + "\'", "\'" + str(password_hash_hex) + "\'")
+            existing_users = db.select_from_users('users', "\'" + username + "\'", "\'" + str(password_hash_hex) + "\'")
             print(existing_users)
             # If account exists in accounts table in out database
             if existing_users != [] and username == existing_users[0][1] and str(password_hash_hex) == \
@@ -104,9 +106,9 @@ def register():
             flash('Bio must contain only characters and numbers!')
 
         else:
-            # Account doesnt exists and the form data is valid, now insert new account into accounts table
             db.insert_into_users('users', "\'" + username + "\'", "\'" + email + "\'", "\'" + str(password_hash_hex) + "\'",
                            "\'" + str(age) + "\'", "\'" + bio + "\'")
+
             flash('You have successfully registered!')
             return render_template('login.html')
 
