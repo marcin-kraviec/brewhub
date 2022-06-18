@@ -6,27 +6,29 @@
         <h4>Recipe info</h4>
         <div>
             <div class="form-group" style="display: inline-block; width:500px">
-                <input type="text" name="recipe_name" class="form-control" id="recipe_name" placeholder="Enter recipe name">
+                <div class="input-group">
+                <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="recipe_name" class="form-control" id="recipe_name" placeholder="Enter recipe name" required>
+                </div>
             </div>
             <div class="form-group" style="display: inline-block; width:320px">
-                <select class="form-select" id="exampleSelect1" name="recipe_style">
-                    <option selected>Choose style</option>
+                <select class="form-select" id="exampleSelect1" name="recipe_style" required>
+                    <option value="" disabled selected>Choose style</option>
                     {% for style in styles %}
                         <option>{{ style }}</option>
                     {%  endfor %}
                 </select>
             </div>
             <div class="form-group" style="display: inline-block; width:230px">
-                <select class="form-select" id="exampleSelect2" name="recipe_type">
-                    <option selected>Choose type</option>
+                <select class="form-select" id="exampleSelect2" name="recipe_type" required>
+                    <option value="" disabled selected>Choose type</option>
                     <option>All grain</option>
                     <option>Partial mash</option>
                     <option>Extract</option>
                 </select>
             </div>
             <div class="form-group" style="display: inline-block; width:230px">
-                <select class="form-select" id="exampleSelect2" name="visibility">
-                    <option selected>Choose visibility</option>
+                <select class="form-select" id="exampleSelect2" name="visibility" required>
+                    <option value="" disabled selected>Choose visibility</option>
                     <option>Public</option>
                     <option>Private</option>
                 </select>
@@ -37,32 +39,32 @@
         <div>
             <div class="form-group">
                 <div class="input-group mb-3" style="width:320px">
-                    <input type="text" class="form-control" placeholder="Enter batch size" name="batch_size">
+                    <input type="number" pattern="^[a-zA-Z\s]+[a-zA-Z]$" class="form-control" placeholder="Enter batch size" name="batch_size" min="5" max="50" required>
                     <span class="input-group-text">L</span>
                 </div>
             </div>
             <div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="text" class="form-control" placeholder="Enter boiling time" name="boiling_time">
+                        <input type="number" class="form-control" placeholder="Enter boiling time" name="boiling_time" min="10" max="120" required>
                         <span class="input-group-text">min</span>
                     </div>
                 </div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="text" class="form-control" placeholder="Enter evaporation" name="evaporation">
+                        <input type="number" class="form-control" placeholder="Enter evaporation" name="evaporation" min="0" max="100" required>
                         <span class="input-group-text">%/h</span>
                     </div>
                 </div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="text" class="form-control" placeholder="Enter boiling losses" name="boiling_losses">
+                        <input type="number" class="form-control" placeholder="Enter boiling losses" name="boiling_losses" min="0" max="100" required>
                         <span class="input-group-text">%</span>
                     </div>
                 </div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="text" class="form-control" placeholder="Enter fermentation losses" name="fermentation_losses">
+                        <input type="number" class="form-control" placeholder="Enter fermentation losses" name="fermentation_losses" min="0" max="100" required>
                         <span class="input-group-text">%</span>
                     </div>
                 </div>
@@ -85,8 +87,8 @@
                 <tbody>
                     <tr class="table-secondary">
                         <th scope="row">
-                            <select class="form-select" id="exampleSelect1" name="fermentable">
-                                <option selected>Choose ingredient</option>
+                            <select class="form-select" id="exampleSelect1" name="fermentable" required>
+                                <option value="" disabled selected>Choose ingredient</option>
                                 {% for fermentable in fermentables %}
                                 <option>{{ fermentable }}</option>
                                 {%  endfor %}
@@ -94,7 +96,7 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Enter amount" name="fermentable_amount">
+                                <input type="number" class="form-control" placeholder="Enter amount" name="fermentable_amount" min="2" max="10" required>
                                 <span class="input-group-text">kg</span>
                             </div>
                         </td>
@@ -117,8 +119,8 @@
                 <tbody>
                     <tr class="table-secondary">
                         <th scope="row">
-                            <select class="form-select" id="exampleSelect1" name="hop">
-                                <option selected>Choose hop</option>
+                            <select class="form-select" id="exampleSelect1" name="hop" required>
+                                <option value="" disabled selected>Choose hop</option>
                                 {% for hop in hops %}
                                 <option>{{ hop }}</option>
                                 {%  endfor %}
@@ -126,8 +128,8 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <select class="form-select" id="exampleSelect1" name="hop_usage">
-                                    <option selected>Choose usage</option>
+                                <select class="form-select" id="exampleSelect1" name="hop_usage" required>
+                                    <option value="" disabled selected>Choose usage</option>
                                     <option>Boil</option>
                                     <option>Aroma</option>
                                     <option>Dry</option>
@@ -136,8 +138,8 @@
                         </td>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Enter time" name="time_value">
-                                <select class="input-group-text" id="exampleSelect1" name="time_option">
+                                <input type="number" class="form-control" placeholder="Enter time" name="time_value" min="10" max="100" required>
+                                <select class="input-group-text" id="exampleSelect1" name="time_option" required>
                                     <option selected>min</option>
                                     <option>days</option>
                                 </select>
@@ -145,7 +147,7 @@
                         </td>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Enter amount" name="hop_amount">
+                                <input type="number" class="form-control" placeholder="Enter amount" name="hop_amount" min="100" max="500" required>
                                 <span class="input-group-text">g</span>
                             </div>
                         </td>
@@ -167,8 +169,8 @@
                 <tbody>
                     <tr class="table-secondary">
                         <th scope="row">
-                            <select class="form-select" id="exampleSelect1" name="other">
-                                <option selected>Choose ingredient</option>
+                            <select class="form-select" id="exampleSelect1" name="other" required>
+                                <option value="" disabled selected>Choose ingredient</option>
                                 {% for other in others %}
                                 <option>{{ other }}</option>
                                 {%  endfor %}
@@ -176,12 +178,14 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Enter amount" name="other_amount">
+                                <input type="number" class="form-control" placeholder="Enter amount" name="other_amount" min="100" max="500" required>
                                 <span class="input-group-text">g</span>
                             </div>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="other_info">
+                            <div class="input-group">
+                                <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" class="form-control" name="other_info">
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -193,8 +197,8 @@
         <div>
             <div class="form-group" style="display: inline-block">
                 <div class="input-group mb-3" style="width:500px">
-                    <select class="form-select" id="exampleSelect1" name="yeast">
-                        <option selected>Choose yeast</option>
+                    <select class="form-select" id="exampleSelect1" name="yeast" required>
+                        <option value="" disabled selected>Choose yeast</option>
                         {% for yeast in yeasts %}
                          <option>{{ yeast }}</option>
                         {%  endfor %}
@@ -203,13 +207,13 @@
             </div>
             <div class="form-group" style="display: inline-block">
                 <div class="input-group mb-3" style="width:390px">
-                    <input type="text" class="form-control" placeholder="Enter primary fermentation time" name="primary_fermentation">
+                    <input type="number" class="form-control" placeholder="Enter primary fermentation time" name="primary_fermentation" min="10" max="30" required>
                     <span class="input-group-text">days</span>
                 </div>
             </div>
             <div class="form-group" style="display: inline-block">
                 <div class="input-group mb-3" style="width:390px">
-                    <input type="text" class="form-control" placeholder="Enter secondary fermentation time" name="secondary_fermentation">
+                    <input type="number" class="form-control" placeholder="Enter secondary fermentation time" name="secondary_fermentation" min="10" max="30" required>
                     <span class="input-group-text">days</span>
                 </div>
             </div>
@@ -218,13 +222,13 @@
         <h4>Mash</h4>
             <div class="form-group">
                 <div class="input-group mb-3" style="width:320px">
-                    <input type="text" class="form-control" placeholder="Enter expected efficiency" name="efficiency">
+                    <input type="number" class="form-control" placeholder="Enter expected efficiency" name="efficiency" min="0" max="100" required>
                     <span class="input-group-text">%</span>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group mb-3" style="width:320px">
-                    <input type="text" class="form-control" placeholder="Enter water/grain ratio" name="water_grain_ratio">
+                    <input type="number" class="form-control" placeholder="Enter water/grain ratio" name="water_grain_ratio" min="10" max="30" required>
                     <span class="input-group-text">L/kg</span>
                 </div>
             </div>
@@ -239,13 +243,13 @@
                     <tr class="table-secondary">
                         <th scope="row">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Enter Temperature" name="mash_temperature">
+                                <input type="number" class="form-control" placeholder="Enter Temperature" name="mash_temperature" min="5" max="40" required>
                                 <span class="input-group-text">°C</span>
                             </div>
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Enter time" name="mash_time">
+                                <input type="number" class="form-control" placeholder="Enter time" name="mash_time" min="30" max="180" required>
                                 <span class="input-group-text">min</span>
                             </div>
                         </td>
@@ -302,9 +306,10 @@
         <h4>Notes</h4>
         <div class="form-group">
             <textarea class="form-control" id="exampleTextarea" rows="5" name="notes"></textarea>
+{#            <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="notes" class="form-control" id="notes" placeholder="Enter some notes" required>#}
         </div>
       <br>
-      <button type="submit" class="btn btn-primary" style="width: 100%">Save recipe</button>
+      <button type="submit" class="btn btn-primary" style="width: 100%" name="submit" value="submit">Save recipe</button>
       </form>
     </div>
 

@@ -5,24 +5,24 @@
       <form action="{{ url_for('recipes.add_ingredients') }}" method="post" name="form_" value="fermentable_form">
         <h4>Fermentable</h4>
             <div class="form-group" style="display: inline-block; width:410px">
-                <input type="text" name="fermentable_name" class="form-control" placeholder="Enter fermentable name">
+                <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="fermentable_name" class="form-control" placeholder="Enter fermentable name" required>
             </div>
             <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:290px">
-                        <input type="text" name="fermentable_color" class="form-control" placeholder="Enter SRM color">
+                        <input type="number" name="fermentable_color" class="form-control" placeholder="Enter SRM color" min="0" max="600" required>
                         <span class="input-group-text">SRM</span>
                     </div>
                     <span style="float: right;">0 - 600</span>
             </div>
             <div class="form-group" style="display: inline-block; width:290px">
                 <div class="input-group mb-3" style="width:290px">
-                    <input type="text" name="gravity_contribution" class="form-control" placeholder="Enter gravity contribution">
+                    <input type="number" name="gravity_contribution" class="form-control" placeholder="Enter gravity contribution" step="0.001" min="1.000" max="1.050" required>
                 </div>
                 <span style="float: right;">1.000 - 1.050</span>
             </div>
             <div class="form-group" style="display: inline-block; width:290px">
                 <div class="input-group mb-3" style="width:290px">
-                    <input type="text" name="fermentable_price" class="form-control" placeholder="Enter price">
+                    <input type="number" name="fermentable_price" class="form-control" placeholder="Enter price" required>
                     <span class="input-group-text">zł/kg</span>
                 </div>
             </div>
@@ -35,18 +35,18 @@
       <form action="{{ url_for('recipes.add_ingredients') }}" method="post" name="form_" value="hop_form">
         <h4>Hop</h4>
             <div class="form-group" style="display: inline-block; width:600px">
-                <input type="text" name="hop_name" class="form-control" placeholder="Enter hop name">
+                <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="hop_name" class="form-control" placeholder="Enter hop name" required>
             </div>
             <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:340px">
-                        <input type="text" name="alpha_acids" class="form-control" placeholder="Enter alpha acids">
+                        <input type="number" name="alpha_acids" class="form-control" placeholder="Enter alpha acids" step="1" min="0" max="25" required>
                         <span class="input-group-text">%</span>
                     </div>
                     <span style="float: right;">0 - 25</span>
             </div>
             <div class="form-group" style="display: inline-block; width:340px">
                 <div class="input-group mb-3" style="width:340px">
-                    <input type="text" name="hop_price" class="form-control" placeholder="Enter price">
+                    <input type="number" name="hop_price" class="form-control" placeholder="Enter price" required>
                     <span class="input-group-text">zł/100g</span>
                 </div>
             </div>
@@ -58,18 +58,18 @@
       <form action="{{ url_for('recipes.add_ingredients') }}" method="post">
         <h4>Yeast</h4>
             <div class="form-group" style="display: inline-block; width:600px">
-                <input type="text" name="yeast_name" class="form-control" placeholder="Enter yeast name">
+                <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="yeast_name" class="form-control" placeholder="Enter yeast name" required>
             </div>
             <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:340px">
-                        <input type="text" name="yeast_attenuation" class="form-control" placeholder="Enter attenuation">
+                        <input type="number" name="yeast_attenuation" class="form-control" placeholder="Enter attenuation" step="1" min="0" max="100" required>
                         <span class="input-group-text">%</span>
                     </div>
                     <span style="float: right;">0 - 100</span>
             </div>
             <div class="form-group" style="display: inline-block; width:340px">
                 <div class="input-group mb-3" style="width:340px">
-                    <input type="text" name="yeast_price" class="form-control" placeholder="Enter price">
+                    <input type="number" name="yeast_price" class="form-control" placeholder="Enter price" required>
                     <span class="input-group-text">zł</span>
                 </div>
             </div>
@@ -81,17 +81,17 @@
       <form action="{{ url_for('recipes.add_ingredients') }}" method="post">
         <h4>Other</h4>
             <div class="form-group" style="display: inline-block; width:600px">
-                <input type="text" name="other_name" class="form-control" placeholder="Enter name">
+                <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="other_name" class="form-control" placeholder="Enter name" required>
             </div>
             <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:340px">
-                        <input type="text" name="optional_info" class="form-control">
+                        <input type="number" name="optional_info" class="form-control" min="0" required>
                     </div>
                     <span style="float: right;">Optional</span>
             </div>
             <div class="form-group" style="display: inline-block; width:340px">
                 <div class="input-group mb-3" style="width:340px">
-                    <input type="text" name="other_price" class="form-control" placeholder="Enter price">
+                    <input type="number" name="other_price" class="form-control" placeholder="Enter price" required>
                     <span class="input-group-text">zł/100g</span>
                 </div>
             </div>

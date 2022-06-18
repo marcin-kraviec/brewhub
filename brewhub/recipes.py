@@ -48,6 +48,7 @@ def add_recipe():
         yeast = str(name) + ' ' + str(float(attenuation)) +' %'
         yeasts_for_combobox.append(yeast)
 
+
     if request.method == 'POST':
 
         # Recipe info
@@ -139,8 +140,11 @@ def add_recipe():
         print(mash_time)
 
         #Notes
-        notes = request.form['notes']
-        print(notes)
+        if not re.match(r'^[A-Za-z0-9\s\.\,\!\?]+[A-Za-z0-9]$', request.form['notes']):
+            flash("Incorrect input data in notes field")
+        else:
+            notes = request.form['notes']
+            print(notes)
 
 
     return render_template('recipe_form.html', styles=styles, fermentables=fermentables_for_combobox, hops=hops_for_combobox, others=others_for_combobox, yeasts=yeasts_for_combobox)
