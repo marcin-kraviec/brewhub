@@ -21,10 +21,9 @@ def login():
         password_hash_hex = password_hash.hexdigest()
         print(password_hash_hex)
 
-        if '\'--' in username or '\'--' in password:
-            flash('Incorrect username/password!')
-            print(" '-- protect from sql comment ")
-
+        if not re.match(r'^[A-Za-z0-9]+[A-Za-z0-9]$', username):
+            flash('Incorrect input data')
+            print("Protecting from sqp bypass")
         else:
             # Check if account exists using MySQL
             existing_users = db.select_from('users', "\'" + username + "\'", "\'" + str(password_hash_hex) + "\'")
@@ -81,38 +80,36 @@ def register():
         password_hash_hex = password_hash.hexdigest()
         print(password_hash_hex)
 
-        if '\'--' in username or '\'--' in password or '\'--' in confirm_password or '\'--' in email or '\'--' in bio:
-            flash('Incorrect input data')
-            print(" '-- protect from sql comment ")
+        # Check if account exists using MySQL
+        existing_users = db.select_from_registration('users')
+        print(existing_users)
+
+        # If account exists show error and validation checks
+        if username in existing_users:
+            flash('Account already exists!')
+
+        elif not re.match(r'^[A-Za-z0-9]+[A-Za-z0-9]$', username):
+            flash('Username must contain only characters and numbers!')
+
+        elif not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
+            flash('Invalid email address!')
+
+        elif password != confirm_password:
+            flash('Retyped password is not correct!')
+
+        elif not username or not password or not email:
+            flash('Please fill out the form!')
+
+        elif not re.match(r'^[A-Za-z0-9\s]+[\sA-Za-z0-9]$', bio):
+            flash('Bio must contain only characters and numbers!')
 
         else:
-            # Check if account exists using MySQL
-            existing_users = db.select_from_registration('users')
-            print(existing_users)
-
-            # If account exists show error and validation checks
-            if username in existing_users:
-                flash('Account already exists!')
-
-            elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-                flash('Invalid email address!')
-
-            elif not re.match(r'[A-Za-z0-9]+', username):
-                flash('Username must contain only characters and numbers!')
-
-            elif password != confirm_password:
-                flash('Retyped password is not correct!')
-
-            elif not username or not password or not email:
-                flash('Please fill out the form!')
-
-            else:
-                # Account doesnt exists and the form data is valid, now insert new account into accounts table
-                db.insert_into('users', "\'" + username + "\'", "\'" + email + "\'",
-                               "\'" + str(password_hash_hex) + "\'",
-                               "\'" + str(age) + "\'", "\'" + bio + "\'")
-                flash('You have successfully registered!')
-                return render_template('login.html')
+            # Account doesnt exists and the form data is valid, now insert new account into accounts table
+            db.insert_into('users', "\'" + username + "\'", "\'" + email + "\'",
+                           "\'" + str(password_hash_hex) + "\'",
+                           "\'" + str(age) + "\'", "\'" + bio + "\'")
+            flash('You have successfully registered!')
+            return render_template('login.html')
 
     elif request.method == 'POST':
         # Form is empty... (no POST data)
