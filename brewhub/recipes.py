@@ -12,13 +12,11 @@ def add_recipe():
     styles = ['American Light Lager', 'American Lager', 'Cream Ale', 'American Wheat Beer', 'International Pale Lager',
               'International Amber Lager']
 
-
-    # Recipe info
     if request.method == 'POST':
 
+        # Recipe info
         user_id = session['id']
         print(user_id)
-
 
         recipe_name = request.form['recipe_name']
         print(recipe_name)
@@ -71,6 +69,50 @@ def add_recipe():
         hop_amount = request.form.getlist('hop_amount')
         print(hop_amount)
 
+        #Others
+        other = request.form.getlist('other')
+        print(other)
+
+        other_amount = request.form.getlist('other_amount')
+        print(other_amount)
+
+        other_info = request.form.getlist('other_info')
+        print(other_info)
+
+        #Fermentation
+        yeast = request.form.get('yeast')
+        print(yeast)
+
+        primary_fermentation = request.form['primary_fermentation']
+        print(primary_fermentation)
+
+        secondary_fermentation = request.form['secondary_fermentation']
+        print(secondary_fermentation)
+
+        #Mash
+        efficiency = request.form['efficiency']
+        print(efficiency)
+
+        water_grain_ratio = request.form['water_grain_ratio']
+        print(water_grain_ratio)
+
+        mash_temperature = request.form.getlist('mash_temperature')
+        print(mash_temperature)
+
+        mash_time = request.form.getlist('mash_time')
+        print(mash_time)
+
+        #Notes
+        notes = request.form['notes']
+        print(notes)
 
 
     return render_template('recipe_form.html', styles=styles)
+
+
+@recipes.route('/add_ingredients', methods=['GET', 'POST'])
+def add_ingredients():
+    return render_template('ingredients_form.html')
+
+
+
