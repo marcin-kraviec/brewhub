@@ -14,10 +14,11 @@ def add_recipe():
 
 
     # Recipe info
-    user_id = session['id']
-    print(user_id)
+    if request.method == 'POST':
 
-    if request.method == "POST":
+        user_id = session['id']
+        print(user_id)
+
 
         recipe_name = request.form['recipe_name']
         print(recipe_name)
