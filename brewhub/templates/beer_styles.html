@@ -966,6 +966,153 @@ Aroma: Low to moderate</p>
         </div>
         {% endif %}
 
+        {% if checks['american_stout'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">American Stout</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 20B</h6>
+            <p class="card-text">A fairly strong, highly roasted, bitter, hoppy dark stout. The body and dark flavors typical of stouts with a more aggressive American hop character and bitterness.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='American Stout') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['imperial_stout'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Imperial Stout</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 20C</h6>
+            <p class="card-text">An intensely-flavored, very strong, very dark stout with a broad range of interpretations. Roasty-burnt malt with a depth of dark or dried fruit flavors, and a warming, bittersweet finish. Despite the intense flavors, the components need to meld together to create a complex, harmonious beer, not a hot mess – sometimes only accomplished with age.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Imperial Stout') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['american_ipa'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">American IPA</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 21A</h6>
+            <p class="card-text">A decidedly hoppy and bitter, moderately strong, pale American ale. The balance is hop-forward, with a clean fermentation profile, dryish finish, and clean, supporting malt allowing a creative range of hop character to shine through.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='American IPA') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['belgian_ipa'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Belgian IPA</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 21B</h6>
+            <p class="card-text">A dry, hoppy IPA with fruitiness and spiciness of Belgian yeast. Often lighter in color and more attenuated, similar to a Belgian Tripel that has been brewed with more hops.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Belgian IPA') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['black_ipa'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Black IPA</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 21B</h6>
+            <p class="card-text">A beer with the dryness, hop-forward balance, and flavor characteristics of an American IPA, but darker in color. Darker malts add a gentle and supportive flavor, not a strongly roasted or burnt character.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Black IPA') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['brown_ipa'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Brown IPA</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 21B</h6>
+            <p class="card-text">Hoppy, bitter, and moderately strong like an American IPA, but with dark caramel, chocolate, toffee, or dark fruit character as in an American Brown Ale. Retaining the dryish finish and lean body that makes IPAs so drinkable, a Brown IPA is a little more flavorful and malty than an American IPA without being sweet or heavy.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Brown IPA') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['brut_ipa'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Brut IPA</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 21B</h6>
+            <p class="card-text">A very pale, hop-forward American IPA variant with a bone-dry finish, very high carbonation, and a restrained bitterness level. Can be suggestive of a sparkling white wine or Champagne. The hop character is modern, and emphasizes flavor and aroma dimensions.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Brut IPA') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['red_ipa'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Red IPA</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 21B</h6>
+            <p class="card-text">Hoppy, bitter, and moderately strong like an American IPA, but with some caramel, toffee, or fruit character as in an American Amber Ale. Retaining the dryish finish and lean body that makes IPAs so drinkable, a Red IPA is a little more flavorful and malty than an American IPA without being sweet or heavy.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Red IPA') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['rye_ipa'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Rye IPA</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 21B</h6>
+            <p class="card-text">An American IPA with spicy, grainy rye malt. The rye gives a bready and peppery flavor, a creamier body, and a dry, grainy finish.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Rye IPA') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['white_ipa'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">White IPA</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 21B</h6>
+            <p class="card-text">A fruity, spicy, refreshing version of an American IPA, but with a lighter color, less body, and featuring the distinctive yeast or spice additions typical of a Witbier.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='White IPA') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['hazy_ipa'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Hazy IPA</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 21B</h6>
+            <p class="card-text">An American IPA with intense fruit flavors and aromas, a soft body, smooth mouthfeel, and often opaque with substantial haze. Less perceived bitterness than traditional IPAs but always massively hop-forward.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Hazy IPA') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['double_ipa'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Double IPA</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 22A</h6>
+            <p class="card-text">An intensely hoppy, fairly strong, bitter pale ale without the big, rich, complex maltiness, residual sweetness, and body of an American Barleywine. Strongly hopped, but clean, dry, and lacking harshness. Despite showing its strength, drinkability is an important consideration.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Double IPA') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['american_strong_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">American Strong Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 22B</h6>
+            <p class="card-text">A malty, bitter, and strong American Ale fitting in the space between American Barleywine, Double IPA, and Red IPA. The malty and hoppy flavors can be quite strong, but are generally in balance.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='American Strong Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+
+
+
+
         <br/><br/>
         <div id="pagination" class="pagination" style="justify-content: right"></div>
 
