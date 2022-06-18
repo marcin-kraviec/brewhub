@@ -14,59 +14,61 @@ def add_recipe():
 
 
     # Recipe info
-    user_id = session['id']
-    print(user_id)
+    if request.method == 'POST':
 
-    recipe_name = request.form['recipe_name']
-    print(recipe_name)
+        user_id = session['id']
+        print(user_id)
 
-    recipe_style = request.form.get('recipe_style')
-    print(recipe_style)
+        recipe_name = request.form['recipe_name']
+        print(recipe_name)
 
-    recipe_type = request.form.get('recipe_type')
-    print(recipe_type)
+        recipe_style = request.form.get('recipe_style')
+        print(recipe_style)
 
-    visibility = request.form.get('visibility')
-    print(visibility)
+        recipe_type = request.form.get('recipe_type')
+        print(recipe_type)
 
-    # Batch info
-    batch_size = request.form['batch_size']
-    print(batch_size)
+        visibility = request.form.get('visibility')
+        print(visibility)
 
-    boiling_time = request.form['boiling_time']
-    print(boiling_time)
+        # Batch info
+        batch_size = request.form['batch_size']
+        print(batch_size)
 
-    evaporation = request.form['evaporation']
-    print(evaporation)
+        boiling_time = request.form['boiling_time']
+        print(boiling_time)
 
-    boiling_losses = request.form['boiling_losses']
-    print(boiling_losses)
+        evaporation = request.form['evaporation']
+        print(evaporation)
 
-    fermentation_losses = request.form['fermentation_losses']
-    print(fermentation_losses)
+        boiling_losses = request.form['boiling_losses']
+        print(boiling_losses)
 
-    #Fermentables
-    fermentable = request.form.getlist('fermentable')
-    print(fermentable)
+        fermentation_losses = request.form['fermentation_losses']
+        print(fermentation_losses)
 
-    fermentable_amount = request.form.getlist('fermentable_amount')
-    print(fermentable_amount)
+        #Fermentables
+        fermentable = request.form.getlist('fermentable')
+        print(fermentable)
 
-    #Hops
-    hop = request.form.getlist('hop')
-    print(hop)
+        fermentable_amount = request.form.getlist('fermentable_amount')
+        print(fermentable_amount)
 
-    hop_usage = request.form.getlist('hop_usage')
-    print(hop_usage)
+        #Hops
+        hop = request.form.getlist('hop')
+        print(hop)
 
-    time_value = request.form.getlist('time_value')
-    print(time_value)
+        hop_usage = request.form.getlist('hop_usage')
+        print(hop_usage)
 
-    time_option = request.form.getlist('time_option')
-    print(time_option)
+        time_value = request.form.getlist('time_value')
+        print(time_value)
 
-    hop_amount = request.form.getlist('hop_amount')
-    print(hop_amount)
+        time_option = request.form.getlist('time_option')
+        print(time_option)
+
+        hop_amount = request.form.getlist('hop_amount')
+        print(hop_amount)
 
 
 
