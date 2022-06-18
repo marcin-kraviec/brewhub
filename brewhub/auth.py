@@ -21,7 +21,7 @@ def login():
         print(password_hash_hex)
 
         # Check if account exists using MySQL
-        existing_users = db.select_from('users', "\'" + username + "\'", "\'" + str(password_hash_hex) + "\'")
+        existing_users = db.select_from_users('users', "\'" + username + "\'", "\'" + str(password_hash_hex) + "\'")
         print(existing_users)
         # If account exists in accounts table in out database
         if existing_users != [] and username == existing_users[0][1] and str(password_hash_hex) == existing_users[0][3]:
@@ -96,7 +96,7 @@ def register():
 
         else:
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
-            db.insert_into('users', "\'" + username + "\'", "\'" + email + "\'", "\'" + str(password_hash_hex) + "\'",
+            db.insert_into_users('users', "\'" + username + "\'", "\'" + email + "\'", "\'" + str(password_hash_hex) + "\'",
                            "\'" + str(age) + "\'", "\'" + bio + "\'")
             flash('You have successfully registered!')
             return render_template('login.html')
