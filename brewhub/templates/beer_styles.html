@@ -1109,6 +1109,149 @@ Aroma: Low to moderate</p>
         </div>
         {% endif %}
 
+        {% if checks['american_barleywine'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">American Barleywine</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 22C</h6>
+            <p class="card-text">A very strong, malty, hoppy, bitter American ale with a rich palate, full mouthfeel, and warming aftertaste, suitable for contemplative sipping.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='American Barleywine') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['wheatwine'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Wheatwine</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 22D</h6>
+            <p class="card-text">A richly textured, high alcohol sipping beer with a significant grainy, bready flavor, and a sleek body. The emphasis is first on the bready, wheaty flavors with malt, hops, fruity yeast, and alcohol complexity.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Wheatwine') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['berliner_weisse'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Berliner Weisse</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23A</h6>
+            <p class="card-text">A very pale, refreshing, low-alcohol German wheat beer with a clean lactic sourness and a very high carbonation level. A light bread dough malt flavor supports the sourness, which shouldn’t seem artificial. A gentle fruitiness is found in the best examples.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Berliner Weisse') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['flanders_red_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Flanders Red Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23B</h6>
+            <p class="card-text">A sour and fruity oak-aged reddish-brown Belgian-style ale with supportive toasty malt flavors and fruit complexity. The dry, tannic finish supports the suggestion of a vintage red wine.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Flanders Red Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['oud_bruin'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Oud Bruin</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23C</h6>
+            <p class="card-text">A malty, fruity, aged, somewhat sour Belgian-style brown ale with a caramel-chocolate malt flavor, and often substantial alcohol.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Oud Bruin') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['lambic'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Lambic</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23D</h6>
+            <p class="card-text">A fairly sour, often moderately funky, wild Belgian wheat beer with sourness taking the place of hop bitterness in the balance. Traditionally served uncarbonated as a café drink.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Lambic') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['gueuze'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Gueuze</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23E</h6>
+            <p class="card-text">A very refreshing, highly carbonated, pleasantly sour but balanced wild Belgian wheat beer. The wild beer character can be complex and varied, combining sour, funky, and fruity flavors</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Gueuze') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['fruit_lambic'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Fruit Lambic</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23F</h6>
+            <p class="card-text">A complex, refreshing, pleasantly sour Belgian wheat beer blending a complementary fermented fruit character with a sour, funky Gueuze.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Fruit Lambic') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['gose'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Gose</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23G</h6>
+            <p class="card-text">A tart, lightly-bittered historical central European wheat beer with a distinctive but restrained salt and coriander character. Very refreshing, with a dry finish, high carbonation, and bright flavors.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Gose') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['witbier'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Witbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 24A</h6>
+            <p class="card-text">A pale, hazy Belgian wheat beer with spices accentuating the yeast character. A delicate, lightly spiced, moderate-strength ale that is a refreshing summer drink with its high carbonation, dry finish, and light hopping.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Witbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['belgian_pale_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Belgian Pale Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 24B</h6>
+            <p class="card-text">A top-fermented, all malt, average strength Belgian ale that is moderately bitter, not dry-hopped, and without strong flavors. The copper-colored beer lacks the aggressive yeast character or sourness of many Belgian beers, but has a well-balanced, malty, fruity, and often bready and toasty profile.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Belgian Pale Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['biere_de_garde'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Bière de Garde</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 24C</h6>
+            <p class="card-text">A family of smooth, fairly strong, malty, lagered artisanal French beer with a range of malt flavors appropriate for the blond, amber, or brown color. All are malty yet dry, with clean flavors. Darker versions have more malt character, while paler versions can have more hops while still remaining malt-focused beers.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Bière de Garde') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['belgian_blond_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Belgian Blond Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 25A</h6>
+            <p class="card-text">A golden, moderately-strong Belgian ale with a pleasantly subtle citrusy-spicy yeast complexity, smooth malty palate, and dry, soft finish.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Belgian Blond Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
 
 
 
