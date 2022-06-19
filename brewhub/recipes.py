@@ -31,7 +31,7 @@ def add_recipe():
     fermentables_for_combobox = []
     for i in range(len(fermentables)):
         (name, color, gravity_contibution, price) = fermentables[i]
-        fermentable = str(name) + ' ' + str(float(color)) + ' SRM'
+        fermentable = str(name)
         fermentables_for_combobox.append(fermentable)
 
     hops = db.select_from_hops(user_id)
@@ -55,8 +55,17 @@ def add_recipe():
     yeasts_for_combobox = []
     for i in range(len(yeasts)):
         (name, attenuation, price) = yeasts[i]
-        yeast = str(name) + ' ' + str(float(attenuation)) +' %'
+        # yeast = str(name) + ' ' + str(float(attenuation)) +' %'
+        yeast = str(name)
         yeasts_for_combobox.append(yeast)
+
+    data = {
+        'yeasts_names': yeasts_for_combobox,
+        'yeasts': yeasts,
+        'fermentables_names': fermentables_for_combobox,
+        'fermentables': fermentables
+    }
+
 
 
     if request.method == 'POST':
@@ -162,7 +171,7 @@ def add_recipe():
 
 
 
-    return render_template('recipe_form.html', styles=styles, fermentables=fermentables_for_combobox, hops=hops_for_combobox, others=others_for_combobox, yeasts=yeasts_for_combobox)
+    return render_template('recipe_form.html', styles=styles, fermentables_for_combobox=fermentables_for_combobox, hops_for_combobox=hops_for_combobox, others_for_combobox=others_for_combobox, yeasts_for_combobox=yeasts_for_combobox, yeasts=yeasts, data=data)
 
 
 @recipes.route('/add_ingredients', methods=['GET', 'POST'])

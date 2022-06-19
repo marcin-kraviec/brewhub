@@ -70,6 +70,7 @@
                 </div>
             </div>
             <button type="button" class="btn btn-warning" onclick="calculate_size()">Calculate</button>
+            <button type="button" class="btn btn-warning" onclick="gravity()">Calculate</button>
         </div>
 
         <hr class="my-4">
@@ -87,16 +88,16 @@
                 <tbody>
                     <tr class="table-secondary">
                         <th scope="row">
-                            <select class="form-select" id="exampleSelect1" name="fermentable" required>
+                            <select class="form-select" id="fermentables" name="fermentable" required>
                                 <option value="" disabled selected>Choose ingredient</option>
-                                {% for fermentable in fermentables %}
+                                {% for fermentable in fermentables_for_combobox %}
                                 <option>{{ fermentable }}</option>
                                 {%  endfor %}
                             </select>
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter amount" name="fermentable_amount" min="0" max="30" required>
+                                <input type="number" class="form-control" placeholder="Enter amount" id="fermentable_amount" name="fermentable_amount" min="0" max="30" required>
                                 <span class="input-group-text">kg</span>
                             </div>
                         </td>
@@ -121,7 +122,7 @@
                         <th scope="row">
                             <select class="form-select" id="exampleSelect1" name="hop" required>
                                 <option value="" disabled selected>Choose hop</option>
-                                {% for hop in hops %}
+                                {% for hop in hops_for_combobox %}
                                 <option>{{ hop }}</option>
                                 {%  endfor %}
                             </select>
@@ -197,9 +198,9 @@
         <div>
             <div class="form-group" style="display: inline-block">
                 <div class="input-group mb-3" style="width:500px">
-                    <select class="form-select" id="exampleSelect1" name="yeast" required>
+                    <select class="form-select" id="yeast" name="yeast" required>
                         <option value="" disabled selected>Choose yeast</option>
-                        {% for yeast in yeasts %}
+                        {% for yeast in yeasts_for_combobox %}
                          <option>{{ yeast }}</option>
                         {%  endfor %}
                     </select>
@@ -222,7 +223,7 @@
         <h4>Mash</h4>
             <div class="form-group">
                 <div class="input-group mb-3" style="width:320px">
-                    <input type="number" class="form-control" placeholder="Enter expected efficiency" name="efficiency" min="0" max="100" required>
+                    <input type="number" class="form-control" placeholder="Enter expected efficiency" id="efficiency" name="efficiency" min="0" max="100" required>
                     <span class="input-group-text">%</span>
                 </div>
             </div>
@@ -336,17 +337,168 @@
         fermentation_losses = fermentation_losses / 100
         evaporation = evaporation / 100
 
-        var wort_size = parseFloat(batch_size) + parseFloat(batch_size) * parseFloat(fermentation_losses)
-        var boil_size = wort_size + (wort_size * parseFloat(boiling_losses))
-        boil_size = boil_size + (boil_size * (parseFloat(boiling_time) * parseFloat(evaporation)))
+        var boil_size = 0;
+        var wort_size = 0;
 
-        var boil_size_field = document.getElementById('boil_size')
-        var wort_size_field = document.getElementById('wort_size')
+        if (batch_size !== '') {
+            wort_size = parseFloat(batch_size) + parseFloat(batch_size) * parseFloat(fermentation_losses)
+            boil_size = wort_size + (wort_size * parseFloat(boiling_losses))
+            boil_size = boil_size + (boil_size * (parseFloat(boiling_time) * parseFloat(evaporation)))
 
-        boil_size_field.innerText = 'Boil size: ' + boil_size + ' L'
-        wort_size_field.innerText = 'Wort size: ' + wort_size + ' L'
+            var boil_size_field = document.getElementById('boil_size')
+            var wort_size_field = document.getElementById('wort_size')
+
+            boil_size_field.innerText = 'Boil size: ' + Math.round(boil_size) + ' L'
+            wort_size_field.innerText = 'Wort size: ' + Math.round(wort_size) + ' L'
+        }
+
+        return wort_size;
+    }
+
+    {#def gravity(gravity_contributions, amounts, efficiency, volume, attenuation):#}
+    {#    gravity_points = []#}
+    {#    n = len(gravity_contributions)#}
+    {#    for i in range(n):#}
+    {#        points = int(str(gravity_contributions)[-2:])#}
+    {#        gravity_points.append(points)#}
+    {##}
+    {#    points_sum = 0#}
+    {#    for i in range(n):#}
+    {#        points_sum += gravity_points[i] * amounts[i] / 2.2#}
+    {##}
+    {#    total = round((points_sum * 0.01 * efficiency) / (volume / 3.78)) / 1000#}
+    {#    og = total + 1#}
+    {#    fg = og - 0.01 * attenuation * og#}
+    {#    return og, fg#}
+
+    {#function gravity {#}
+        {#var volume = document.getElementsByName();#}
+        {#var gravity_contributions = "hehe";#}
+        {#var gravity_points = [];#}
+        {#var n = length(gravity_contributions);#}
+        {#var points;#}
+        {#for (let i = 0; i < n; i++) {#}
+        {#    points = parseInt(gravity_contributions.slice(-2));#}
+        {#    gravity_points.push(points)#}
+        {##}
+        {#var points_sum = 0;#}
+        {##}
+        {#for (let i = 0; i < n; i++) {#}
+        {#    points_sum += gravity_points[i] * amounts[i] / 2.2;#}
+        {##}
+        {##}
+        {#var total = Math.round((points_sum * 0.01 * efficiency) / (volume / 3.78)) /1000#}
+        {#var og = total + 1;#}
+        {#var fg = og - 0.01 * attenuation * og;}#}
+
+    function gravity() {
+        var flaskData = JSON.parse('{{data | tojson | safe}}');
+
+        {# attenuation is ready #}
+        var yeast = document.getElementById("yeast");
+        yeast = yeast.options[yeast.selectedIndex].text;
+        var yeasts_names = flaskData.yeasts_names;
+        var yeasts = flaskData.yeasts;
+        var index = yeasts_names.indexOf(yeast)
+        var attenuation = 0;
+        if (yeast === "Choose yeast") {
+            attenuation = 0
+        } else {
+            attenuation = yeasts[index][1]
+        }
+        {#console.log(attenuation)#}
+
+        {# efficiency is ready #}
+        var efficiency = 0;
+        if (document.getElementById("efficiency").value === '') {
+            efficiency = 0;
+        } else {
+            efficiency = document.getElementById("efficiency").value;
+        }
+        efficiency = parseInt(efficiency);
+        {#console.log(efficiency);#}
+
+        {# amounts is ready #}
+        var fermentable_amount = document.getElementsByName("fermentable_amount");
+        var fermentable_amounts = [];
+        fermentable_amount.forEach( function (a) {
+            a = a.value;
+            if (a === '') {
+                a = 0;
+            }
+            fermentable_amounts.push(parseInt(a));
+        });
+        {#console.log(fermentable_amounts)#}
+
+        {# volume is ready #}
+        var volume = calculate_size()
+        if(volume === 0) {
+            volume = 1;
+        }
+        {#console.log(volume)#}
+
+        {# gravity_contributions is ready #}
+        var fermentable = document.getElementsByName("fermentable");
+        var gravity_contributions = []
+        var srms = []
+        var fermentables_names = flaskData.fermentables_names;
+        var fermentables = flaskData.fermentables;
+        var index = fermentables_names.indexOf(fermentable)
+        fermentable.forEach(function (f) {
+            f = f.options[f.selectedIndex].text;
+            var index = fermentables_names.indexOf(f)
+
+            if (f === "Choose ingredient") {
+                gravity_contributions.push(0)
+                srms.push(0)
+            } else {
+                gravity_contributions.push(fermentables[index][2]);
+                srms.push(fermentables[index][1]);
+            }
+        });
+        {#console.log(gravity_contributions)#}
+
+        var gravity_points = [];
+        gravity_contributions.forEach( function (g) {
+            g = g * 1000 - 1000;
+            gravity_points.push(g);
+        })
+        {#console.log(gravity_points)#}
+
+        var points_sum = 0;
+        var n = gravity_points.length;
+
+        for (let i = 0; i < n; i++) {
+            points_sum += gravity_points[i] * fermentable_amounts[i] * 2.2;
+        }
+
+        var total = Math.round((points_sum * efficiency * 0.01) / (volume / 3.78)) / 1000;
+
+        {# og is ready #}
+        var og = total + 1;
+
+        {# fg is ready #}
+        var fg = (Math.round((og * 1000 - 1000) - 0.01 * attenuation * (og * 1000 - 1000)) / 1000) + 1;
+
+        {#console.log(og);#}
+        {#console.log(fg);#}
+
+        {# abv is ready #}
+        var abv = Math.round((og - fg) * 131.25 * 10) / 10;
+        {#console.log(abv);#}
+
+        var mcu = 0;
+        for (let i = 0; i < n; i++) {
+            mcu += fermentable_amounts[i] * srms[i] * 2.2 / (volume / 3.78);
+        }
+        {# srm is ready #}
+        var srm = Math.round(1.4922 * (mcu ** 0.6859) * 10) / 10;
+        console.log(srm);
 
 
+
+
+        return [og, fg, abv, srm];
     }
     </script>
 
