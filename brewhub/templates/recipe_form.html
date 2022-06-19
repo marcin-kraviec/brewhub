@@ -39,42 +39,42 @@
         <div>
             <div class="form-group">
                 <div class="input-group mb-3" style="width:320px">
-                    <input type="number" pattern="^[a-zA-Z\s]+[a-zA-Z]$" class="form-control" placeholder="Enter batch size" name="batch_size" min="5" max="50" required>
+                    <input type="number" pattern="^[a-zA-Z\s]+[a-zA-Z]$" class="form-control" placeholder="Enter batch size" name="batch_size" id="batch_size" min="5" max="100" required>
                     <span class="input-group-text">L</span>
                 </div>
             </div>
             <div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="number" class="form-control" placeholder="Enter boiling time" name="boiling_time" min="10" max="120" required>
+                        <input type="number" class="form-control" placeholder="Enter boiling time" name="boiling_time" id="boiling_time" min="0" max="200" required>
                         <span class="input-group-text">min</span>
                     </div>
                 </div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="number" class="form-control" placeholder="Enter evaporation" name="evaporation" min="0" max="100" required>
+                        <input type="number" class="form-control" placeholder="Enter evaporation" name="evaporation" id="evaporation" min="0" max="100" required>
                         <span class="input-group-text">%/h</span>
                     </div>
                 </div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="number" class="form-control" placeholder="Enter boiling losses" name="boiling_losses" min="0" max="100" required>
+                        <input type="number" class="form-control" placeholder="Enter boiling losses" name="boiling_losses" id="boiling_losses" min="0" max="100" required>
                         <span class="input-group-text">%</span>
                     </div>
                 </div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="number" class="form-control" placeholder="Enter fermentation losses" name="fermentation_losses" min="0" max="100" required>
+                        <input type="number" class="form-control" placeholder="Enter fermentation losses" name="fermentation_losses" id="fermentation_losses"min="0" max="100" required>
                         <span class="input-group-text">%</span>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-warning">Calculate</button>
+            <button type="button" class="btn btn-warning" onclick="calculate_size()">Calculate</button>
         </div>
 
         <hr class="my-4">
-        <p>Boil size: </p>
-        <p>Wort size: </p>
+        <p id="boil_size">Boil size: </p>
+        <p id="wort_size">Wort size: </p>
         <hr class="my-4">
         <h4>Fermentables</h4>
             <table class="table table-hover" id="fermentablesTable">
@@ -96,7 +96,7 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter amount" name="fermentable_amount" min="2" max="10" required>
+                                <input type="number" class="form-control" placeholder="Enter amount" name="fermentable_amount" min="0" max="30" required>
                                 <span class="input-group-text">kg</span>
                             </div>
                         </td>
@@ -138,7 +138,7 @@
                         </td>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter time" name="time_value" min="10" max="100" required>
+                                <input type="number" class="form-control" placeholder="Enter time" name="time_value" min="0" max="200" required>
                                 <select class="input-group-text" id="exampleSelect1" name="time_option" required>
                                     <option selected>min</option>
                                     <option>days</option>
@@ -147,7 +147,7 @@
                         </td>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter amount" name="hop_amount" min="100" max="500" required>
+                                <input type="number" class="form-control" placeholder="Enter amount" name="hop_amount" min="0" max="1000" required>
                                 <span class="input-group-text">g</span>
                             </div>
                         </td>
@@ -178,7 +178,7 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter amount" name="other_amount" min="100" max="500" required>
+                                <input type="number" class="form-control" placeholder="Enter amount" name="other_amount" min="0" max="5000" required>
                                 <span class="input-group-text">g</span>
                             </div>
                         </td>
@@ -207,13 +207,13 @@
             </div>
             <div class="form-group" style="display: inline-block">
                 <div class="input-group mb-3" style="width:390px">
-                    <input type="number" class="form-control" placeholder="Enter primary fermentation time" name="primary_fermentation" min="10" max="30" required>
+                    <input type="number" class="form-control" placeholder="Enter primary fermentation time" name="primary_fermentation" min="0" max="30" required>
                     <span class="input-group-text">days</span>
                 </div>
             </div>
             <div class="form-group" style="display: inline-block">
                 <div class="input-group mb-3" style="width:390px">
-                    <input type="number" class="form-control" placeholder="Enter secondary fermentation time" name="secondary_fermentation" min="10" max="30" required>
+                    <input type="number" class="form-control" placeholder="Enter secondary fermentation time" name="secondary_fermentation" min="0" max="30" required>
                     <span class="input-group-text">days</span>
                 </div>
             </div>
@@ -228,7 +228,7 @@
             </div>
             <div class="form-group">
                 <div class="input-group mb-3" style="width:320px">
-                    <input type="number" class="form-control" placeholder="Enter water/grain ratio" name="water_grain_ratio" min="10" max="30" required>
+                    <input type="number" class="form-control" placeholder="Enter water/grain ratio" name="water_grain_ratio" min="0" max="20" required>
                     <span class="input-group-text">L/kg</span>
                 </div>
             </div>
@@ -243,13 +243,13 @@
                     <tr class="table-secondary">
                         <th scope="row">
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter Temperature" name="mash_temperature" min="5" max="40" required>
+                                <input type="number" class="form-control" placeholder="Enter Temperature" name="mash_temperature" min="0" max="100" required>
                                 <span class="input-group-text">°C</span>
                             </div>
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter time" name="mash_time" min="30" max="180" required>
+                                <input type="number" class="form-control" placeholder="Enter time" name="mash_time" min="0" max="200" required>
                                 <span class="input-group-text">min</span>
                             </div>
                         </td>
@@ -264,7 +264,7 @@
         <div>
             <div>
                 <span>Original gravity: </span>
-                <span style="float: right;">1.020 - 1.030 </span>
+                <span style="float: right;">1.020 - 1.030</span>
             </div>
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
@@ -305,8 +305,8 @@
         <hr class="my-4">
         <h4>Notes</h4>
         <div class="form-group">
-            <textarea class="form-control" id="exampleTextarea" rows="5" name="notes"></textarea>
-{#            <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="notes" class="form-control" id="notes" placeholder="Enter some notes" required>#}
+             <textarea class="form-control" id="exampleTextarea" rows="5" name="notes"></textarea>
+{#            <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="notes" class="form-control" id="notes" placeholder="Enter some notes" required> #}
         </div>
       <br>
       <button type="submit" class="btn btn-primary" style="width: 100%" name="submit" value="submit">Save recipe</button>
@@ -322,6 +322,30 @@
     function delete_row(tableID){
         var table=document.getElementById(tableID)
             table.tBodies[0].rows[1].remove()
+
+    }
+    function calculate_size(){
+        var batch_size = document.getElementById('batch_size').value
+        var boiling_time = document.getElementById('boiling_time').value
+        var evaporation = document.getElementById('evaporation').value
+        var boiling_losses = document.getElementById('boiling_losses').value
+        var fermentation_losses = document.getElementById('fermentation_losses').value
+
+        boiling_time = boiling_time / 60
+        boiling_losses = boiling_losses / 100
+        fermentation_losses = fermentation_losses / 100
+        evaporation = evaporation / 100
+
+        var wort_size = parseFloat(batch_size) + parseFloat(batch_size) * parseFloat(fermentation_losses)
+        var boil_size = wort_size + (wort_size * parseFloat(boiling_losses))
+        boil_size = boil_size + (boil_size * (parseFloat(boiling_time) * parseFloat(evaporation)))
+
+        var boil_size_field = document.getElementById('boil_size')
+        var wort_size_field = document.getElementById('wort_size')
+
+        boil_size_field.innerText = 'Boil size: ' + boil_size + ' L'
+        wort_size_field.innerText = 'Wort size: ' + wort_size + ' L'
+
 
     }
     </script>

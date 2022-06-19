@@ -12,9 +12,19 @@ def add_recipe():
     db = DatabaseConnector()
     user_id = session['id']
     print(user_id)
+    def dupa():
+        return('dupa')
 
-    styles = ['American Light Lager', 'American Lager', 'Cream Ale', 'American Wheat Beer', 'International Pale Lager',
-              'International Amber Lager']
+    style_data = {"American Light Lager": {"IBU": [8, 12], "SRM": [2, 3], "OG": [1.028, 1.040], "FG": [0.998, 1.008],
+                                    "ABV": [2.8, 4.2]},
+           "American Lager": {"IBU": [8, 19], "SRM": [2, 3.5], "OG": [1.040, 1.050], "FG": [1.004, 1.010],
+                              "ABV": [4.2, 5.3]},
+           "Cream Ale": {"IBU": [8, 20], "SRM": [2, 5], "OG": [1.042, 1.055], "FG": [1.006, 1.012], "ABV": [4.2, 5.6]},
+           "American Wheat Beer": {"IBU": [15, 30], "SRM": [3, 6], "OG": [1.040, 1.055], "FG": [1.008, 1.013],
+                                   "ABV": [4.0, 5.5]},
+           "International Pale Lager": {"IBU": [18, 25], "SRM": [2, 6], "OG": [1.042, 1.050], "FG": [1.008, 1.012],
+                                        "ABV": [4.5, 6]}}
+    styles = style_data.keys()
 
     fermentables = db.select_from_fermentables(user_id)
     print(fermentables)
@@ -140,11 +150,16 @@ def add_recipe():
         print(mash_time)
 
         #Notes
-        if not re.match(r'^[A-Za-z0-9\s\.\,\!\?]+[A-Za-z0-9]$', request.form['notes']):
-            flash("Incorrect input data in notes field")
-        else:
+        if request.form['notes'] == '':
             notes = request.form['notes']
             print(notes)
+        else:
+            if not re.match(r'^[A-Za-z0-9\s\.\,\!\?]+[A-Za-z0-9]$', request.form['notes']):
+                flash("Incorrect input data in notes field")
+            else:
+                notes = request.form['notes']
+                print(notes)
+
 
 
     return render_template('recipe_form.html', styles=styles, fermentables=fermentables_for_combobox, hops=hops_for_combobox, others=others_for_combobox, yeasts=yeasts_for_combobox)
@@ -215,6 +230,9 @@ def add_ingredients():
 
 
     return render_template('ingredients_form.html')
+
+
+
 
 
 
