@@ -39,7 +39,7 @@ def add_recipe():
     hops_for_combobox = []
     for i in range(len(hops)):
         (name, alpha_acids, price) = hops[i]
-        hop = str(name) + ' AA. ' + str(float(alpha_acids)) + ' %'
+        hop = str(name)
         hops_for_combobox.append(hop)
 
     others = db.select_from_others(user_id)
@@ -63,7 +63,9 @@ def add_recipe():
         'yeasts_names': yeasts_for_combobox,
         'yeasts': yeasts,
         'fermentables_names': fermentables_for_combobox,
-        'fermentables': fermentables
+        'fermentables': fermentables,
+        'hops_names': hops_for_combobox,
+        'hops': hops
     }
 
 
@@ -171,7 +173,7 @@ def add_recipe():
 
 
 
-    return render_template('recipe_form.html', styles=styles, fermentables_for_combobox=fermentables_for_combobox, hops_for_combobox=hops_for_combobox, others_for_combobox=others_for_combobox, yeasts_for_combobox=yeasts_for_combobox, yeasts=yeasts, data=data)
+    return render_template('recipe_form.html', styles=styles, fermentables_for_combobox=fermentables_for_combobox, hops_for_combobox=hops_for_combobox, others_for_combobox=others_for_combobox, yeasts_for_combobox=yeasts_for_combobox, yeasts=yeasts, data=data, style_data=style_data)
 
 
 @recipes.route('/add_ingredients', methods=['GET', 'POST'])

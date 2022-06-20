@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="form-group" style="display: inline-block; width:320px">
-                <select class="form-select" id="exampleSelect1" name="recipe_style" required>
+                <select class="form-select" id="style" onchange="choose_style()" name="recipe_style" required>
                     <option value="" disabled selected>Choose style</option>
                     {% for style in styles %}
                         <option>{{ style }}</option>
@@ -120,7 +120,7 @@
                 <tbody>
                     <tr class="table-secondary">
                         <th scope="row">
-                            <select class="form-select" id="exampleSelect1" name="hop" required>
+                            <select class="form-select" id="exampleSelect1" id="hop" name="hop" required>
                                 <option value="" disabled selected>Choose hop</option>
                                 {% for hop in hops_for_combobox %}
                                 <option>{{ hop }}</option>
@@ -129,7 +129,7 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <select class="form-select" id="exampleSelect1" name="hop_usage" required>
+                                <select class="form-select" id="exampleSelect1" id="hop_usage" name="hop_usage" required>
                                     <option value="" disabled selected>Choose usage</option>
                                     <option>Boil</option>
                                     <option>Aroma</option>
@@ -139,7 +139,7 @@
                         </td>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter time" name="time_value" min="0" max="200" required>
+                                <input type="number" class="form-control" placeholder="Enter time" id="hop_time" name="hop_time" min="0" max="200" required>
                                 <select class="input-group-text" id="exampleSelect1" name="time_option" required>
                                     <option selected>min</option>
                                     <option>days</option>
@@ -268,7 +268,7 @@
                 <span style="float: right;">1.020 - 1.030</span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="OG" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
             <div>
@@ -276,7 +276,7 @@
                 <span style="float: right;">1.005 - 1.010 </span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="FG" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
             <div>
@@ -284,7 +284,7 @@
                 <span style="float: right;">20 - 30 </span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="IBU" role="progressbar" style="width: 2%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
             <div>
@@ -292,7 +292,7 @@
                 <span style="float: right;">10 - 15</span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="SRM" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
             <div>
@@ -300,7 +300,7 @@
                 <span style="float: right;">4 - 5</span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="ABV" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div>
         <hr class="my-4">
@@ -355,41 +355,6 @@
         return wort_size;
     }
 
-    {#def gravity(gravity_contributions, amounts, efficiency, volume, attenuation):#}
-    {#    gravity_points = []#}
-    {#    n = len(gravity_contributions)#}
-    {#    for i in range(n):#}
-    {#        points = int(str(gravity_contributions)[-2:])#}
-    {#        gravity_points.append(points)#}
-    {##}
-    {#    points_sum = 0#}
-    {#    for i in range(n):#}
-    {#        points_sum += gravity_points[i] * amounts[i] / 2.2#}
-    {##}
-    {#    total = round((points_sum * 0.01 * efficiency) / (volume / 3.78)) / 1000#}
-    {#    og = total + 1#}
-    {#    fg = og - 0.01 * attenuation * og#}
-    {#    return og, fg#}
-
-    {#function gravity {#}
-        {#var volume = document.getElementsByName();#}
-        {#var gravity_contributions = "hehe";#}
-        {#var gravity_points = [];#}
-        {#var n = length(gravity_contributions);#}
-        {#var points;#}
-        {#for (let i = 0; i < n; i++) {#}
-        {#    points = parseInt(gravity_contributions.slice(-2));#}
-        {#    gravity_points.push(points)#}
-        {##}
-        {#var points_sum = 0;#}
-        {##}
-        {#for (let i = 0; i < n; i++) {#}
-        {#    points_sum += gravity_points[i] * amounts[i] / 2.2;#}
-        {##}
-        {##}
-        {#var total = Math.round((points_sum * 0.01 * efficiency) / (volume / 3.78)) /1000#}
-        {#var og = total + 1;#}
-        {#var fg = og - 0.01 * attenuation * og;}#}
 
     function gravity() {
         var flaskData = JSON.parse('{{data | tojson | safe}}');
@@ -493,12 +458,100 @@
         }
         {# srm is ready #}
         var srm = Math.round(1.4922 * (mcu ** 0.6859) * 10) / 10;
-        console.log(srm);
+        {#console.log(srm);#}
+
+        {# ibu #}
+        var ibu = 0;
+        var if_all_boil = 0;
+        var usages = [];
+        var usage = document.getElementsByName("hop_usage");
+        usage.forEach( function (u) {
+            u = u.options[u.selectedIndex].text;
+            usages.push(u);
+        });
+        usages.forEach( function (uu) {
+            if (uu === 'Boil') {
+                if_all_boil += 1;
+            }
+        })
+
+        if (if_all_boil === usages.length) {
+            var alpha_acids = [];
+            var hops_names = flaskData.hops_names;
+            var hops = flaskData.hops;
+            var hop = document.getElementsByName("hop");
+            hop.forEach(function (h) {
+                h = h.options[h.selectedIndex].text;
+                var index = hops_names.indexOf(h);
+                if (h === "Choose hop") {
+                    alpha_acids.push(0);
+                } else {
+                    alpha_acids.push(hops[index][1]);
+                }
+            });
+            var hop_time = document.getElementsByName("hop_time");
+            var times = [];
+            hop_time.forEach( function (t) {
+                t = parseInt(t.value);
+                times.push(t);
+            });
+
+            var hop_amount = document.getElementsByName("hop_amount");
+            var hop_amounts = [];
+            hop_amount.forEach( function (ha) {
+                ha = parseInt(ha.value);
+                hop_amounts.push(ha);
+            });
+
+
+
+            var l = alpha_acids.length;
+            var utilization = 0;
+            for (let i = 0; i < l; i++) {
+                utilization = ((1 - Math.exp(-0.04 * times[i])) / 4.15) * (1.65 * Math.pow(0.000125, (og - 1.0)));
+                ibu += utilization * (0.01 * alpha_acids[i] * hop_amounts[i] / 0.035274 * 0.7489 / (volume / 3.78));
+            }
+
+            {#console.log(alpha_acids);#}
+            {#console.log(times);#}
+            {#console.log(hop_amounts);#}
+
+        } else {
+            ibu = 0;
+        }
+
+        {#console.log(ibu);#}
+
+        {# calculate percentage values #}
+
+        {# to narazie źle pokazuje trzeba procenty odpowiednio policzyc wyzej #}
+        document.getElementById("OG").style.width = og.toString()+'%';
+        document.getElementById("FG").style.width = fg.toString()+'%';
+        document.getElementById("IBU").style.width = ibu.toString()+'%';
+        document.getElementById("SRM").style.width = srm.toString()+'%';
+        document.getElementById("ABV").style.width = abv.toString()+'%';
 
 
 
 
-        return [og, fg, abv, srm];
+
+
+        return [og, fg, abv, srm, ibu]
+    }
+
+    function choose_style() {
+        var style_data = JSON.parse('{{style_data | tojson | safe}}');
+        var chosen_style = document.getElementById("style");
+        chosen_style = chosen_style.options[chosen_style.selectedIndex].text;
+
+
+        console.log(chosen_style);
+
+        var chosen_style_params;
+
+        console.log(Object.keys(style_data));
+        console.log(Object.keys(Object.values(style_data)[0]))
+        console.log(Object.values(Object.values(style_data)[0]))
     }
     </script>
 
