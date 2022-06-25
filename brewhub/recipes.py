@@ -251,8 +251,16 @@ def public_recipe(recipe_name=''):
     if (chosen_recipe[0][0], session['id']) in db.select_from_likes(chosen_recipe[0][0]):
         if_liked = True
     print(chosen_recipe)
+
+    # list of users who likes this recipe
+    recipe_to_like_id = chosen_recipe[0][0]
+    current_likes_this_recipe = db.select_from_likes("\'" + str(recipe_to_like_id) + "\'")
+    users_who_like = ''
+    for i in range(len(current_likes_this_recipe)):
+        users_who_like += (db.select_from_users_by_id("\'" + str(current_likes_this_recipe[i][1]) + "\'")[0][1]) + ',\n'
+
     return render_template('public_recipe.html', recipe_name=recipe_name, chosen_recipe=chosen_recipe[0],
-                           likes_amount=likes_amount, if_liked=if_liked)
+                           likes_amount=likes_amount, if_liked=if_liked, users_who_like=users_who_like)
 
 
 @recipes.route('/public_recipes/like/<string:recipe_name>', methods=['POST'])
@@ -275,7 +283,10 @@ def like_recipe(recipe_name=''):
     # update the list of likes
     current_likes_this_recipe = db.select_from_likes("\'" + str(recipe_to_like_id) + "\'")
     print(current_likes_this_recipe)
-    return jsonify({"likes": len(current_likes_this_recipe), "liked": (not possibility_to_like)})
+    users_who_like = ''
+    for i in range(len(current_likes_this_recipe)):
+        users_who_like += (db.select_from_users_by_id("\'" + str(current_likes_this_recipe[i][1]) + "\'")[0][1]) + ',\n'
+    return jsonify({"likes": len(current_likes_this_recipe), "liked": (not possibility_to_like), "users_who_like": users_who_like})
 
 
 @recipes.route('/add_ingredients', methods=['GET', 'POST'])

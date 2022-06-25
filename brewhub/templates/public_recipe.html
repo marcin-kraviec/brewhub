@@ -173,8 +173,9 @@
     </div>
 
     <br/>
-    <a id="like_count" style="display: inline-block">{{ likes_amount }}</a>
-    <a> likes </a>
+
+    <a id="like_count" style="display: inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ users_who_like }}">{{ likes_amount }} likes</a>
+
     <br/><br/>
     {% if if_liked %}
         <a class="btn btn-primary" id="like_it" style="background: #FBB03B;" onclick="like('{{ chosen_recipe[2] }}')">You like it!</a>
@@ -211,12 +212,6 @@
 
 </div>
 
-
-
-    </div>
-
-
-
     <script>
         // Get the modal
         var modal = document.getElementById("myModal");
@@ -244,14 +239,17 @@
           }
         }
 
+
         function like(recipe_name) {
             const like_count = document.getElementById('like_count');
             const like_button = document.getElementById('like_it');
+            const tooltip = document.getElementById('tooltip')
 
             fetch(`/public_recipes/like/${recipe_name}`, {method: 'POST'})
                 .then((res) => res.json())
                 .then((data) => {
-                    like_count.innerHTML = data['likes'];
+                    like_count.innerHTML = data['likes'] + ' likes';
+                    like_count.title = data['users_who_like'];
                     if (data['liked']) {
                         like_button.style.background = '#FBB03B';
                         like_button.textContent = 'You like it!';

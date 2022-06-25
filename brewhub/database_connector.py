@@ -72,6 +72,20 @@ class DatabaseConnector:
             logging.error('Query has not been executed: ' + str(e))
 
     @staticmethod
+    def select_from_users_by_id(user_id):
+        query = 'SELECT * FROM users WHERE id=%s' % user_id
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            data = []
+            for element in cursor:
+                data.append(element)
+            return data
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
     def update_users(name, username, new_username, new_email, new_bio):
         query = 'UPDATE %s SET username=%s, email=%s, bio=%s WHERE username=%s' % (
             name, new_username, new_email, new_bio, username)
@@ -94,6 +108,8 @@ class DatabaseConnector:
             DatabaseConnector.database.commit()
         except (mysql.connector.Error, AttributeError) as e:
             logging.error('Query has not been executed: ' + str(e))
+
+
 
     @staticmethod
     def select_from_fermentables(user_id):
