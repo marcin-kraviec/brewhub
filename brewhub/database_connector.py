@@ -307,3 +307,17 @@ class DatabaseConnector:
             return likes
         except (mysql.connector.Error, AttributeError) as e:
             logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def select_all_likes():
+        query = 'SELECT * FROM likes'
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            likes = []
+            for element in cursor:
+                likes.append(element)
+            return likes
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))

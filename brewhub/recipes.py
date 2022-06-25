@@ -236,9 +236,10 @@ def show_recipes():
     user_id = session['id']
     public_recipes = db.select_public_recipes_from_recipes()
     counter = len(public_recipes)
-
+    all_likes = db.select_all_likes()
+    likes_counter = 0
     print(public_recipes)
-    return render_template('public_recipes.html', public_recipes=public_recipes, user_id=user_id, counter=counter)
+    return render_template('public_recipes.html', public_recipes=public_recipes, user_id=user_id, counter=counter, all_likes=all_likes)
 
 
 @recipes.route('/public_recipes/<string:recipe_name>', methods=['GET', 'POST'])
