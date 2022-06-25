@@ -28,7 +28,8 @@ class DatabaseConnector:
 
     @staticmethod
     def insert_into_users(name, username, email, password, age, bio):
-        query = 'INSERT INTO %s (username, email, password, age, bio) VALUES (%s, %s, %s, %s, %s)' % (name, username, email, password, age, bio)
+        query = 'INSERT INTO %s (username, email, password, age, bio) VALUES (%s, %s, %s, %s, %s)' % (
+            name, username, email, password, age, bio)
         print(query)
 
         try:
@@ -72,7 +73,8 @@ class DatabaseConnector:
 
     @staticmethod
     def update_users(name, username, new_username, new_email, new_bio):
-        query = 'UPDATE %s SET username=%s, email=%s, bio=%s WHERE username=%s' %(name, new_username, new_email, new_bio, username)
+        query = 'UPDATE %s SET username=%s, email=%s, bio=%s WHERE username=%s' % (
+            name, new_username, new_email, new_bio, username)
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -83,7 +85,8 @@ class DatabaseConnector:
 
     @staticmethod
     def insert_into_fermentables(user_id, name, color, contribution, price):
-        query = 'INSERT INTO fermentables (user_id, name, color, contribution, price) VALUES (%s, %s, %s, %s, %s)' % (user_id, name, color, contribution, price)
+        query = 'INSERT INTO fermentables (user_id, name, color, contribution, price) VALUES (%s, %s, %s, %s, %s)' % (
+            user_id, name, color, contribution, price)
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -109,7 +112,7 @@ class DatabaseConnector:
     @staticmethod
     def insert_into_hops(user_id, name, alpha_acids, price):
         query = 'INSERT INTO hops (user_id, name, alpha_acids, price) VALUES (%s, %s, %s, %s)' % (
-        user_id, name, alpha_acids, price)
+            user_id, name, alpha_acids, price)
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -186,20 +189,22 @@ class DatabaseConnector:
 
     @staticmethod
     def insert_into_recipes(owner_id, name, style, type, visibility, date, batch_size, boiling_time, evaporation,
-                            boiling_losses,fermentation_losses, boil_size, wort_size, fermentables, fermentables_amounts,
-                            hops, hops_usages,hops_timings, hops_amounts, others, others_amounts, others_infos, yeast,
-                            primary_fermentation,secondary_fermentation, efficiency, temperature_stops, stops_timings,
+                            boiling_losses, fermentation_losses, boil_size, wort_size, fermentables,
+                            fermentables_amounts,
+                            hops, hops_usages, hops_timings, hops_amounts, others, others_amounts, others_infos, yeast,
+                            primary_fermentation, secondary_fermentation, efficiency, temperature_stops, stops_timings,
                             og, fg, ibu, srm, abv, notes, price):
 
         query = """INSERT INTO recipes (owner_id, name, style, type, visibility, date, batch_size, boiling_time, evaporation, boiling_losses,
                             fermentation_losses, boil_size, wort_size, fermentables, fermentables_amounts, hops, hops_usages,
                             hops_timings, hops_amounts, others, others_amounts, others_infos, yeast, primary_fermentation,
                             secondary_fermentation, efficiency, temperature_stops, stops_timings, og, fg, ibu, srm, abv, notes, price)
-                            VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,)"""% \
-                            (owner_id, name, style, type, visibility, date, batch_size, boiling_time, evaporation, boiling_losses,
-                            fermentation_losses, boil_size, wort_size, fermentables, fermentables_amounts, hops, hops_usages,
-                            hops_timings, hops_amounts, others, others_amounts, others_infos, yeast, primary_fermentation,
-                            secondary_fermentation, efficiency, temperature_stops, stops_timings, og, fg, ibu, srm, abv, notes, price)
+                            VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s)""" % \
+                (owner_id, name, style, type, visibility, date, batch_size, boiling_time, evaporation, boiling_losses,
+                 fermentation_losses, boil_size, wort_size, fermentables, fermentables_amounts, hops, hops_usages,
+                 hops_timings, hops_amounts, others, others_amounts, others_infos, yeast, primary_fermentation,
+                 secondary_fermentation, efficiency, temperature_stops, stops_timings, og, fg, ibu, srm, abv, notes,
+                 price)
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -209,8 +214,8 @@ class DatabaseConnector:
             logging.error('Query has not been executed: ' + str(e))
 
     @staticmethod
-    def select_from_recipes(owner_id='\'*\''):
-        query = 'SELECT * FROM recipes WHERE user_id=%s' % (owner_id)
+    def select_from_recipes(user_id='\'*\''):
+        query = 'SELECT * FROM recipes WHERE owner_id=%s' % (user_id)
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -222,3 +227,67 @@ class DatabaseConnector:
         except (mysql.connector.Error, AttributeError) as e:
             logging.error('Query has not been executed: ' + str(e))
 
+    @staticmethod
+    def select_from_recipes_by_recipe_name(recipe_name):
+        query = 'SELECT * FROM recipes WHERE name=%s' % ("\'" + recipe_name + "\'")
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            recipes = []
+            for element in cursor:
+                recipes.append(element)
+            return recipes
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def select_public_recipes_from_recipes():
+        query = 'SELECT * FROM recipes WHERE visibility=%s' % ("\'" + "Public" + "\'")
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            recipes = []
+            for element in cursor:
+                recipes.append(element)
+            return recipes
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def insert_into_likes(recipe_id, user_id):
+        query = 'INSERT INTO likes (recipe_id, user_id) VALUES (%s, %s)' % (
+            recipe_id, user_id)
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            DatabaseConnector.database.commit()
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def delete_from_likes(recipe_id, user_id):
+        query = 'DELETE FROM likes WHERE recipe_id=%s AND user_id=%s' % (recipe_id, user_id)
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            DatabaseConnector.database.commit()
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def select_from_likes(recipe_id):
+        query = 'SELECT * FROM likes WHERE recipe_id=%s' % (recipe_id)
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            likes = []
+            for element in cursor:
+                likes.append(element)
+            return likes
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))

@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="container" style="width: 50%; alignment: center">
+
+    <div class="card">
+    <div class="card-body">
+
+        <h3>{{ recipe_name }}</h3>
+        <br/>
+        <table class="table">
+              <tbody>
+                <tr>
+                  <th scope="row"><h5></h5></th>
+                  <td></td>
+                </tr>
+                <tr>
+                    <th scope="row"><h5>Description</h5></th>
+                    {% if chosen_recipe[34] != '' %}
+                        <td>{{ chosen_recipe[34] }}</td>
+                    {% else %}
+                        <td> - </td>
+                    {% endif %}
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Style</h5></th>
+                  <td>{{ chosen_recipe[3] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Author</h5></th>
+                  <td>{{ chosen_recipe[1] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Added</h5></th>
+                  <td>{{ chosen_recipe[6] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5></h5></th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Type</h5></th>
+                  <td>{{ chosen_recipe[4] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Batch size</h5></th>
+                  <td>{{ chosen_recipe[7] }} &nbsp;L</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Boiling time</h5></th>
+                  <td>{{ chosen_recipe[8] }} &nbsp;min</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Evaporation</h5></th>
+                  <td>{{ chosen_recipe[9] }} &nbsp;%/h</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Boiling losses</h5></th>
+                  <td>{{ chosen_recipe[10] }} &nbsp;%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Fermentation losses</h5></th>
+                  <td>{{ chosen_recipe[11] }} &nbsp;%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Boil size</h5></th>
+                  <td>{{ chosen_recipe[12] }} &nbsp;L</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Wort size</h5></th>
+                  <td>{{ chosen_recipe[13] }} &nbsp;L</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Fermentables</h5></th>
+                  <td>
+                      {% for i in range(chosen_recipe[14].split(",")|length) %}
+                        {{ chosen_recipe[14].split(",")[i] }},&nbsp; {{ chosen_recipe[15].split(",")[i] }} &nbsp;kg<br/>
+                      {% endfor %}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Hops</h5></th>
+                  <td>
+                      {% for i in range(chosen_recipe[16].split(",")|length) %}
+                          {% if chosen_recipe[17].split(",")[i] != "Dry" %}
+                            {{ chosen_recipe[16].split(",")[i] }},&nbsp; {{ chosen_recipe[17].split(",")[i] }},&nbsp; {{ chosen_recipe[18].split(",")[i] }}&nbsp;min,&nbsp; {{ chosen_recipe[19].split(",")[i] }}&nbsp;g<br/>
+                          {% else %}
+                            {{ chosen_recipe[16].split(",")[i] }},&nbsp; {{ chosen_recipe[17].split(",")[i] }},&nbsp; {{ chosen_recipe[18].split(",")[i] }}&nbsp;days,&nbsp; {{ chosen_recipe[19].split(",")[i] }}&nbsp;g<br/>
+                          {% endif %}
+                      {% endfor %}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Others</h5></th>
+                  <td>
+                      {% for i in range(chosen_recipe[20].split(",")|length) %}
+                        {{ chosen_recipe[20].split(",")[i] }},&nbsp; {{ chosen_recipe[21].split(",")[i] }}&nbsp;g,&nbsp; {{ chosen_recipe[22].split(",")[i] }}<br/>
+                      {% endfor %}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Yeast</h5></th>
+                    <td>{{ chosen_recipe[23] }}<br/>Primary fermentation:&nbsp; {{ chosen_recipe[24] }}&nbsp;days<br/>Secondary fermentation:&nbsp; {{ chosen_recipe[25] }}&nbsp;days</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Expected efficiency</h5></th>
+                    <td>{{ chosen_recipe[26] }} &nbsp;%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Temperature</h5></th>
+                  <td>
+                    {% for i in range(chosen_recipe[27].split(",")|length) %}
+                        {{ chosen_recipe[27].split(",")[i] }}&nbsp;°C,&nbsp; {{ chosen_recipe[28].split(",")[i] }}&nbsp;min<br/>
+                    {% endfor %}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Vital statistics</h5></th>
+                    <td>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <h5 style="display: inline-block">OG</h5>
+                                    </th>
+                                    <td>
+                                        &nbsp;{{ chosen_recipe[29] }} &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <h5 style="display: inline-block">FG</h5>
+                                    </th>
+                                    <td>
+                                        &nbsp;{{ chosen_recipe[30] }} &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <h5 style="display: inline-block">IBU</h5>
+                                    </th>
+                                    <td>
+                                        &nbsp;{{ chosen_recipe[31] }} &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <h5 style="display: inline-block">SRM</h5>
+                                    </th>
+                                    <td>
+                                        &nbsp;{{ chosen_recipe[32] }} &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <h5 style="display: inline-block">ABV</h5>
+                                    </th>
+                                    <td>
+                                        &nbsp;{{ chosen_recipe[33] }} &nbsp;
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Estimated price</h5></th>
+                    <td>{{ chosen_recipe[35] }} &nbsp;PLN</td>
+                </tr>
+              </tbody>
+        </table>
+        </div>
+    </div>
+
+    <br/>
+    <a id="like_count" style="display: inline-block">{{ likes_amount }}</a>
+    <a> likes </a>
+    <br/><br/>
+    {% if if_liked %}
+        <a class="btn btn-primary" id="like_it" style="background: #FBB03B;" onclick="like('{{ chosen_recipe[2] }}')">You like it!</a>
+    {% else %}
+        <a class="btn btn-primary" id="like_it" onclick="like('{{ chosen_recipe[2] }}')">Like it</a>
+    {% endif %}
+    <!-- Trigger/Open The Modal -->
+    <button class="btn btn-primary" id="myBtn">Comments</button>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h2>Comments</h2>
+            <button class="close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form>
+              <div class="form-group">
+                  <label for="exampleTextarea" class="form-label mt-4">Write your comment below</label>
+                  <textarea class="form-control" name='bio' id="bio" rows="3"></textarea><br/>
+                  <button type="submit" class="btn btn-primary" style="width: 100%">Add comment</button>
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <h3>Modal Footer</h3>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+
+
+
+    </div>
+
+
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+
+        function like(recipe_name) {
+            const like_count = document.getElementById('like_count');
+            const like_button = document.getElementById('like_it');
+
+            fetch(`/public_recipes/like/${recipe_name}`, {method: 'POST'})
+                .then((res) => res.json())
+                .then((data) => {
+                    like_count.innerHTML = data['likes'];
+                    if (data['liked']) {
+                        like_button.style.background = '#FBB03B';
+                        like_button.textContent = 'You like it!';
+                    } else {
+                        like_button.style.background = 'black';
+                        like_button.style.color = 'white';
+                        like_button.textContent = 'Like it';
+                    }
+                });
+
+        }
+
+
+    </script>
+{% endblock %}

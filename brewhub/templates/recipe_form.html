@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="container">
-      <form action="{{ url_for('recipes.add_recipe') }}" method="post">
+      <form action="{{ url_for('recipes.add_recipe') }}" method="post" onsubmit="$(this).find('input').prop('disabled', false)">
         <h4>Recipe info</h4>
         <div>
             <div class="form-group" style="display: inline-block; width:500px">
@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="form-group" style="display: inline-block; width:320px">
-                <select class="form-select" id="style" onchange="choose_style()" name="recipe_style" required>
+                <select class="form-select" id="style" onchange="gravity()" name="recipe_style" required>
                     <option value="" disabled selected>Choose style</option>
                     {% for style in styles %}
                         <option>{{ style }}</option>
@@ -39,32 +39,32 @@
         <div>
             <div class="form-group">
                 <div class="input-group mb-3" style="width:320px">
-                    <input type="number" pattern="^[a-zA-Z\s]+[a-zA-Z]$" class="form-control" placeholder="Enter batch size" name="batch_size" id="batch_size" min="5" max="100" required>
+                    <input type="number" pattern="^[a-zA-Z\s]+[a-zA-Z]$" class="form-control" placeholder="Enter batch size" onchange="gravity()" name="batch_size" id="batch_size" min="5" max="100" required>
                     <span class="input-group-text">L</span>
                 </div>
             </div>
             <div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="number" class="form-control" placeholder="Enter boiling time" name="boiling_time" id="boiling_time" min="0" max="200" required>
+                        <input type="number" class="form-control" placeholder="Enter boiling time" onchange="gravity()" name="boiling_time" id="boiling_time" min="0" max="200" required>
                         <span class="input-group-text">min</span>
                     </div>
                 </div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="number" class="form-control" placeholder="Enter evaporation" name="evaporation" id="evaporation" min="0" max="100" required>
+                        <input type="number" class="form-control" placeholder="Enter evaporation" onchange="gravity()" name="evaporation" id="evaporation" min="0" max="100" required>
                         <span class="input-group-text">%/h</span>
                     </div>
                 </div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="number" class="form-control" placeholder="Enter boiling losses" name="boiling_losses" id="boiling_losses" min="0" max="100" required>
+                        <input type="number" class="form-control" placeholder="Enter boiling losses" onchange="gravity()" name="boiling_losses" id="boiling_losses" min="0" max="100" required>
                         <span class="input-group-text">%</span>
                     </div>
                 </div>
                 <div class="form-group" style="display: inline-block">
                     <div class="input-group mb-3" style="width:320px">
-                        <input type="number" class="form-control" placeholder="Enter fermentation losses" name="fermentation_losses" id="fermentation_losses"min="0" max="100" required>
+                        <input type="number" class="form-control" placeholder="Enter fermentation losses" onchange="gravity()" name="fermentation_losses" id="fermentation_losses" min="0" max="100" required>
                         <span class="input-group-text">%</span>
                     </div>
                 </div>
@@ -74,11 +74,11 @@
         </div>
 
         <hr class="my-4">
-        <p id="boil_size">Boil size: </p>
-        <p id="wort_size">Wort size: </p>
+        <p style="display: inline-block">Boil size: </p><input type="text" class="form-control" name="boil_size" id="boil_size" value=" - " style="display: inline-block; width: auto; background: white" readonly><br/>
+        <p style="display: inline-block">Wort size: </p><input type="text" class="form-control" name="wort_size" id="wort_size" value=" - " style="display: inline-block; width: auto; background: white" readonly>
         <hr class="my-4">
         <h4>Fermentables</h4>
-            <table class="table table-hover" id="fermentablesTable">
+            <table class="table table-hover" id="fermentablesTable" name="fermentablesTable">
                 <thead>
                     <tr>
                         <th scope="col" style="width: 800px">Ingredient</th>
@@ -88,7 +88,7 @@
                 <tbody>
                     <tr class="table-secondary">
                         <th scope="row">
-                            <select class="form-select" id="fermentables" name="fermentable" required>
+                            <select class="form-select" id="fermentable" name="fermentable" required>
                                 <option value="" disabled selected>Choose ingredient</option>
                                 {% for fermentable in fermentables_for_combobox %}
                                 <option>{{ fermentable }}</option>
@@ -106,6 +106,7 @@
             </table>
             <button type="button" class="btn btn-warning" onclick="add_row('fermentablesTable')" style="width: 150px">Add row</button>
             <button type="button" class="btn btn-danger" onclick="delete_row('fermentablesTable')" style="width: 150px">Delete row</button>
+            <button type="button" class="btn btn-danger" onclick="control_fermentables()" style="width: 150px">control</button>
         <hr class="my-4">
         <h4>Hops</h4>
             <table class="table table-hover" id="hopTable">
@@ -129,7 +130,7 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <select class="form-select" id="exampleSelect1" id="hop_usage" name="hop_usage" required>
+                                <select class="form-select" id="hop_usage" onchange="hops_usage_choice()" name="hop_usage" required>
                                     <option value="" disabled selected>Choose usage</option>
                                     <option>Boil</option>
                                     <option>Aroma</option>
@@ -140,10 +141,7 @@
                         <td>
                             <div class="input-group mb-3">
                                 <input type="number" class="form-control" placeholder="Enter time" id="hop_time" name="hop_time" min="0" max="200" required>
-                                <select class="input-group-text" id="exampleSelect1" name="time_option" required>
-                                    <option selected>min</option>
-                                    <option>days</option>
-                                </select>
+                                <div class="input-group-text" id="time_option" name="time_option" required> - </div>
                             </div>
                         </td>
                         <td>
@@ -172,7 +170,7 @@
                         <th scope="row">
                             <select class="form-select" id="exampleSelect1" name="other" required>
                                 <option value="" disabled selected>Choose ingredient</option>
-                                {% for other in others %}
+                                {% for other in others_for_combobox %}
                                 <option>{{ other }}</option>
                                 {%  endfor %}
                             </select>
@@ -264,43 +262,43 @@
         <h4>Details</h4>
         <div>
             <div>
-                <span>Original gravity: </span>
-                <span style="float: right;">1.020 - 1.030</span>
+                <span>Original gravity: <input class="form-control" name="OGvalue" id="OGvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
+                <span id="OGspan" style="float: right;">1.020 - 1.030</span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="OG" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="OG" role="progressbar" style="width: 0%;"></div>
             </div>
             <br>
             <div>
-                <span>Final gravity: </span>
-                <span style="float: right;">1.005 - 1.010 </span>
+                <span>Final gravity: <input class="form-control" name="FGvalue" id="FGvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
+                <span id="FGspan" style="float: right;">1.005 - 1.010 </span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="FG" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="FG" role="progressbar" style="width: 0%;"></div>
             </div>
             <br>
             <div>
-                <span>IBU: </span>
-                <span style="float: right;">20 - 30 </span>
+                <span>IBU: <input class="form-control" name="IBUvalue" id="IBUvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
+                <span id="IBUspan" style="float: right;">20 - 30 </span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="IBU" role="progressbar" style="width: 2%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="IBU" role="progressbar" style="width: 0%;"></div>
             </div>
             <br>
             <div>
-                <span>SRM: </span>
-                <span style="float: right;">10 - 15</span>
+                <span>SRM: <input class="form-control" name="SRMvalue" id="SRMvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
+                <span id="SRMspan" style="float: right;">10 - 15</span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="SRM" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="SRM" role="progressbar" style="width: 0%;"></div>
             </div>
             <br>
             <div>
-                <span>ABV: </span>
-                <span style="float: right;">4 - 5</span>
+                <span>ABV: <input class="form-control" name="ABVvalue" id="ABVvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
+                <span id="ABVspan" style="float: right;">4 - 5</span>
             </div>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="ABV" role="progressbar" style="width: 25%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="ABV" role="progressbar" style="width: 0%;"></div>
             </div>
         </div>
         <hr class="my-4">
@@ -315,16 +313,18 @@
     </div>
 
     <script>
+
     function add_row(tableID){
         var table=document.getElementById(tableID)
             var cl = table.tBodies[0].rows[0].cloneNode(true)
             table.tBodies[0].appendChild( cl )
     }
+
     function delete_row(tableID){
         var table=document.getElementById(tableID)
             table.tBodies[0].rows[1].remove()
-
     }
+
     function calculate_size(){
         var batch_size = document.getElementById('batch_size').value
         var boiling_time = document.getElementById('boiling_time').value
@@ -341,20 +341,28 @@
         var wort_size = 0;
 
         if (batch_size !== '') {
-            wort_size = parseFloat(batch_size) + parseFloat(batch_size) * parseFloat(fermentation_losses)
-            boil_size = wort_size + (wort_size * parseFloat(boiling_losses))
-            boil_size = boil_size + (boil_size * (parseFloat(boiling_time) * parseFloat(evaporation)))
+            wort_size = parseFloat(batch_size) + parseFloat(batch_size) * parseFloat(fermentation_losses);
+            boil_size = wort_size + (wort_size * parseFloat(boiling_losses));
+            boil_size = boil_size + (boil_size * (parseFloat(boiling_time) * parseFloat(evaporation)));
 
-            var boil_size_field = document.getElementById('boil_size')
-            var wort_size_field = document.getElementById('wort_size')
+            var boil_size_field = document.getElementById('boil_size');
+            var wort_size_field = document.getElementById('wort_size');
 
-            boil_size_field.innerText = 'Boil size: ' + Math.round(boil_size) + ' L'
-            wort_size_field.innerText = 'Wort size: ' + Math.round(wort_size) + ' L'
+            boil_size_field.value = Math.round(boil_size)
+            wort_size_field.value = Math.round(wort_size)
         }
-
         return wort_size;
     }
 
+    function hops_usage_choice() {
+        var usage = document.getElementById("hop_usage");
+        usage = usage.options[usage.selectedIndex].text;
+        if (usage !== "Dry") {
+            document.getElementById("time_option").textContent = "min";
+        } else {
+            document.getElementById("time_option").textContent = "days";
+        }
+    }
 
     function gravity() {
         var flaskData = JSON.parse('{{data | tojson | safe}}');
@@ -397,9 +405,6 @@
 
         {# volume is ready #}
         var volume = calculate_size()
-        if(volume === 0) {
-            volume = 1;
-        }
         {#console.log(volume)#}
 
         {# gravity_contributions is ready #}
@@ -437,109 +442,95 @@
             points_sum += gravity_points[i] * fermentable_amounts[i] * 2.2;
         }
 
-        var total = Math.round((points_sum * efficiency * 0.01) / (volume / 3.78)) / 1000;
+        var og = 0;
+        var fg = 0;
 
-        {# og is ready #}
-        var og = total + 1;
+        if (volume !== 0) {
+            var total = Math.round((points_sum * efficiency * 0.01) / (volume / 3.78)) / 1000;
+            {# og is ready #}
+            og = total + 1;
+            {# fg is ready #}
+            fg = (Math.round((og * 1000 - 1000) - 0.01 * attenuation * (og * 1000 - 1000)) / 1000) + 1;
+        }
 
-        {# fg is ready #}
-        var fg = (Math.round((og * 1000 - 1000) - 0.01 * attenuation * (og * 1000 - 1000)) / 1000) + 1;
 
-        {#console.log(og);#}
-        {#console.log(fg);#}
+        console.log(og);
+        console.log(fg);
 
         {# abv is ready #}
         var abv = Math.round((og - fg) * 131.25 * 10) / 10;
         {#console.log(abv);#}
 
         var mcu = 0;
-        for (let i = 0; i < n; i++) {
-            mcu += fermentable_amounts[i] * srms[i] * 2.2 / (volume / 3.78);
+        var srm = 0;
+
+        if (volume !== 0) {
+            for (let i = 0; i < n; i++) {
+                mcu += fermentable_amounts[i] * srms[i] * 2.2 / (volume / 3.78);
+            }
+            {# srm is ready #}
+            srm = Math.round(1.4922 * (mcu ** 0.6859) * 10) / 10;
+            {#console.log(srm);#}
         }
-        {# srm is ready #}
-        var srm = Math.round(1.4922 * (mcu ** 0.6859) * 10) / 10;
-        {#console.log(srm);#}
 
         {# ibu #}
-        var ibu = 0;
-        var if_all_boil = 0;
         var usages = [];
         var usage = document.getElementsByName("hop_usage");
         usage.forEach( function (u) {
             u = u.options[u.selectedIndex].text;
-            usages.push(u);
-        });
-        usages.forEach( function (uu) {
-            if (uu === 'Boil') {
-                if_all_boil += 1;
+            if (u === "Boil") {
+                usages.push(u);
             }
-        })
-
-        if (if_all_boil === usages.length) {
-            var alpha_acids = [];
-            var hops_names = flaskData.hops_names;
-            var hops = flaskData.hops;
-            var hop = document.getElementsByName("hop");
-            hop.forEach(function (h) {
-                h = h.options[h.selectedIndex].text;
-                var index = hops_names.indexOf(h);
-                if (h === "Choose hop") {
-                    alpha_acids.push(0);
-                } else {
-                    alpha_acids.push(hops[index][1]);
-                }
-            });
-            var hop_time = document.getElementsByName("hop_time");
-            var times = [];
-            hop_time.forEach( function (t) {
-                t = parseInt(t.value);
-                times.push(t);
-            });
-
-            var hop_amount = document.getElementsByName("hop_amount");
-            var hop_amounts = [];
-            hop_amount.forEach( function (ha) {
-                ha = parseInt(ha.value);
-                hop_amounts.push(ha);
-            });
+        });
 
 
+        var alpha_acids = [];
+        var hops_names = flaskData.hops_names;
+        var hops = flaskData.hops;
+        var hop = document.getElementsByName("hop");
+        hop.forEach(function (h) {
+            h = h.options[h.selectedIndex].text;
+            var index = hops_names.indexOf(h);
+            if (h === "Choose hop") {
+                alpha_acids.push(0);
+            } else {
+                alpha_acids.push(hops[index][1]);
+            }
+        });
+        var hop_time = document.getElementsByName("hop_time");
+        var times = [];
+        hop_time.forEach( function (t) {
+            t = parseInt(t.value);
+            times.push(t);
+        });
 
-            var l = alpha_acids.length;
-            var utilization = 0;
+        var hop_amount = document.getElementsByName("hop_amount");
+        var hop_amounts = [];
+        hop_amount.forEach( function (ha) {
+            ha = parseInt(ha.value);
+            hop_amounts.push(ha);
+        });
+
+        var l = alpha_acids.length;
+        var utilization = 0;
+        var ibu = 0;
+
+        if (volume !== 0) {
             for (let i = 0; i < l; i++) {
                 utilization = ((1 - Math.exp(-0.04 * times[i])) / 4.15) * (1.65 * Math.pow(0.000125, (og - 1.0)));
                 ibu += utilization * (0.01 * alpha_acids[i] * hop_amounts[i] / 0.035274 * 0.7489 / (volume / 3.78));
             }
-
-            {#console.log(alpha_acids);#}
-            {#console.log(times);#}
-            {#console.log(hop_amounts);#}
-
-        } else {
-            ibu = 0;
         }
+
+        {#console.log(alpha_acids);#}
+        {#console.log(times);#}
+        {#console.log(hop_amounts);#}
+
 
         {#console.log(ibu);#}
 
         {# calculate percentage values #}
 
-        {# to narazie źle pokazuje trzeba procenty odpowiednio policzyc wyzej #}
-        document.getElementById("OG").style.width = og.toString()+'%';
-        document.getElementById("FG").style.width = fg.toString()+'%';
-        document.getElementById("IBU").style.width = ibu.toString()+'%';
-        document.getElementById("SRM").style.width = srm.toString()+'%';
-        document.getElementById("ABV").style.width = abv.toString()+'%';
-
-
-
-
-
-
-        return [og, fg, abv, srm, ibu]
-    }
-
-    function choose_style() {
         var style_data = JSON.parse('{{style_data | tojson | safe}}');
         var chosen_style = document.getElementById("style");
         chosen_style = chosen_style.options[chosen_style.selectedIndex].text;
@@ -547,12 +538,65 @@
 
         console.log(chosen_style);
 
-        var chosen_style_params;
+        {#console.log(Object.keys(style_data));#}
+        {#console.log(Object.keys(Object.values(style_data)[0]))#}
+        {#console.log(Object.values(Object.values(style_data)[0]))#}
+        {#console.log(Object.values(Object.values(style_data)[0])[1][0])#}
 
-        console.log(Object.keys(style_data));
-        console.log(Object.keys(Object.values(style_data)[0]))
-        console.log(Object.values(Object.values(style_data)[0]))
+        var min_abv = Object.values(Object.values(style_data)[0])[0][0];
+        var max_abv = Object.values(Object.values(style_data)[0])[0][1];
+
+        var min_fg = Object.values(Object.values(style_data)[0])[1][0];
+        var max_fg = Object.values(Object.values(style_data)[0])[1][1];
+
+        var min_ibu = Object.values(Object.values(style_data)[0])[2][0];
+        var max_ibu = Object.values(Object.values(style_data)[0])[2][1];
+
+        var min_og = Object.values(Object.values(style_data)[0])[3][0];
+        var max_og = Object.values(Object.values(style_data)[0])[3][1];
+
+        var min_srm = Object.values(Object.values(style_data)[0])[4][0];
+        var max_srm = Object.values(Object.values(style_data)[0])[4][1];
+
+
+        document.getElementById("OGspan").textContent = (min_og).toString() + ' - ' + (max_og).toString();
+        document.getElementById("FGspan").textContent = (min_fg).toString() + ' - ' + (max_fg).toString();
+        document.getElementById("IBUspan").textContent = (min_ibu).toString() + ' - ' + (max_ibu).toString();
+        document.getElementById("SRMspan").textContent = (min_srm).toString() + ' - ' + (max_srm).toString();
+        document.getElementById("ABVspan").textContent = (min_abv).toString() + ' - ' + (max_abv).toString();
+
+        document.getElementById("OG").style.width = (((og - min_og) / (max_og - min_og)) * 100).toString()+'%';
+        document.getElementById("FG").style.width = (((fg - min_fg) / (max_fg - min_fg)) * 100).toString()+'%';
+        document.getElementById("IBU").style.width = (((ibu - min_ibu) / (max_ibu - min_ibu)) * 100).toString()+'%';
+        document.getElementById("SRM").style.width = (((srm - min_srm) / (max_srm - min_srm)) * 100).toString()+'%';
+        document.getElementById("ABV").style.width = (((abv - min_abv) / (max_abv - min_abv)) * 100).toString()+'%';
+
+        document.getElementById("OGvalue").value = og.toString();
+        document.getElementById("FGvalue").value = fg.toString();
+        document.getElementById("IBUvalue").value = ibu.toString();
+        document.getElementById("SRMvalue").value = srm.toString();
+        document.getElementById("ABVvalue").value = abv.toString();
+
+        if (og < min_og || og > max_og) {
+            document.getElementById("OGvalue").style.color = "red";
+        }
+        if (fg < min_fg || fg > max_fg) {
+            document.getElementById("FGvalue").style.color = "red";
+        }
+        if (ibu < min_ibu || ibu > max_ibu) {
+            document.getElementById("IBUvalue").style.color = "red";
+        }
+        if (srm < min_srm || srm > max_srm) {
+            document.getElementById("SRMvalue").style.color = "red";
+        }
+        if (abv < min_abv || abv > max_abv) {
+            document.getElementById("ABVvalue").style.color = "red";
+        }
+
     }
+
+    function control_fermentables() {}
+
     </script>
 
 
