@@ -6,12 +6,18 @@
           <div class="card-header d-flex justify-content-between align-items-center">
               <h4 class="card-title">{{ recipe[2] }}</h4>
               {% set likes_counter = namespace(value=0) %}
+              {% set comments_counter = namespace(value=0) %}
               {% for like in all_likes %}
                   {% if recipe[0] == like[0] %}
                       {%  set likes_counter.value = likes_counter.value + 1 %}
                   {% endif %}
               {% endfor %}
-              <p  style="display: inline-block;">Likes: {{ likes_counter.value }} |  Comments: {{ 12 }}</p>
+              {% for comment in all_comments %}
+                  {% if recipe[0] == comment[0] %}
+                    {% set comments_counter.value = comments_counter.value + 1 %}
+                  {%  endif %}
+              {% endfor %}
+              <p  style="display: inline-block;">Likes: {{ likes_counter.value }} |  Comments: {{ comments_counter.value }}</p>
           </div>
           <div class="card-body">
             {% if (recipe[34] != '') %}

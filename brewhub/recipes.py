@@ -237,9 +237,11 @@ def show_recipes():
     public_recipes = db.select_public_recipes_from_recipes()
     counter = len(public_recipes)
     all_likes = db.select_all_likes()
+    all_comments = db.select_all_comments()
     likes_counter = 0
     print(public_recipes)
-    return render_template('public_recipes.html', public_recipes=public_recipes, user_id=user_id, counter=counter, all_likes=all_likes)
+    return render_template('public_recipes.html', public_recipes=public_recipes, user_id=user_id, counter=counter,
+                           all_likes=all_likes, all_comments=all_comments)
 
 
 @recipes.route('/public_recipes/<string:recipe_name>', methods=['GET', 'POST'])
@@ -260,8 +262,65 @@ def public_recipe(recipe_name=''):
     for i in range(len(current_likes_this_recipe)):
         users_who_like += (db.select_from_users_by_id("\'" + str(current_likes_this_recipe[i][1]) + "\'")[0][1]) + ',\n'
 
+    comments = db.select_from_comments("\'" + str(recipe_to_like_id) + "\'")
+
+    users_who_comment_ids = []
+    for comment in comments:
+        users_who_comment_ids.append(comment[1])
+    users_who_comment_ids = set(users_who_comment_ids)
+    users_who_comment_ids = list(users_who_comment_ids)
+
+    users_who_comment_usernames = []
+    for id in users_who_comment_ids:
+        username = db.select_from_users_by_id(id)[0][1]
+        users_who_comment_usernames.append(username)
+
+    users_who_comment = ''
+    for username in users_who_comment_usernames:
+        users_who_comment += (str(username) + ", \n")
+
     return render_template('public_recipe.html', recipe_name=recipe_name, chosen_recipe=chosen_recipe[0],
-                           likes_amount=likes_amount, if_liked=if_liked, users_who_like=users_who_like)
+                           likes_amount=likes_amount, if_liked=if_liked, users_who_like=users_who_like,
+                           comments=comments, users_who_comment=users_who_comment)
+
+
+@recipes.route('/public_recipes/<string:recipe_name>/comments', methods=['GET', 'POST'])
+def add_comment(recipe_name=''):
+    data = request.get_json(force=True)
+    comment_text = data['content']
+    user_id = session['id']
+    db = DatabaseConnector()
+    recipe_id = (db.select_from_recipes_by_recipe_name(recipe_name))[0][0]
+
+    user_who_add_comment_username = db.select_from_users_by_id(user_id)[0][1]
+    print(user_who_add_comment_username)
+
+    date_created = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    if not comment_text:
+        print("You cannot add empty comment.")
+    else:
+        db.insert_into_comments("\'" + str(recipe_id) + "\'", "\'" + str(user_id) + "\'", "\'" + str(user_who_add_comment_username) + "\'",
+                                "\'" + str(comment_text) + "\'", "\'" + str(date_created) + "\'")
+
+    comments = db.select_from_comments("\'" + str(recipe_id) + "\'")
+
+    users_who_comment_ids = []
+    for comment in comments:
+        users_who_comment_ids.append(comment[1])
+    users_who_comment_ids = set(users_who_comment_ids)
+    users_who_comment_ids = list(users_who_comment_ids)
+
+    users_who_comment_usernames = []
+    for id in users_who_comment_ids:
+        username = db.select_from_users_by_id(id)[0][1]
+        users_who_comment_usernames.append(username)
+
+    users_who_comment = ''
+    for username in users_who_comment_usernames:
+        users_who_comment += (str(username) + ", \n")
+    print(users_who_comment)
+
+    return jsonify({"comments": len(comments), "users_who_comment": users_who_comment, "new_comment_content": comment_text, "date_created": date_created, 'user_who_add_comment': str(user_who_add_comment_username)})
 
 
 @recipes.route('/public_recipes/like/<string:recipe_name>', methods=['POST'])
@@ -287,7 +346,9 @@ def like_recipe(recipe_name=''):
     users_who_like = ''
     for i in range(len(current_likes_this_recipe)):
         users_who_like += (db.select_from_users_by_id("\'" + str(current_likes_this_recipe[i][1]) + "\'")[0][1]) + ',\n'
-    return jsonify({"likes": len(current_likes_this_recipe), "liked": (not possibility_to_like), "users_who_like": users_who_like})
+
+    return jsonify(
+        {"likes": len(current_likes_this_recipe), "liked": (not possibility_to_like), "users_who_like": users_who_like})
 
 
 @recipes.route('/add_ingredients', methods=['GET', 'POST'])

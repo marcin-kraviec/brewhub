@@ -109,8 +109,6 @@ class DatabaseConnector:
         except (mysql.connector.Error, AttributeError) as e:
             logging.error('Query has not been executed: ' + str(e))
 
-
-
     @staticmethod
     def select_from_fermentables(user_id):
         query = 'SELECT name, color, contribution, price FROM fermentables WHERE user_id=%s' % (user_id)
@@ -319,5 +317,45 @@ class DatabaseConnector:
             for element in cursor:
                 likes.append(element)
             return likes
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def select_all_comments():
+        query = 'SELECT * FROM comments'
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            comments = []
+            for element in cursor:
+                comments.append(element)
+            return comments
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def insert_into_comments(recipe_id, user_id, username, content, date):
+        query = 'INSERT INTO comments (recipe_id, user_id, username, content, date) VALUES (%s, %s, %s,%s, %s)' % (
+            recipe_id, user_id, username, content, date)
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            DatabaseConnector.database.commit()
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def select_from_comments(recipe_id):
+        query = 'SELECT * FROM comments WHERE recipe_id=%s' % (recipe_id)
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            comments = []
+            for element in cursor:
+                comments.append(element)
+            return comments
         except (mysql.connector.Error, AttributeError) as e:
             logging.error('Query has not been executed: ' + str(e))

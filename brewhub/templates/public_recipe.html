@@ -120,7 +120,7 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th>
+                                    <th scope="row">
                                         <h5 style="display: inline-block">OG</h5>
                                     </th>
                                     <td>
@@ -128,7 +128,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>
+                                    <th scope="row">
                                         <h5 style="display: inline-block">FG</h5>
                                     </th>
                                     <td>
@@ -136,7 +136,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>
+                                    <th scope="row">
                                         <h5 style="display: inline-block">IBU</h5>
                                     </th>
                                     <td>
@@ -144,7 +144,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>
+                                    <th scope="row">
                                         <h5 style="display: inline-block">SRM</h5>
                                     </th>
                                     <td>
@@ -152,7 +152,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>
+                                    <th scope="row">
                                         <h5 style="display: inline-block">ABV</h5>
                                     </th>
                                     <td>
@@ -174,17 +174,18 @@
 
     <br/>
 
-    <a id="like_count" style="display: inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ users_who_like }}">{{ likes_amount }} likes</a>
+    <a id="like_count" style="display: inline-block" data-bs-toggle="tooltip_likes" data-bs-placement="left" title="{{ users_who_like }}">{{ likes_amount }} likes</a>
+    <a id="comment_count" style="display: inline-block" data-bs-toggle="tooltip_comments" data-bs-placement="left" title="{{ users_who_comment }}">|&nbsp;{{ comments|length }} comments</a>
 
     <br/><br/>
-    <div style="alignment: center">
+    <div class="d-flex justify-content-between align-items-center" style="alignment: center">
     {% if if_liked %}
         <a class="btn btn-primary" id="like_it" style="background: #FBB03B; width: 49%" onclick="like('{{ chosen_recipe[2] }}')">You like it!</a>
     {% else %}
         <a class="btn btn-primary" id="like_it" style="width: 49%;" onclick="like('{{ chosen_recipe[2] }}')">Like it</a>
     {% endif %}
     <!-- Trigger/Open The Modal -->
-    <button class="btn btn-primary" id="myBtn" style="width: 49%;">Comments</button>
+    <button class="btn btn-primary" id="comments" style="width: 49%;">Comments</button>
     </div>
 
     <!-- The Modal -->
@@ -197,16 +198,36 @@
             <button class="close">&times;</button>
         </div>
         <div class="modal-body">
-          <form>
+          <div class="mb-3" id="current_comments" style="overflow-y:scroll; overflow-x:hidden; height:200px;">
+              {% for comment in comments %}
+                  <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                      <h5 style="display: inline-block">{{ comment[2] }}: </h5>
+                      <a style="display: inline-block">&nbsp;&nbsp; {{ comment[3] }}</a>
+                  </div>
+                  <div>
+                      <small>{{ comment[4] }}</small>
+                  </div>
+                  </div>
+{#                              <tr class="d-flex justify-content-between align-items-center">#}
+{#                                  <th>#}
+{#                                      <h5>{{ comment[2] }}: </h5>#}
+{#                                  </th>#}
+{#                                  <th>#}
+{#                                      <textarea class="form-control" style="overflow: auto; background: #fefefe; height: auto; min-width:600px; resize: none;" disabled>&nbsp;&nbsp; {{ comment[3] }}</textarea>#}
+{#                                  </th>#}
+{#                                  <td>#}
+{#                                      <small>{{ comment[4] }}</small>#}
+{#                                  </td>#}
+{#                              </tr>#}
+              {% endfor %}
+          </div>
+            <hr class="my-4">
               <div class="form-group">
-                  <label for="exampleTextarea" class="form-label mt-4">Write your comment below</label>
-                  <textarea class="form-control" name='bio' id="bio" rows="3"></textarea><br/>
-                  <button type="submit" class="btn btn-primary" style="width: 100%">Add comment</button>
+                  <small id="comment_alert" style="color: #FBB03B"></small>
+                  <input type="text" id="comment_input" class="form-control mb-2" placeholder="Write here your comment" name="new_comment" maxlength="50" required>
+                  <button onclick="add_comment('{{ chosen_recipe[2] }}')" class="btn btn-primary" style="width: 100%;">Add comment</button>
               </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <h3>Modal Footer</h3>
         </div>
       </div>
 
@@ -219,7 +240,7 @@
         var modal = document.getElementById("myModal");
 
         // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
+        var btn = document.getElementById("comments");
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
@@ -245,7 +266,7 @@
         function like(recipe_name) {
             const like_count = document.getElementById('like_count');
             const like_button = document.getElementById('like_it');
-            const tooltip = document.getElementById('tooltip')
+            const tooltip = document.getElementById('tooltip_likes')
 
             fetch(`/public_recipes/like/${recipe_name}`, {method: 'POST'})
                 .then((res) => res.json())
@@ -261,6 +282,39 @@
                         like_button.textContent = 'Like it';
                     }
                 });
+
+        }
+
+        function add_comment(recipe_name) {
+            let content = document.getElementById("comment_input").value;
+            const current_comments  = document.getElementById('current_comments');
+            const comment_count = document.getElementById('comment_count')
+            const comment_alert = document.getElementById('comment_alert')
+            const comment_button = document.getElementById('comments');
+            const tooltip = document.getElementById('tooltip_comments')
+
+            if (content !== '') {
+
+                fetch(`/public_recipes/${recipe_name}/comments`,
+                    {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            'content': content,
+                        }),
+                        headers: {
+                            'Content-type': 'application/json; charset=UTF-8'
+                        }
+                    })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        comment_alert.innerHTML = "Comment has been added";
+                        current_comments.innerHTML += "<div class=\"d-flex justify-content-between align-items-center\"><div><h5 style=\"display: inline-block\">" + data['user_who_add_comment'] + ": " + "</h5><a style=\"display: inline-block\">&nbsp;&nbsp;&nbsp;" + content + "</a></div><div><small>" + data['date_created'] + "</small></div></div>"
+                        comment_count.innerHTML = " | " + data['comments'] + ' comments';
+                        comment_count.title = data['users_who_comment']
+                    });
+            } else {
+                comment_alert.innerHTML = "You cannot add empty comment!";
+            }
 
         }
 
