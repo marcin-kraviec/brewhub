@@ -198,9 +198,9 @@
             <button class="close">&times;</button>
         </div>
         <div class="modal-body">
-          <div class="mb-3" id="current_comments" style="overflow-y:scroll; overflow-x:hidden; height:200px;">
+          <div class="mb-3" id="current_comments" style="overflow-y:scroll; overflow-x:hidden; height:300px;">
                   {% for comment in comments %}
-                          <div class="container-fluid d-flex justify-content-between align-items-center" style="vertical-align: middle">
+                          <div class="container-fluid d-flex justify-content-between align-items-center" id="comment-{{ comment[4] }}" style="vertical-align: middle">
                               <div style="padding-top: 5px">
                                   <h5 style="display: inline-block">{{ comment[2] }}: &nbsp;&nbsp;&nbsp;</h5>
                                   <a style="display: inline-block">{{ comment[3] }}</a>
@@ -208,13 +208,13 @@
                               <div>
                               <small>{{ comment[4] }}&nbsp;&nbsp;&nbsp;</small>
                                   {% if comment[1] == session['id'] %}
-                                        <button class="btn-primary">Delete</button>
+                                        <button class="btn-primary" onclick="delete_comment('{{ recipe_name }}','{{ comment[4] }}')">Delete</button>
                                   {% else %}
-                                        <button class="btn-primary" style="border: none; background: #fefefe; color: #fefefe" disabled>Delete</button>
+                                        <button id="delete_comment" class="btn-primary" style="border: none; background: #fefefe; color: #fefefe" disabled>Delete</button>
                                   {% endif %}
                               </div>
                           </div>
-                            <br/>
+                            <br id="space_between_comments-{{ comment[4] }}"/>
                   {% endfor %}
           </div>
             <hr class="my-4">
@@ -310,6 +310,26 @@
             } else {
                 comment_alert.innerHTML = "You cannot add empty comment!";
             }
+
+        }
+
+        function delete_comment(recipe_name, date) {
+            const comment_to_delete = document.getElementById("comment-" + date)
+            const space_between_comments = document.getElementById("space_between_comments-" + date)
+            const comment_count = document.getElementById('comment_count')
+            const comment_alert = document.getElementById('comment_alert')
+
+            fetch(`/public_recipes/${recipe_name}/comments/${date}`, {
+                method: 'DELETE',
+            })
+            .then((res) => res.json())
+            .then((data) => {
+               comment_to_delete.remove();
+               space_between_comments.remove();
+               comment_count.innerHTML = " | " + data['comments'] + ' comments';
+               comment_count.title = data['users_who_comment']
+               comment_alert.innerHTML = "Comment has been deleted";
+            });
 
         }
 

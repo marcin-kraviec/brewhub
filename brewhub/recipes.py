@@ -439,6 +439,36 @@ def add_comment(recipe_name=''):
          "date_created": date_created, 'user_who_add_comment': str(user_who_add_comment_username)})
 
 
+@recipes.route('/public_recipes/<string:recipe_name>/comments/<string:date>', methods=['DELETE'])
+def delete_comment(recipe_name, date):
+    db = DatabaseConnector()
+    user_id = session['id']
+    db.delete_from_comments("\'" + str(user_id) + "\'", "\'" + date + "\'")
+
+    recipe_id = (db.select_from_recipes_by_recipe_name(recipe_name))[0][0]
+    comments = db.select_from_comments("\'" + str(recipe_id) + "\'")
+
+    users_who_comment_ids = []
+    for comment in comments:
+        users_who_comment_ids.append(comment[1])
+    users_who_comment_ids = set(users_who_comment_ids)
+    users_who_comment_ids = list(users_who_comment_ids)
+
+    users_who_comment_usernames = []
+    for id in users_who_comment_ids:
+        username = db.select_from_users_by_id(id)[0][1]
+        users_who_comment_usernames.append(username)
+
+    users_who_comment = ''
+    for username in users_who_comment_usernames:
+        users_who_comment += (str(username) + ", \n")
+
+    print(users_who_comment)
+
+    return jsonify({"comments": len(comments), "users_who_comment": users_who_comment})
+
+
+
 @recipes.route('/public_recipes/like/<string:recipe_name>', methods=['POST'])
 def like_recipe(recipe_name=''):
     possibility_to_like = True

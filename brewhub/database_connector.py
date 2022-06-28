@@ -387,3 +387,15 @@ class DatabaseConnector:
             return comments
         except (mysql.connector.Error, AttributeError) as e:
             logging.error('Query has not been executed: ' + str(e))
+
+
+    @staticmethod
+    def delete_from_comments(user_id, date):
+        query = 'DELETE FROM comments WHERE user_id=%s AND date=%s' % (user_id, date)
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            DatabaseConnector.database.commit()
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
