@@ -8,11 +8,12 @@ import smtplib
 from email.message import EmailMessage
 import codecs
 from jinja2 import Environment, FileSystemLoader
+from brewhub.database_config import PASSWORD_FOR_MAIL_ACCOUNT
 
 recipes = Blueprint('recipes', __name__)
 
 EMAIL_ADDRESS = 'brewhub22@gmail.com'
-EMAIL_PASSWORD = 'xfqafqudfxgvdfbu'
+EMAIL_PASSWORD = PASSWORD_FOR_MAIL_ACCOUNT
 
 
 class MailService:
