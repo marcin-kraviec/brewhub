@@ -288,7 +288,9 @@
             const comment_button = document.getElementById('comments');
             const tooltip = document.getElementById('tooltip_comments')
 
-            if (content !== '') {
+            const regex = new RegExp(/^[A-Za-z0-9\s\.\,\!\?]+[A-Za-z0-9]$/)
+
+            if (content !== '' && regex.test(content)) {
 
                 fetch(`/public_recipes/${recipe_name}/comments`,
                     {
@@ -308,10 +310,11 @@
                         comment_count.innerHTML = " | " + data['comments'] + ' comments';
                         comment_count.title = data['users_who_comment']
                     });
-            } else {
+            } else if (content === '') {
                 comment_alert.innerHTML = "You cannot add empty comment!";
+            } else {
+                comment_alert.innerHTML = "Your comment is incorrect!";
             }
-
         }
 
         function delete_comment(recipe_name, date) {
