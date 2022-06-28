@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container element" style="width: 50%; alignment: center" >
-        {% for recipe in public_recipes %}
+        {% for recipe in user_recipes %}
         <div class="card" style="display: inline-block; width: 100%;">
           <div class="card-header d-flex justify-content-between align-items-center">
               <h4 class="card-title">{{ recipe[2] }}</h4>
@@ -17,7 +17,9 @@
                     {% set comments_counter.value = comments_counter.value + 1 %}
                   {%  endif %}
               {% endfor %}
-              <p  style="display: inline-block;">Likes: {{ likes_counter.value }} |  Comments: {{ comments_counter.value }}</p>
+              {% if recipe[5] == "Public" %}
+                <p  style="display: inline-block;">Likes: {{ likes_counter.value }} |  Comments: {{ comments_counter.value }}</p>
+              {% endif %}
           </div>
           <div class="card-body">
             {% if (recipe[34] != '') %}
@@ -26,10 +28,14 @@
                 <p class="card-text"> - <br/></p>
             {% endif %}
             <h6 class="card-subtitle mb-2 text-muted"><h6 style="display: inline-block">STYLE:</h6> {{ recipe[3] }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted"><h6 style="display: inline-block">AUTHOR:</h6> {{ recipe[1] }}</h6>
             <h6 class="card-subtitle mb-2 text-muted"><h6 style="display: inline-block">ADDED:</h6> {{ recipe[6] }}</h6>
+            {% if recipe[5] == "Public" %}
+                <h6 class="card-subtitle mb-2"><h6 style="display: inline-block">VISIBILITY:</h6><a style="color: yellowgreen"> {{ recipe[5] }}</a></h6>
+            {% else %}
+                <h6 class="card-subtitle mb-2"><h6 style="display: inline-block">VISIBILITY:</h6><a style="color: crimson"> {{ recipe[5] }}</a></h6>
+            {% endif %}
               <br/><br/>
-            <a href="{{ url_for('recipes.public_recipe', recipe_name=recipe[2]) }}" class="btn btn-primary btn-sm" style="display: inline-block; width: 100%">Open</a>
+            <a href="{{ url_for('recipes.user_recipe', recipe_name=recipe[2]) }}" class="btn btn-primary btn-sm" style="display: inline-block; width: 100%">Open</a>
           </div>
         </div>
             <br/><br/>

@@ -72,8 +72,36 @@ class DatabaseConnector:
             logging.error('Query has not been executed: ' + str(e))
 
     @staticmethod
+    def select_all_users():
+        query = 'SELECT * FROM users'
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            data = []
+            for element in cursor:
+                data.append(element)
+            return data
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
     def select_from_users_by_id(user_id):
         query = 'SELECT * FROM users WHERE id=%s' % user_id
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            data = []
+            for element in cursor:
+                data.append(element)
+            return data
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def select_from_users_by_username(username):
+        query = 'SELECT * FROM users WHERE username=%s' % username
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -228,8 +256,8 @@ class DatabaseConnector:
             logging.error('Query has not been executed: ' + str(e))
 
     @staticmethod
-    def select_from_recipes(user_id='\'*\''):
-        query = 'SELECT * FROM recipes WHERE owner_id=%s' % (user_id)
+    def select_from_recipes(user_id):
+        query = 'SELECT * FROM recipes WHERE owner_id=%s' % user_id
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()

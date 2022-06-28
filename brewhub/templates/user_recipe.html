@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="container" style="width: 90%; alignment: center">
+    <div class="container" style="width: 50%; alignment: center">
 
     <div class="card">
     <div class="card-body">
@@ -171,148 +171,96 @@
         </table>
         </div>
     </div>
-
     <br/>
-
-    <a id="like_count" style="display: inline-block" data-bs-toggle="tooltip_likes" data-bs-placement="left" title="{{ users_who_like }}">{{ likes_amount }} likes</a>
-    <a id="comment_count" style="display: inline-block" data-bs-toggle="tooltip_comments" data-bs-placement="left" title="{{ users_who_comment }}">|&nbsp;{{ comments|length }} comments</a>
-
-    <br/><br/>
-    <div class="d-flex justify-content-between align-items-center" style="alignment: center">
-    {% if if_liked %}
-        <a class="btn btn-primary" id="like_it" style="background: #FBB03B; width: 49%" onclick="like('{{ chosen_recipe[2] }}')">You like it!</a>
-    {% else %}
-        <a class="btn btn-primary" id="like_it" style="width: 49%;" onclick="like('{{ chosen_recipe[2] }}')">Like it</a>
+    {% if chosen_recipe[5] == "Private" %}
+        <button class="btn btn-primary" id="share_button" style="width: 100%">Share this recipe</button>
     {% endif %}
-    <!-- Trigger/Open The Modal -->
-    <button class="btn btn-primary" id="comments" style="width: 49%;">Comments</button>
-    </div>
 
-    <!-- The Modal -->
+        <!-- The Modal -->
     <div id="myModal" class="modal">
 
       <!-- Modal content -->
       <div class="modal-content">
         <div class="modal-header">
-            <h2>Comments</h2>
+            <h2>Sharing the recipe</h2>
             <button class="close">&times;</button>
         </div>
         <div class="modal-body">
-          <div class="mb-3" id="current_comments" style="overflow-y:scroll; overflow-x:hidden; height:200px;">
-                  {% for comment in comments %}
-                          <div class="container-fluid d-flex justify-content-between align-items-center" style="vertical-align: middle">
-                              <div style="padding-top: 5px">
-                                  <h5 style="display: inline-block">{{ comment[2] }}: &nbsp;&nbsp;&nbsp;</h5>
-                                  <a style="display: inline-block">{{ comment[3] }}</a>
-                              </div>
-                              <div>
-                              <small>{{ comment[4] }}&nbsp;&nbsp;&nbsp;</small>
-                                  {% if comment[1] == session['id'] %}
-                                        <button class="btn-primary">Delete</button>
-                                  {% else %}
-                                        <button class="btn-primary" style="border: none; background: #fefefe; color: #fefefe" disabled>Delete</button>
-                                  {% endif %}
-                              </div>
-                          </div>
-                            <br/>
-                  {% endfor %}
+          <div class="mb-3">
+              <h5>Enter the username below that you want to share the recipe with</h5><br/>
+                  <small id="share_alert" style="color: #FBB03B"></small><br/><br/>
+                  <input type="text" pattern="^[A-Za-z0-9]+[A-Za-z0-9]$" id="username_to_share_input" class="form-control mb-2" placeholder="Enter username" name="username_to_share_input" required>
+              <br/>
+              <hr class="my-4">
+              <br/>
+                  <button onclick="share_recipe('{{ recipe_name }}', {{ existing_users_usernames }})" class="btn btn-primary" style="width: 100%;">Share recipe</button>
           </div>
-            <hr class="my-4">
-              <div class="form-group">
-                  <small id="comment_alert" style="color: #FBB03B"></small><br/>
-                  <input type="text" id="comment_input" class="form-control mb-2" placeholder="Write here your comment" name="new_comment" maxlength="80" required>
-                  <button onclick="add_comment('{{ chosen_recipe[2] }}')" class="btn btn-primary" style="width: 100%;">Add comment</button>
-              </div>
         </div>
       </div>
 
     </div>
 
-</div>
+
+
+    </div>
+
+
+
 
     <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
+    // Get the modal
+    var modal = document.getElementById("myModal");
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("comments");
+    // Get the button that opens the modal
+    var btn = document.getElementById("share_button");
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks the button, open the modal
-        btn.onclick = function() {
-          modal.style.display = "block";
-        }
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
 
+    function share_recipe(recipe_name, existing_users_usernames){
+        const username = document.getElementById('username_to_share_input');
+        const share_alert = document.getElementById('share_alert')
+        let x = Boolean(false);
 
-        function like(recipe_name) {
-            const like_count = document.getElementById('like_count');
-            const like_button = document.getElementById('like_it');
-            const tooltip = document.getElementById('tooltip_likes')
-
-            fetch(`/public_recipes/like/${recipe_name}`, {method: 'POST'})
-                .then((res) => res.json())
-                .then((data) => {
-                    like_count.innerHTML = data['likes'] + ' likes';
-                    like_count.title = data['users_who_like'];
-                    if (data['liked']) {
-                        like_button.style.background = '#FBB03B';
-                        like_button.textContent = 'You like it!';
-                    } else {
-                        like_button.style.background = 'black';
-                        like_button.style.color = 'white';
-                        like_button.textContent = 'Like it';
-                    }
-                });
-
-        }
-
-        function add_comment(recipe_name) {
-            let content = document.getElementById("comment_input").value;
-            const current_comments  = document.getElementById('current_comments');
-            const comment_count = document.getElementById('comment_count')
-            const comment_alert = document.getElementById('comment_alert')
-            const comment_button = document.getElementById('comments');
-            const tooltip = document.getElementById('tooltip_comments')
-
-            if (content !== '') {
-
-                fetch(`/public_recipes/${recipe_name}/comments`,
-                    {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            'content': content,
-                        }),
-                        headers: {
-                            'Content-type': 'application/json; charset=UTF-8'
-                        }
-                    })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        comment_alert.innerHTML = "Comment has been added";
-                        current_comments.innerHTML += "<div class=\"container-fluid d-flex justify-content-between align-items-center\"><div><h5 style=\"display: inline-block\">" + data['user_who_add_comment'] + ": " + "&nbsp;&nbsp;&nbsp;</h5><a style=\"display: inline-block\">" + content + "</a></div><div><small>" + data['date_created'] + "&nbsp;&nbsp;&nbsp;&nbsp;</small><button class=\"btn-primary\">Delete</button></div></div><br/>"
-                        comment_count.innerHTML = " | " + data['comments'] + ' comments';
-                        comment_count.title = data['users_who_comment']
-                    });
-            } else {
-                comment_alert.innerHTML = "You cannot add empty comment!";
+        for (let i=0; i<existing_users_usernames.length; i++) {
+            if(username.value === existing_users_usernames[i]) {
+                x = Boolean(true);
             }
-
         }
 
+        if(x) {
+            fetch(`/user_recipe/share/${recipe_name}/${username.value}`, {method: 'POST'})
+            .then((data)=> {
+                share_alert.innerText = "Recipe has been shared"
+                share_alert.style.color = "yellowgreen"
+            });
+        }
 
+        else if (username.value === ''){
+            share_alert.style.color = "crimson";
+            share_alert.innerHTML = "Please fill the field below";}
+        else {
+            share_alert.style.color = "crimson";
+            share_alert.innerHTML = "User with this username do not exists";
+        }
+
+    }
     </script>
 {% endblock %}

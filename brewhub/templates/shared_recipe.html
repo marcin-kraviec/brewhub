@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
+    integrity="sha256-c9vxcXyAG4paArQG3xk6DjyW/9aHxai2ef9RpMWO44A=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+<meta charset="UTF-8">
+<title>Recipe for you</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/184/184482.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/lux/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+</head>
+
+<body>
+    <div class="container" id="recipe" style="width: 90%; alignment: center">
+    <br/><br/>
+
+    <div class="card">
+    <div class="card-body">
+
+        <h3>{{ recipe_name }}</h3>
+        <br/>
+        <table class="table">
+              <tbody>
+                <tr>
+                  <th scope="row"><h5></h5></th>
+                  <td></td>
+                </tr>
+                <tr>
+                    <th scope="row"><h5>Description</h5></th>
+                    {% if shared_recipe[34] != '' %}
+                        <td>{{ shared_recipe[34] }}</td>
+                    {% else %}
+                        <td> - </td>
+                    {% endif %}
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Style</h5></th>
+                  <td>{{ shared_recipe[3] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Author</h5></th>
+                  <td>{{ shared_recipe[1] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Added</h5></th>
+                  <td>{{ shared_recipe[6] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5></h5></th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Type</h5></th>
+                  <td>{{ shared_recipe[4] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Batch size</h5></th>
+                  <td>{{ shared_recipe[7] }} &nbsp;L</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Boiling time</h5></th>
+                  <td>{{ shared_recipe[8] }} &nbsp;min</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Evaporation</h5></th>
+                  <td>{{ shared_recipe[9] }} &nbsp;%/h</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Boiling losses</h5></th>
+                  <td>{{ shared_recipe[10] }} &nbsp;%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Fermentation losses</h5></th>
+                  <td>{{ shared_recipe[11] }} &nbsp;%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Boil size</h5></th>
+                  <td>{{ shared_recipe[12] }} &nbsp;L</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Wort size</h5></th>
+                  <td>{{ shared_recipe[13] }} &nbsp;L</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Fermentables</h5></th>
+                  <td>
+                      {% for i in range(shared_recipe[14].split(",")|length) %}
+                        {{ shared_recipe[14].split(",")[i] }},&nbsp; {{ shared_recipe[15].split(",")[i] }} &nbsp;kg<br/>
+                      {% endfor %}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Hops</h5></th>
+                  <td>
+                      {% for i in range(shared_recipe[16].split(",")|length) %}
+                          {% if shared_recipe[17].split(",")[i] != "Dry" %}
+                            {{ shared_recipe[16].split(",")[i] }},&nbsp; {{ shared_recipe[17].split(",")[i] }},&nbsp; {{ shared_recipe[18].split(",")[i] }}&nbsp;min,&nbsp; {{ shared_recipe[19].split(",")[i] }}&nbsp;g<br/>
+                          {% else %}
+                            {{ shared_recipe[16].split(",")[i] }},&nbsp; {{ shared_recipe[17].split(",")[i] }},&nbsp; {{ shared_recipe[18].split(",")[i] }}&nbsp;days,&nbsp; {{ shared_recipe[19].split(",")[i] }}&nbsp;g<br/>
+                          {% endif %}
+                      {% endfor %}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Others</h5></th>
+                  <td>
+                      {% for i in range(shared_recipe[20].split(",")|length) %}
+                        {{ shared_recipe[20].split(",")[i] }},&nbsp; {{ shared_recipe[21].split(",")[i] }}&nbsp;g,&nbsp; {{ shared_recipe[22].split(",")[i] }}<br/>
+                      {% endfor %}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Yeast</h5></th>
+                    <td>{{ shared_recipe[23] }}<br/>Primary fermentation:&nbsp; {{ shared_recipe[24] }}&nbsp;days<br/>Secondary fermentation:&nbsp; {{ shared_recipe[25] }}&nbsp;days</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Expected efficiency</h5></th>
+                    <td>{{ shared_recipe[26] }} &nbsp;%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Temperature</h5></th>
+                  <td>
+                    {% for i in range(shared_recipe[27].split(",")|length) %}
+                        {{ shared_recipe[27].split(",")[i] }}&nbsp;°C,&nbsp; {{ shared_recipe[28].split(",")[i] }}&nbsp;min<br/>
+                    {% endfor %}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Vital statistics</h5></th>
+                    <td>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">
+                                        <h5 style="display: inline-block">OG</h5>
+                                    </th>
+                                    <td>
+                                        &nbsp;{{ shared_recipe[29] }} &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <h5 style="display: inline-block">FG</h5>
+                                    </th>
+                                    <td>
+                                        &nbsp;{{ shared_recipe[30] }} &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <h5 style="display: inline-block">IBU</h5>
+                                    </th>
+                                    <td>
+                                        &nbsp;{{ shared_recipe[31] }} &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <h5 style="display: inline-block">SRM</h5>
+                                    </th>
+                                    <td>
+                                        &nbsp;{{ shared_recipe[32] }} &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <h5 style="display: inline-block">ABV</h5>
+                                    </th>
+                                    <td>
+                                        &nbsp;{{ shared_recipe[33] }} &nbsp;
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                  <th scope="row"><h5>Estimated price</h5></th>
+                    <td>{{ shared_recipe[35] }} &nbsp;PLN</td>
+                </tr>
+              </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+    <br/><br/>
+    <div class="container">
+        <button class="btn btn-primary" style="width:100%" id="download">Download PDF</button>
+        <br/><br/>
+    </div>
+</body>
+
+
+<script>
+window.onload = function(){
+    document.getElementById("download").addEventListener("click",()=>{
+        const recipe = this.document.getElementById("recipe");
+        console.log(recipe)
+        console.log(window)
+        var opt = {
+          margin:       0,
+          filename:     'new_recipe.pdf',
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 1},
+          jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().from(recipe).set(opt).save();
+    })
+}
+</script>
+</html>
