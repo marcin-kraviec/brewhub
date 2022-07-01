@@ -88,7 +88,7 @@
                 <tbody>
                     <tr class="table-secondary">
                         <th scope="row">
-                            <select class="form-select" id="fermentable" name="fermentable" required>
+                            <select class="form-select" id="fermentable" onchange="gravity()" name="fermentable" required>
                                 <option value="" disabled selected>Choose ingredient</option>
                                 {% for fermentable in fermentables_for_combobox %}
                                 <option>{{ fermentable }}</option>
@@ -97,7 +97,7 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter amount" id="fermentable_amount" name="fermentable_amount" min="0" max="30" required>
+                                <input type="number" class="form-control" placeholder="Enter amount" onchange="gravity()" id="fermentable_amount" name="fermentable_amount" min="0" max="30" required>
                                 <span class="input-group-text">kg</span>
                             </div>
                         </td>
@@ -121,7 +121,7 @@
                 <tbody>
                     <tr class="table-secondary">
                         <th scope="row">
-                            <select class="form-select" id="exampleSelect1" id="hop" name="hop" required>
+                            <select class="form-select" id="exampleSelect1" id="hop" onchange="gravity()" name="hop" required>
                                 <option value="" disabled selected>Choose hop</option>
                                 {% for hop in hops_for_combobox %}
                                 <option>{{ hop }}</option>
@@ -130,7 +130,7 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <select class="form-select" id="hop_usage" onchange="hops_usage_choice()" name="hop_usage" required>
+                                <select class="form-select" id="hop_usage" onchange="gravity()" onchange="hops_usage_choice()" name="hop_usage" required>
                                     <option value="" disabled selected>Choose usage</option>
                                     <option>Boil</option>
                                     <option>Aroma</option>
@@ -140,13 +140,13 @@
                         </td>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter time" id="hop_time" name="hop_time" min="0" max="200" required>
+                                <input type="number" class="form-control" placeholder="Enter time" onchange="gravity()" id="hop_time" name="hop_time" min="0" max="200" required>
                                 <div class="input-group-text" id="time_option" name="time_option" required> - </div>
                             </div>
                         </td>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter amount" name="hop_amount" min="0" max="1000" required>
+                                <input type="number" class="form-control" placeholder="Enter amount" onchange="gravity()" name="hop_amount" min="0" max="1000" required>
                                 <span class="input-group-text">g</span>
                             </div>
                         </td>
@@ -168,7 +168,7 @@
                 <tbody>
                     <tr class="table-secondary">
                         <th scope="row">
-                            <select class="form-select" id="exampleSelect1" name="other" required>
+                            <select class="form-select" id="exampleSelect1" onchange="gravity()" name="other" required>
                                 <option value="" disabled selected>Choose ingredient</option>
                                 {% for other in others_for_combobox %}
                                 <option>{{ other }}</option>
@@ -177,7 +177,7 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter amount" name="other_amount" min="0" max="5000" required>
+                                <input type="number" class="form-control" placeholder="Enter amount" onchange="gravity()" name="other_amount" min="0" max="5000" required>
                                 <span class="input-group-text">g</span>
                             </div>
                         </td>
@@ -196,7 +196,7 @@
         <div>
             <div class="form-group" style="display: inline-block">
                 <div class="input-group mb-3" style="width:500px">
-                    <select class="form-select" id="yeast" name="yeast" required>
+                    <select class="form-select" id="yeast" onchange="gravity()" name="yeast" required>
                         <option value="" disabled selected>Choose yeast</option>
                         {% for yeast in yeasts_for_combobox %}
                          <option>{{ yeast }}</option>
@@ -221,13 +221,13 @@
         <h4>Mash</h4>
             <div class="form-group">
                 <div class="input-group mb-3" style="width:320px">
-                    <input type="number" class="form-control" placeholder="Enter expected efficiency" id="efficiency" name="efficiency" min="0" max="100" required>
+                    <input type="number" class="form-control" onchange="gravity()" placeholder="Enter expected efficiency" id="efficiency" name="efficiency" min="0" max="100" required>
                     <span class="input-group-text">%</span>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group mb-3" style="width:320px">
-                    <input type="number" class="form-control" placeholder="Enter water/grain ratio" name="water_grain_ratio" min="0" max="20" required>
+                    <input type="text" class="form-control" placeholder="Enter water/grain ratio" name="water_grain_ratio">
                     <span class="input-group-text">L/kg</span>
                 </div>
             </div>
@@ -521,6 +521,7 @@
                 ibu += utilization * (0.01 * alpha_acids[i] * hop_amounts[i] / 0.035274 * 0.7489 / (volume / 3.78));
             }
         }
+        ibu = Math.round(ibu * 10) / 10;
 
         {#console.log(alpha_acids);#}
         {#console.log(times);#}
