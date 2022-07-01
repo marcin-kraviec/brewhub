@@ -8,6 +8,7 @@ class DatabaseConnector:
     # establishing connection to database
     try:
         database = mysql.connector.connect(host=HOST, user=USER, password=PASSWORD, database=DATABASE, auth_plugin='mysql_native_password')
+
         print('DUPA')
     except mysql.connector.Error as e:
         logging.critical('Connection to database has not been established: ' + str(e))
@@ -375,7 +376,7 @@ class DatabaseConnector:
 
     @staticmethod
     def select_from_comments(recipe_id):
-        query = 'SELECT * FROM comments WHERE recipe_id=%s' % (recipe_id)
+        query = 'SELECT * FROM comments WHERE recipe_id=%s' % recipe_id
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -386,7 +387,6 @@ class DatabaseConnector:
             return comments
         except (mysql.connector.Error, AttributeError) as e:
             logging.error('Query has not been executed: ' + str(e))
-
 
     @staticmethod
     def delete_from_comments(user_id, date):

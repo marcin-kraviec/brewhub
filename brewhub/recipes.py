@@ -12,13 +12,15 @@ from brewhub.database_config import PASSWORD_FOR_MAIL_ACCOUNT
 
 recipes = Blueprint('recipes', __name__)
 
+# data necessary to email sending service
 EMAIL_ADDRESS = 'brewhub22@gmail.com'
 EMAIL_PASSWORD = PASSWORD_FOR_MAIL_ACCOUNT
 
 
+# email sending service
 class MailService:
     def __init__(self):
-        # with smtplib.SMTP_SSL('smtp.gmail.com', 465) as self.smtp:
+        #   with smtplib.SMTP_SSL('smtp.gmail.com', 465) as self.smtp:
         #   self.smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
         self.smtpObj = smtplib.SMTP("smtp.gmail.com", 587)
         self.smtpObj.ehlo()
@@ -49,10 +51,6 @@ m = MailService()
 def add_recipe():
     db = DatabaseConnector()
     user_id = session['id']
-    print(user_id)
-
-    def dupa():
-        return ('dupa')
 
     style_data = {"American Light Lager": {"IBU": [8, 12], "SRM": [2, 3], "OG": [1.028, 1.040], "FG": [0.998, 1.008],
                                            "ABV": [2.8, 4.2]},
@@ -65,40 +63,46 @@ def add_recipe():
                   "International Pale Lager": {"IBU": [18, 25], "SRM": [2, 6], "OG": [1.042, 1.050],
                                                "FG": [1.008, 1.012],
                                                "ABV": [4.5, 6]}}
+    # get beer style names from style_data
     styles = style_data.keys()
 
+    # get all user fermentables from database
     fermentables = db.select_from_fermentables(user_id)
-    print(fermentables)
+    # put fermantables into combobox in creating recipe form
     fermentables_for_combobox = []
     for i in range(len(fermentables)):
         (name, color, gravity_contibution, price) = fermentables[i]
         fermentable = str(name)
         fermentables_for_combobox.append(fermentable)
 
+    # get all user hops from database
     hops = db.select_from_hops(user_id)
-    print(hops)
+    # put hops into combobox in creating recipe form
     hops_for_combobox = []
     for i in range(len(hops)):
         (name, alpha_acids, price) = hops[i]
         hop = str(name)
         hops_for_combobox.append(hop)
 
+    # get all others hops from database
     others = db.select_from_others(user_id)
-    print(others)
+    # put others into combobox in creating recipe form
     others_for_combobox = []
     for i in range(len(others)):
         (name, info, price) = others[i]
         other = str(name) + ' ' + str(info)
         others_for_combobox.append(other)
 
+    # get all yeasts hops from database
     yeasts = db.select_from_yeasts(user_id)
-    print(yeasts)
+    # put yeats into combobox in creating recipe form
     yeasts_for_combobox = []
     for i in range(len(yeasts)):
         (name, attenuation, price) = yeasts[i]
         # yeast = str(name) + ' ' + str(float(attenuation)) +' %'
         yeast = str(name)
         yeasts_for_combobox.append(yeast)
+
 
     data = {
         'yeasts_names': yeasts_for_combobox,
@@ -111,46 +115,31 @@ def add_recipe():
 
     if request.method == 'POST':
 
+        # get data from html form
+        # date
         recipe_date = datetime.date.today()
-        print(recipe_date)
-
-        # Recipe info
-        user_id = session['id']
-        print(user_id)
-
+        # recipe name
         recipe_name = request.form['recipe_name']
-        print(recipe_name)
-
+        # recipe style
         recipe_style = request.form.get('recipe_style')
-        print(recipe_style)
-
+        # recipe type
         recipe_type = request.form.get('recipe_type')
-        print(recipe_type)
-
+        # visibility
         visibility = request.form.get('visibility')
-        print(visibility)
-
-        # Batch info
+        # batch size
         batch_size = request.form['batch_size']
-        print(batch_size)
-
+        # boiling time
         boiling_time = request.form['boiling_time']
-        print(boiling_time)
-
+        # evaporation
         evaporation = request.form['evaporation']
-        print(evaporation)
-
+        # boiling losses
         boiling_losses = request.form['boiling_losses']
-        print(boiling_losses)
-
+        # fermentation losses
         fermentation_losses = request.form['fermentation_losses']
-        print(fermentation_losses)
-
+        # boil size
         boil_size = request.form['boil_size']
-        print(boil_size)
-
+        # wort size
         wort_size = request.form['wort_size']
-        print(wort_size)
 
         # Fermentables
         fermentables1 = request.form.getlist('fermentable')
@@ -173,9 +162,6 @@ def add_recipe():
         hops_timings = request.form.getlist('hop_time')
         hops_timings = ",".join(hops_timings)
         print(hops_timings)
-
-        # hops_time_options = request.form.getlist('time_option')
-        # print(hops_time_options)
 
         hops_amounts = request.form.getlist('hop_amount')
         hops_amounts = ",".join(hops_amounts)
@@ -230,6 +216,7 @@ def add_recipe():
                 notes = request.form['notes']
                 print(notes)
 
+        # get vital statistics from html form
         og = request.form["OGvalue"]
         print(og)
         fg = request.form["FGvalue"]
@@ -245,6 +232,7 @@ def add_recipe():
         price = "0"
         print(price)
 
+        # add recipe in database
         db.insert_into_recipes("\'" + str(user_id) + "\'", "\'" + recipe_name + "\'", "\'" + recipe_style + "\'",
                                "\'" + recipe_type + "\'", "\'" + visibility + "\'", "\'" + str(recipe_date) + "\'",
                                "\'" + str(batch_size) + "\'",
@@ -261,6 +249,8 @@ def add_recipe():
                                "\'" + stops_timings + "\'",
                                "\'" + og + "\'", "\'" + fg + "\'", "\'" + ibu + "\'", "\'" + srm + "\'",
                                "\'" + abv + "\'", "\'" + notes + "\'", "\'" + price + "\'")
+
+        flash('Recipe has been added successfully')
 
     return render_template('recipe_form.html', styles=styles, fermentables_for_combobox=fermentables_for_combobox,
                            hops_for_combobox=hops_for_combobox, others_for_combobox=others_for_combobox,
@@ -467,7 +457,6 @@ def delete_comment(recipe_name, date):
     print(users_who_comment)
 
     return jsonify({"comments": len(comments), "users_who_comment": users_who_comment})
-
 
 
 @recipes.route('/public_recipes/like/<string:recipe_name>', methods=['POST'])

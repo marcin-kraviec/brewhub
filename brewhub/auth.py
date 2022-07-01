@@ -21,7 +21,6 @@ def login():
         password_hash_hex = password_hash.hexdigest()
         print(password_hash_hex)
 
-
         if not re.match(r'^[A-Za-z0-9]+[A-Za-z0-9]$', username):
             flash('Incorrect input data')
             print("Protecting from sqp bypass")
@@ -106,8 +105,9 @@ def register():
             flash('Bio must contain only characters and numbers!')
 
         else:
-            db.insert_into_users('users', "\'" + username + "\'", "\'" + email + "\'", "\'" + str(password_hash_hex) + "\'",
-                           "\'" + str(age) + "\'", "\'" + bio + "\'")
+            db.insert_into_users('users', "\'" + username + "\'", "\'" + email + "\'",
+                                 "\'" + str(password_hash_hex) + "\'",
+                                 "\'" + str(age) + "\'", "\'" + bio + "\'")
 
             flash('You have successfully registered!')
             return render_template('login.html')
