@@ -258,7 +258,7 @@ class DatabaseConnector:
 
     @staticmethod
     def select_from_recipes_by_recipe_name(recipe_name):
-        query = 'SELECT * FROM recipes WHERE name=%s' % ("\'" + recipe_name + "\'")
+        query = 'SELECT * FROM recipes WHERE name=%s' % (recipe_name)
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()

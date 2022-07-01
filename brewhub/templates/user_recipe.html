@@ -174,7 +174,11 @@
     <br/>
     {% if chosen_recipe[5] == "Private" %}
         <button class="btn btn-primary" id="share_button" style="width: 100%">Share this recipe</button>
+    {% else %}
+        <button class="btn btn-primary" id="share_button" style="width: 100%" disabled>Share this recipe</button>
     {% endif %}
+    <br/>
+    <a class="btn btn-primary" href="{{ url_for('recipes.edit_recipe', recipe_name=chosen_recipe[2]) }}" id="edit_button" style="width: 100%">Edit recipe</a>
 
         <!-- The Modal -->
     <div id="myModal" class="modal">

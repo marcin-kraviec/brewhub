@@ -257,6 +257,20 @@ def add_recipe():
                            yeasts_for_combobox=yeasts_for_combobox, yeasts=yeasts, data=data, style_data=style_data)
 
 
+@recipes.route('/user_recipes/<string:recipe_name>/edit', methods=['GET'])
+def edit_recipe(recipe_name=''):
+    db = DatabaseConnector()
+    user_id = session['id']
+
+    # select all params of recipe to edit from database
+    recipe_params = db.select_from_recipes_by_recipe_name("\'" + recipe_name + "\'")[0]
+    print(recipe_params)
+
+
+
+    return render_template('recipe_edit.html', recipe_params=recipe_params)
+
+
 @recipes.route('/public_recipes', methods=['GET'])
 def show_recipes():
     db = DatabaseConnector()
@@ -302,7 +316,7 @@ def user_recipe(recipe_name=''):
     db = DatabaseConnector()
 
     # select chosen recipe from database
-    chosen_recipe = db.select_from_recipes_by_recipe_name(recipe_name)
+    chosen_recipe = db.select_from_recipes_by_recipe_name("\'" + recipe_name + "\'")
     recipe_to_like_id = chosen_recipe[0][0]
 
     # select amount of likes for chosen recipe
@@ -362,7 +376,7 @@ def share_user_recipe(recipe_name, username):
 @recipes.route('/shared_recipe/<string:recipe_name>', methods=['GET'])
 def open_shared_recipe(recipe_name):
     db = DatabaseConnector()
-    shared_recipe = db.select_from_recipes_by_recipe_name(recipe_name)[0]
+    shared_recipe = db.select_from_recipes_by_recipe_name("\'" + recipe_name + "\'")[0]
     return render_template('shared_recipe.html', recipe_name=recipe_name, shared_recipe=shared_recipe)
 
 
@@ -370,7 +384,7 @@ def open_shared_recipe(recipe_name):
 def public_recipe(recipe_name=''):
     print(recipe_name)
     db = DatabaseConnector()
-    chosen_recipe = db.select_from_recipes_by_recipe_name(recipe_name)
+    chosen_recipe = db.select_from_recipes_by_recipe_name("\'" + recipe_name + "\'")
     likes_amount = len(db.select_from_likes(chosen_recipe[0][0]))
     if_liked = False
     if (chosen_recipe[0][0], session['id']) in db.select_from_likes(chosen_recipe[0][0]):
@@ -412,7 +426,7 @@ def add_comment(recipe_name=''):
     comment_text = data['content']
     user_id = session['id']
     db = DatabaseConnector()
-    recipe_id = (db.select_from_recipes_by_recipe_name(recipe_name))[0][0]
+    recipe_id = (db.select_from_recipes_by_recipe_name("\'" + recipe_name + "\'"))[0][0]
 
     user_who_add_comment_username = db.select_from_users_by_id(user_id)[0][1]
     print(user_who_add_comment_username)
@@ -454,7 +468,7 @@ def delete_comment(recipe_name, date):
     user_id = session['id']
     db.delete_from_comments("\'" + str(user_id) + "\'", "\'" + date + "\'")
 
-    recipe_id = (db.select_from_recipes_by_recipe_name(recipe_name))[0][0]
+    recipe_id = (db.select_from_recipes_by_recipe_name("\'" + recipe_name + "\'"))[0][0]
     comments = db.select_from_comments("\'" + str(recipe_id) + "\'")
 
     users_who_comment_ids = []
@@ -482,7 +496,7 @@ def like_recipe(recipe_name=''):
     possibility_to_like = True
     user_id = session['id']
     db = DatabaseConnector()
-    recipe_to_like = db.select_from_recipes_by_recipe_name(recipe_name)
+    recipe_to_like = db.select_from_recipes_by_recipe_name("\'" + recipe_name + "\'")
     recipe_to_like_id = recipe_to_like[0][0]
     current_likes_this_recipe = db.select_from_likes("\'" + str(recipe_to_like_id) + "\'")
     for like in current_likes_this_recipe:
