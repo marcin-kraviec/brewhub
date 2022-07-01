@@ -7,7 +7,8 @@ from brewhub.database_config import HOST, USER, PASSWORD, DATABASE
 class DatabaseConnector:
     # establishing connection to database
     try:
-        database = mysql.connector.connect(host=HOST, user=USER, password=PASSWORD, database=DATABASE, auth_plugin='mysql_native_password')
+        database = mysql.connector.connect(host=HOST, user=USER, password=PASSWORD, database=DATABASE,
+                                           auth_plugin='mysql_native_password')
 
         print('DUPA')
     except mysql.connector.Error as e:
@@ -60,20 +61,6 @@ class DatabaseConnector:
     @staticmethod
     def select_from_users(name, username, password):
         query = 'SELECT * FROM %s WHERE username=%s AND password=%s' % (name, username, password)
-        print(query)
-        try:
-            cursor = DatabaseConnector.database.cursor()
-            cursor.execute(query)
-            data = []
-            for element in cursor:
-                data.append(element)
-            return data
-        except (mysql.connector.Error, AttributeError) as e:
-            logging.error('Query has not been executed: ' + str(e))
-
-    @staticmethod
-    def select_all_users():
-        query = 'SELECT * FROM users'
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -335,30 +322,16 @@ class DatabaseConnector:
             logging.error('Query has not been executed: ' + str(e))
 
     @staticmethod
-    def select_all_likes():
-        query = 'SELECT * FROM likes'
+    def select_all(table):
+        query = 'SELECT * FROM %s' % table
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
             cursor.execute(query)
-            likes = []
+            data = []
             for element in cursor:
-                likes.append(element)
-            return likes
-        except (mysql.connector.Error, AttributeError) as e:
-            logging.error('Query has not been executed: ' + str(e))
-
-    @staticmethod
-    def select_all_comments():
-        query = 'SELECT * FROM comments'
-        print(query)
-        try:
-            cursor = DatabaseConnector.database.cursor()
-            cursor.execute(query)
-            comments = []
-            for element in cursor:
-                comments.append(element)
-            return comments
+                data.append(element)
+            return data
         except (mysql.connector.Error, AttributeError) as e:
             logging.error('Query has not been executed: ' + str(e))
 

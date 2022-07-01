@@ -261,11 +261,19 @@ def add_recipe():
 def show_recipes():
     db = DatabaseConnector()
     user_id = session['id']
+
+    # select all public recipes from database
     public_recipes = db.select_public_recipes_from_recipes()
+
+    # count amount of public recipes <- for pagination
     counter = len(public_recipes)
-    all_likes = db.select_all_likes()
-    all_comments = db.select_all_comments()
-    print(public_recipes)
+
+    # select all likes from database
+    all_likes = db.select_all('likes')
+
+    # select all comments from database
+    all_comments = db.select_all('comments')
+
     return render_template('public_recipes.html', public_recipes=public_recipes, user_id=user_id, counter=counter,
                            all_likes=all_likes, all_comments=all_comments)
 
@@ -274,31 +282,40 @@ def show_recipes():
 def show_user_recipes():
     db = DatabaseConnector()
     user_id = session['id']
+
+    # select user's recipes from database by user_id
     user_recipes = db.select_from_recipes("\'" + str(user_id) + "\'")
+
+    # count amount of user's recipes <- for pagination
     counter = len(user_recipes)
-    all_likes = db.select_all_likes()
-    all_comments = db.select_all_comments()
-    print(user_recipes)
+
+    # select all likes and comments from database
+    all_likes = db.select_all('likes')
+    all_comments = db.select_all('comments')
+
     return render_template('user_recipes.html', user_recipes=user_recipes, user_id=user_id, counter=counter,
                            all_likes=all_likes, all_comments=all_comments)
 
 
 @recipes.route('/user_recipes/<string:recipe_name>', methods=['GET', 'POST'])
 def user_recipe(recipe_name=''):
-    print(recipe_name)
     db = DatabaseConnector()
+
+    # select chosen recipe from database
     chosen_recipe = db.select_from_recipes_by_recipe_name(recipe_name)
-    likes_amount = len(db.select_from_likes(chosen_recipe[0][0]))
+    recipe_to_like_id = chosen_recipe[0][0]
+
+    # select amount of likes for chosen recipe
+    likes_amount = len(db.select_from_likes(recipe_to_like_id))
 
     # list of users who likes this recipe
-    recipe_to_like_id = chosen_recipe[0][0]
     current_likes_this_recipe = db.select_from_likes("\'" + str(recipe_to_like_id) + "\'")
     users_who_like = ''
     for i in range(len(current_likes_this_recipe)):
         users_who_like += (db.select_from_users_by_id("\'" + str(current_likes_this_recipe[i][1]) + "\'")[0][1]) + ',\n'
 
+    # select all comments and their authors for this recipe
     comments = db.select_from_comments("\'" + str(recipe_to_like_id) + "\'")
-
     users_who_comment_ids = []
     for comment in comments:
         users_who_comment_ids.append(comment[1])
@@ -310,11 +327,12 @@ def user_recipe(recipe_name=''):
         username = db.select_from_users_by_id(id)[0][1]
         users_who_comment_usernames.append(username)
 
+    # list of users who commented this recipe
     users_who_comment = ''
     for username in users_who_comment_usernames:
         users_who_comment += (str(username) + ", \n")
 
-    existing_users = db.select_all_users()
+    existing_users = db.select_all('users')
     existing_users_usernames = []
     for user in existing_users:
         existing_users_usernames.append(user[1])
