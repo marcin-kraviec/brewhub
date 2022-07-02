@@ -130,7 +130,7 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <select class="form-select" id="hop_usage" onchange="gravity()" onchange="hops_usage_choice()" name="hop_usage" required>
+                                <select class="form-select" id="hop_usage" onchange="hops_usage_choice(); gravity()" name="hop_usage" required>
                                     <option value="" disabled selected>Choose usage</option>
                                     <option>Boil</option>
                                     <option>Aroma</option>
@@ -355,12 +355,17 @@
     }
 
     function hops_usage_choice() {
-        var usage = document.getElementById("hop_usage");
-        usage = usage.options[usage.selectedIndex].text;
-        if (usage !== "Dry") {
-            document.getElementById("time_option").textContent = "min";
-        } else {
-            document.getElementById("time_option").textContent = "days";
+        var usages = document.getElementsByName("hop_usage");
+        var time_options = document.getElementsByName("time_option");
+        var l = usages.length;
+        var usages_text = []
+        for (let i=0; i < l; i++) {
+            usages_text.push(usages[i].options[usages[i].selectedIndex].text);
+            if (usages_text[i] !== "Dry") {
+                time_options[i].textContent = "min";
+            } else {
+                time_options[i].textContent = "days";
+            }
         }
     }
 

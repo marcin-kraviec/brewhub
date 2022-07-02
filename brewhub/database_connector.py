@@ -243,6 +243,32 @@ class DatabaseConnector:
             logging.error('Query has not been executed: ' + str(e))
 
     @staticmethod
+    def update_recipe(owner_id, name, style, type, visibility, date, batch_size, boiling_time, evaporation,
+                            boiling_losses, fermentation_losses, boil_size, wort_size, fermentables,
+                            fermentables_amounts,
+                            hops, hops_usages, hops_timings, hops_amounts, others, others_amounts, others_infos, yeast,
+                            primary_fermentation, secondary_fermentation, efficiency, temperature_stops, stops_timings,
+                            og, fg, ibu, srm, abv, notes, price, recipe_id):
+
+        query = """UPDATE recipes SET owner_id=%s, name=%s, style=%s, type=%s, visibility=%s, date=%s, batch_size=%s, boiling_time=%s, evaporation=%s, boiling_losses=%s,
+                            fermentation_losses=%s, boil_size=%s, wort_size=%s, fermentables=%s, fermentables_amounts=%s, hops=%s, hops_usages=%s,
+                            hops_timings=%s, hops_amounts=%s, others=%s, others_amounts=%s, others_infos=%s, yeast=%s, primary_fermentation=%s,
+                            secondary_fermentation=%s, efficiency=%s, temperature_stops=%s, stops_timings=%s, og=%s, fg=%s, ibu=%s, srm=%s, abv=%s, notes=%s, price=%s
+                            WHERE id=%s""" % \
+                (owner_id, name, style, type, visibility, date, batch_size, boiling_time, evaporation, boiling_losses,
+                 fermentation_losses, boil_size, wort_size, fermentables, fermentables_amounts, hops, hops_usages,
+                 hops_timings, hops_amounts, others, others_amounts, others_infos, yeast, primary_fermentation,
+                 secondary_fermentation, efficiency, temperature_stops, stops_timings, og, fg, ibu, srm, abv, notes,
+                 price, recipe_id)
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            DatabaseConnector.database.commit()
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
     def select_from_recipes(user_id):
         query = 'SELECT * FROM recipes WHERE owner_id=%s' % user_id
         print(query)
@@ -259,6 +285,20 @@ class DatabaseConnector:
     @staticmethod
     def select_from_recipes_by_recipe_name(recipe_name):
         query = 'SELECT * FROM recipes WHERE name=%s' % (recipe_name)
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            recipes = []
+            for element in cursor:
+                recipes.append(element)
+            return recipes
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def select_from_recipes_by_id(recipe_id):
+        query = 'SELECT * FROM recipes WHERE id=%s' % recipe_id
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()

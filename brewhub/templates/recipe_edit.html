@@ -1,5 +1,747 @@
 {% extends "base.html" %}
 
 {% block content %}
-edit recipe html
+    <div class="container">
+      <form method="post" onsubmit="$(this).find('input').prop('disabled', false)">
+        <h4>Recipe info</h4>
+        <div>
+            <div class="form-group" style="display: inline-block; width:500px">
+                <label><h6>Recipe name</h6></label>
+                <div class="input-group">
+                <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="recipe_name" class="form-control" id="recipe_name" placeholder="Enter recipe name" value="{{ recipe_params[2] }}" required>
+                </div>
+            </div>
+            <div class="form-group" style="display: inline-block; width:320px">
+                <label><h6>Recipe style</h6></label>
+                <select class="form-select" id="style" onchange="gravity()" name="recipe_style" required>
+                    <option selected>{{ recipe_params[3] }}</option>
+                    {% for style in styles %}
+                        <option>{{ style }}</option>
+                    {%  endfor %}
+                </select>
+            </div>
+            <div class="form-group" style="display: inline-block; width:230px">
+                <label><h6>Recipe type</h6></label>
+                <select class="form-select" id="exampleSelect2" name="recipe_type" required>
+                    <option selected>{{ recipe_params[4] }}</option>
+                    <option>All grain</option>
+                    <option>Partial mash</option>
+                    <option>Extract</option>
+                </select>
+            </div>
+            <div class="form-group" style="display: inline-block; width:230px">
+                <label><h6>Visibility</h6></label>
+                <select class="form-select" id="exampleSelect2" name="visibility" required>
+                    <option selected>{{ recipe_params[5] }}</option>
+                    <option>Public</option>
+                    <option>Private</option>
+                </select>
+            </div>
+        </div>
+        <hr class="my-4">
+        <h4>Batch info</h4>
+        <div>
+            <div class="form-group">
+                <label><h6>Batch size</h6></label>
+                <div class="input-group mb-3" style="width:320px">
+                    <input type="number" pattern="^[a-zA-Z\s]+[a-zA-Z]$" class="form-control" onchange="gravity()" name="batch_size" id="batch_size" min="5" max="100" value="{{ recipe_params[7] }}" required>
+                    <span class="input-group-text">L</span>
+                </div>
+            </div>
+            <div>
+                <div class="form-group" style="display: inline-block">
+                    <label><h6>Boiling time</h6></label>
+                    <div class="input-group mb-3" style="width:320px">
+                        <input type="number" class="form-control" onchange="gravity()" name="boiling_time" id="boiling_time" min="0" max="200" value="{{ recipe_params[8] }}" required>
+                        <span class="input-group-text">min</span>
+                    </div>
+                </div>
+                <div class="form-group" style="display: inline-block">
+                    <label><h6>Evaporation</h6></label>
+                    <div class="input-group mb-3" style="width:320px">
+                        <input type="number" class="form-control"  onchange="gravity()" name="evaporation" id="evaporation" min="0" max="100" value="{{ recipe_params[9] }}" required>
+                        <span class="input-group-text">%/h</span>
+                    </div>
+                </div>
+                <div class="form-group" style="display: inline-block">
+                    <label><h6>Boiling losses</h6></label>
+                    <div class="input-group mb-3" style="width:320px">
+                        <input type="number" class="form-control" onchange="gravity()" name="boiling_losses" id="boiling_losses" min="0" max="100" value="{{ recipe_params[10] }}" required>
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="form-group" style="display: inline-block">
+                    <label><h6>Fermentation losses</h6></label>
+                    <div class="input-group mb-3" style="width:320px">
+                        <input type="number" class="form-control" onchange="gravity()" name="fermentation_losses" id="fermentation_losses" min="0" max="100" value="{{ recipe_params[11] }}" required>
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-warning" onclick="calculate_size()">Calculate</button>
+        </div>
+
+        <hr class="my-4">
+        <p style="display: inline-block">Boil size: </p><input type="text" class="form-control" name="boil_size" id="boil_size" value=" - " style="display: inline-block; width: auto; background: white" readonly><br/>
+        <p style="display: inline-block">Wort size: </p><input type="text" class="form-control" name="wort_size" id="wort_size" value=" - " style="display: inline-block; width: auto; background: white" readonly>
+        <hr class="my-4">
+        <h4>Fermentables</h4>
+        {% set fermentables_list = recipe_params[14].split(",") %}
+        {% set fermentables_amounts_list = recipe_params[15].split(",") %}
+            <table class="table table-hover" id="fermentablesTable" name="fermentablesTable">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 800px">Ingredient</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for f in range(fermentables_list|length) %}
+                    <tr class="table-secondary">
+                        <th scope="row">
+                            <select class="form-select" id="fermentable" onchange="gravity()" name="fermentable" required>
+                                <option selected>{{ fermentables_list[f] }}</option>
+                                {% for fermentable in fermentables_for_combobox %}
+                                <option>{{ fermentable }}</option>
+                                {%  endfor %}
+                            </select>
+                        </th>
+                        <td>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" onchange="gravity()" id="fermentable_amount" name="fermentable_amount" min="0" max="30" value="{{ fermentables_amounts_list[f] }}" required>
+                                <span class="input-group-text">kg</span>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-warning" onclick="add_row_fermentables()" style="width: 150px">Add row</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('fermentablesTable')" style="width: 150px">Delete row</button>
+            <button type="button" class="btn btn-danger" onclick="control_fermentables()" style="width: 150px">control</button>
+        <hr class="my-4">
+        <h4>Hops</h4>
+        {% set hops_list = recipe_params[16].split(",") %}
+        {% set hops_usages_list = recipe_params[17].split(",") %}
+        {% set hops_timings_list = recipe_params[18].split(",") %}
+        {% set hops_amounts_list = recipe_params[19].split(",") %}
+            <table class="table table-hover" id="hopTable">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 450px">Hop</th>
+                        <th scope="col" style="width: 250px">Usage</th>
+                        <th scope="col" style="width: 300px">Time</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for h in range(hops_list|length) %}
+                    <tr class="table-secondary">
+                        <th scope="row">
+                            <select class="form-select" id="exampleSelect1" id="hop" onchange="gravity()" name="hop" required>
+                                <option selected>{{ hops_list[h] }}</option>
+                                {% for hop in hops_for_combobox %}
+                                <option>{{ hop }}</option>
+                                {%  endfor %}
+                            </select>
+                        </th>
+                        <td>
+                            <div class="input-group mb-3">
+                                <select class="form-select" id="hop_usage" onchange="hops_usage_choice(); gravity()" name="hop_usage" required>
+                                    <option selected>{{ hops_usages_list[h] }}</option>
+                                    <option>Boil</option>
+                                    <option>Aroma</option>
+                                    <option>Dry</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" onchange="gravity()" id="hop_time" name="hop_time" min="0" max="200" value="{{ hops_timings_list[h] }}" required>
+                                <div class="input-group-text" id="time_option" name="time_option" required> - </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" onchange="gravity()" name="hop_amount" min="0" max="1000" value="{{ hops_amounts_list[h] }}" required>
+                                <span class="input-group-text">g</span>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-warning" onclick="add_row_hops()" style="width: 150px">Add row</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('hopTable')" style="width: 150px">Delete row</button>
+        <hr class="my-4">
+        <h4>Others</h4>
+        {% set others_list = recipe_params[20].split(",") %}
+        {% set others_amounts_list = recipe_params[21].split(",") %}
+        {% set others_infos_list = recipe_params[22].split(",") %}
+            <table class="table table-hover" id="othersTable">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 450px">Ingredient</th>
+                        <th scope="col" style="width: 280px">Amount</th>
+                        <th scope="col">Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for o in range(others_list|length) %}
+                    <tr class="table-secondary">
+                        <th scope="row">
+                            <select class="form-select" id="exampleSelect1" onchange="gravity()" name="other" required>
+                                <option selected>{{ others_list[o] }}</option>
+                                {% for other in others_for_combobox %}
+                                <option>{{ other }}</option>
+                                {%  endfor %}
+                            </select>
+                        </th>
+                        <td>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" onchange="gravity()" name="other_amount" min="0" max="5000" value="{{ others_amounts_list[o] }}" required>
+                                <span class="input-group-text">g</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" class="form-control" name="other_info" value="{{ others_infos_list[o] }}">
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-warning" onclick="add_row_others()" style="width: 150px">Add row</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('othersTable')" style="width: 150px">Delete row</button>
+        <hr class="my-4">
+        <h4>Fermentation</h4>
+        <div>
+            <div class="form-group" style="display: inline-block">
+                <label><h6>Yeast</h6></label>
+                <div class="input-group mb-3" style="width:500px">
+                    <select class="form-select" id="yeast" onchange="gravity()" name="yeast" required>
+                        <option selected>{{ recipe_params[23] }}</option>
+                        {% for yeast in yeasts_for_combobox %}
+                         <option>{{ yeast }}</option>
+                        {%  endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" style="display: inline-block">
+                <label><h6>Primary fermentation time</h6></label>
+                <div class="input-group mb-3" style="width:390px">
+                    <input type="number" class="form-control" name="primary_fermentation" min="0" max="30" value="{{ recipe_params[24] }}" required>
+                    <span class="input-group-text">days</span>
+                </div>
+            </div>
+            <div class="form-group" style="display: inline-block">
+                <label><h6>Secondary fermentation time</h6></label>
+                <div class="input-group mb-3" style="width:390px">
+                    <input type="number" class="form-control" name="secondary_fermentation" min="0" max="30" value="{{ recipe_params[25] }}" required>
+                    <span class="input-group-text">days</span>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <h4>Mash</h4>
+            <div class="form-group">
+                <label><h6>Ecpected efficiency</h6></label>
+                <div class="input-group mb-3" style="width:320px">
+                    <input type="number" class="form-control" onchange="gravity()" id="efficiency" name="efficiency" min="0" max="100" value="{{ recipe_params[26] }}" required>
+                    <span class="input-group-text">%</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3" style="width:320px">
+                    <input type="text" class="form-control" placeholder="Enter water/grain ratio" name="water_grain_ratio">
+                    <span class="input-group-text">L/kg</span>
+                </div>
+            </div>
+            {% set mash_temperature_list = recipe_params[27].split(",") %}
+            {% set mash_temperature_times_list = recipe_params[28].split(",") %}
+            <table class="table table-hover" id="mashTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Temperature</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in range(mash_temperature_list|length) %}
+                    <tr class="table-secondary">
+                        <th scope="row">
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" name="mash_temperature" min="0" max="100" value="{{ mash_temperature_list[t] }}" required>
+                                <span class="input-group-text">°C</span>
+                            </div>
+                        </th>
+                        <td>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" name="mash_time" min="0" max="200" value="{{ mash_temperature_times_list[t] }}" required>
+                                <span class="input-group-text">min</span>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-warning" onclick="add_row_mash()" style="width: 150px">Add step</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('mashTable')" style="width: 150px">Delete row</button>
+
+        <hr class="my-4">
+        <h4>Details</h4>
+        <div>
+            <div>
+                <span>Original gravity: <input class="form-control" name="OGvalue" id="OGvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
+                <span id="OGspan" style="float: right;">1.020 - 1.030</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="OG" role="progressbar" style="width: 0%;"></div>
+            </div>
+            <br>
+            <div>
+                <span>Final gravity: <input class="form-control" name="FGvalue" id="FGvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
+                <span id="FGspan" style="float: right;">1.005 - 1.010 </span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="FG" role="progressbar" style="width: 0%;"></div>
+            </div>
+            <br>
+            <div>
+                <span>IBU: <input class="form-control" name="IBUvalue" id="IBUvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
+                <span id="IBUspan" style="float: right;">20 - 30 </span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="IBU" role="progressbar" style="width: 0%;"></div>
+            </div>
+            <br>
+            <div>
+                <span>SRM: <input class="form-control" name="SRMvalue" id="SRMvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
+                <span id="SRMspan" style="float: right;">10 - 15</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="SRM" role="progressbar" style="width: 0%;"></div>
+            </div>
+            <br>
+            <div>
+                <span>ABV: <input class="form-control" name="ABVvalue" id="ABVvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
+                <span id="ABVspan" style="float: right;">4 - 5</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="ABV" role="progressbar" style="width: 0%;"></div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <h4>Notes</h4>
+        <div class="form-group">
+             <textarea class="form-control" id="exampleTextarea" rows="5" name="notes">{{ recipe_params[34] }}</textarea>
+        </div>
+      <br>
+      <button type="submit" class="btn btn-primary" href="{{ url_for('recipes.show_user_recipes') }}" style="width: 100%" name="submit" value="submit">Save recipe</button>
+      </form>
+    </div>
+
+    <script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+      gravity();
+      hops_usage_choice();
+    });
+
+    function add_row(tableID){
+        var table=document.getElementById(tableID)
+            var cl = table.tBodies[0].rows[0].cloneNode(true)
+            table.tBodies[0].appendChild( cl )
+    }
+
+    function add_row_fermentables(){
+        var table=document.getElementById('fermentablesTable')
+            var new_row = '<tr class="table-secondary">' +
+                            '<th scope="row">' +
+                                '<select class="form-select" id="fermentable" onchange="gravity()" name="fermentable" required>' +
+                                    '<option value="" disabled selected>Choose ingredient</option>' +
+                                    '{% for fermentable in fermentables_for_combobox %}' +
+                                    '<option>{{ fermentable }}</option>' +
+                                    '{%  endfor %}' +
+                                '</select>' +
+                            '</th>' +
+                            '<td>' +
+                                '<div class="input-group mb-3">' +
+                                    '<input type="number" class="form-control" placeholder="Enter amount" onchange="gravity()" id="fermentable_amount" name="fermentable_amount" min="0" max="30" required>' +
+                                    '<span class="input-group-text">kg</span>' +
+                                '</div>' +
+                            '</td>' +
+                        '</tr>';
+            table.tBodies[0].innerHTML += ( new_row )
+    }
+
+    function add_row_hops(){
+        var table=document.getElementById('hopTable')
+            var new_row = '<tr class="table-secondary">' +
+                        '<th scope="row">' +
+                            '<select class="form-select" id="exampleSelect1" id="hop" onchange="gravity()" name="hop" required>' +
+                                '<option value="" disabled selected>Choose hop</option>' +
+                                '{% for hop in hops_for_combobox %}' +
+                                '<option>{{ hop }}</option>' +
+                                '{%  endfor %}' +
+                            '</select>' +
+                        '</th>' +
+                        '<td>' +
+                            '<div class="input-group mb-3">' +
+                                '<select class="form-select" id="hop_usage" onchange="hops_usage_choice(); gravity()" name="hop_usage" required>' +
+                                    '<option value="" disabled selected>Choose usage</option>' +
+                                    '<option>Boil</option>' +
+                                    '<option>Aroma</option>' +
+                                    '<option>Dry</option>' +
+                                '</select>' +
+                            '</div>' +
+                        '</td>' +
+                        '<td>' +
+                            '<div class="input-group mb-3">' +
+                                '<input type="number" class="form-control" placeholder="Enter time" onchange="gravity()" id="hop_time" name="hop_time" min="0" max="200" required>' +
+                                '<div class="input-group-text" id="time_option" name="time_option" required> - </div>' +
+                            '</div>' +
+                        '</td>' +
+                        '<td>' +
+                            '<div class="input-group mb-3">' +
+                                '<input type="number" class="form-control" placeholder="Enter amount" onchange="gravity()" name="hop_amount" min="0" max="1000" required>' +
+                                '<span class="input-group-text">g</span>' +
+                            '</div>' +
+                        '</td>' +
+                    '</tr>'
+            table.tBodies[0].innerHTML += ( new_row )
+    }
+
+    function add_row_others(){
+        var table=document.getElementById('othersTable')
+            var new_row = '<tr class="table-secondary">' +
+                        '<th scope="row">' +
+                            '<select class="form-select" id="exampleSelect1" onchange="gravity()" name="other" required>' +
+                                '<option value="" disabled selected>Choose ingredient</option>' +
+                                '{% for other in others_for_combobox %}' +
+                                '<option>{{ other }}</option>' +
+                                '{%  endfor %}' +
+                            '</select>' +
+                        '</th>' +
+                        '<td>' +
+                            '<div class="input-group mb-3">' +
+                                '<input type="number" class="form-control" placeholder="Enter amount" onchange="gravity()" name="other_amount" min="0" max="5000" required>' +
+                                '<span class="input-group-text">g</span>' +
+                            '</div>' +
+                        '</td>' +
+                        '<td>' +
+                            '<div class="input-group">' +
+                                '<input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" class="form-control" name="other_info">' +
+                            '</div>' +
+                        '</td>' +
+                    '</tr>'
+            table.tBodies[0].innerHTML += ( new_row )
+    }
+
+    function add_row_mash(){
+        var table=document.getElementById('mashTable')
+            var new_row = '<tr class="table-secondary">' +
+                        '<th scope="row">' +
+                            '<div class="input-group mb-3">' +
+                                '<input type="number" class="form-control" placeholder="Enter Temperature" name="mash_temperature" min="0" max="100" required>' +
+                                '<span class="input-group-text">°C</span>' +
+                            '</div>' +
+                        '</th>' +
+                        '<td>' +
+                            '<div class="input-group mb-3">' +
+                                '<input type="number" class="form-control" placeholder="Enter time" name="mash_time" min="0" max="200" required>' +
+                                '<span class="input-group-text">min</span>' +
+                            '</div>' +
+                        '</td>' +
+                    '</tr>'
+            table.tBodies[0].innerHTML += ( new_row )
+    }
+
+    function delete_row(tableID){
+        var table=document.getElementById(tableID)
+            table.tBodies[0].rows[1].remove()
+    }
+
+    function calculate_size(){
+        var batch_size = document.getElementById('batch_size').value
+        var boiling_time = document.getElementById('boiling_time').value
+        var evaporation = document.getElementById('evaporation').value
+        var boiling_losses = document.getElementById('boiling_losses').value
+        var fermentation_losses = document.getElementById('fermentation_losses').value
+
+        boiling_time = boiling_time / 60
+        boiling_losses = boiling_losses / 100
+        fermentation_losses = fermentation_losses / 100
+        evaporation = evaporation / 100
+
+        var boil_size = 0;
+        var wort_size = 0;
+
+        if (batch_size !== '') {
+            wort_size = parseFloat(batch_size) + parseFloat(batch_size) * parseFloat(fermentation_losses);
+            boil_size = wort_size + (wort_size * parseFloat(boiling_losses));
+            boil_size = boil_size + (boil_size * (parseFloat(boiling_time) * parseFloat(evaporation)));
+
+            var boil_size_field = document.getElementById('boil_size');
+            var wort_size_field = document.getElementById('wort_size');
+
+            boil_size_field.value = Math.round(boil_size)
+            wort_size_field.value = Math.round(wort_size)
+        }
+        return wort_size;
+    }
+
+    function hops_usage_choice() {
+        var usages = document.getElementsByName("hop_usage");
+        var time_options = document.getElementsByName("time_option");
+        var l = usages.length;
+        var usages_text = []
+        for (let i=0; i < l; i++) {
+            usages_text.push(usages[i].options[usages[i].selectedIndex].text);
+            if (usages_text[i] !== "Dry") {
+                time_options[i].textContent = "min";
+            } else {
+                time_options[i].textContent = "days";
+            }
+        }
+    }
+
+    function gravity() {
+        var flaskData = JSON.parse('{{data | tojson | safe}}');
+
+        {# attenuation is ready #}
+        var yeast = document.getElementById("yeast");
+        yeast = yeast.options[yeast.selectedIndex].text;
+        var yeasts_names = flaskData.yeasts_names;
+        var yeasts = flaskData.yeasts;
+        var index = yeasts_names.indexOf(yeast)
+        var attenuation = 0;
+        if (yeast === "Choose yeast") {
+            attenuation = 0
+        } else {
+            attenuation = yeasts[index][1]
+        }
+        {#console.log(attenuation)#}
+
+        {# efficiency is ready #}
+        var efficiency = 0;
+        if (document.getElementById("efficiency").value === '') {
+            efficiency = 0;
+        } else {
+            efficiency = document.getElementById("efficiency").value;
+        }
+        efficiency = parseInt(efficiency);
+        {#console.log(efficiency);#}
+
+        {# amounts is ready #}
+        var fermentable_amount = document.getElementsByName("fermentable_amount");
+        var fermentable_amounts = [];
+        fermentable_amount.forEach( function (a) {
+            a = a.value;
+            if (a === '') {
+                a = 0;
+            }
+            fermentable_amounts.push(parseInt(a));
+        });
+        {#console.log(fermentable_amounts)#}
+
+        {# volume is ready #}
+        var volume = calculate_size()
+        {#console.log(volume)#}
+
+        {# gravity_contributions is ready #}
+        var fermentable = document.getElementsByName("fermentable");
+        var gravity_contributions = []
+        var srms = []
+        var fermentables_names = flaskData.fermentables_names;
+        var fermentables = flaskData.fermentables;
+        var index = fermentables_names.indexOf(fermentable)
+        fermentable.forEach(function (f) {
+            f = f.options[f.selectedIndex].text;
+            var index = fermentables_names.indexOf(f)
+
+            if (f === "Choose ingredient") {
+                gravity_contributions.push(0)
+                srms.push(0)
+            } else {
+                gravity_contributions.push(fermentables[index][2]);
+                srms.push(fermentables[index][1]);
+            }
+        });
+        {#console.log(gravity_contributions)#}
+
+        var gravity_points = [];
+        gravity_contributions.forEach( function (g) {
+            g = g * 1000 - 1000;
+            gravity_points.push(g);
+        })
+        {#console.log(gravity_points)#}
+
+        var points_sum = 0;
+        var n = gravity_points.length;
+
+        for (let i = 0; i < n; i++) {
+            points_sum += gravity_points[i] * fermentable_amounts[i] * 2.2;
+        }
+
+        var og = 0;
+        var fg = 0;
+
+        if (volume !== 0) {
+            var total = Math.round((points_sum * efficiency * 0.01) / (volume / 3.78)) / 1000;
+            {# og is ready #}
+            og = total + 1;
+            {# fg is ready #}
+            fg = (Math.round((og * 1000 - 1000) - 0.01 * attenuation * (og * 1000 - 1000)) / 1000) + 1;
+        }
+
+
+        console.log(og);
+        console.log(fg);
+
+        {# abv is ready #}
+        var abv = Math.round((og - fg) * 131.25 * 10) / 10;
+        {#console.log(abv);#}
+
+        var mcu = 0;
+        var srm = 0;
+
+        if (volume !== 0) {
+            for (let i = 0; i < n; i++) {
+                mcu += fermentable_amounts[i] * srms[i] * 2.2 / (volume / 3.78);
+            }
+            {# srm is ready #}
+            srm = Math.round(1.4922 * (mcu ** 0.6859) * 10) / 10;
+            {#console.log(srm);#}
+        }
+
+        {# ibu #}
+        var usages = [];
+        var usage = document.getElementsByName("hop_usage");
+        usage.forEach( function (u) {
+            u = u.options[u.selectedIndex].text;
+            if (u === "Boil") {
+                usages.push(u);
+            }
+        });
+
+
+        var alpha_acids = [];
+        var hops_names = flaskData.hops_names;
+        var hops = flaskData.hops;
+        var hop = document.getElementsByName("hop");
+        hop.forEach(function (h) {
+            h = h.options[h.selectedIndex].text;
+            var index = hops_names.indexOf(h);
+            if (h === "Choose hop") {
+                alpha_acids.push(0);
+            } else {
+                alpha_acids.push(hops[index][1]);
+            }
+        });
+        var hop_time = document.getElementsByName("hop_time");
+        var times = [];
+        hop_time.forEach( function (t) {
+            t = parseInt(t.value);
+            times.push(t);
+        });
+
+        var hop_amount = document.getElementsByName("hop_amount");
+        var hop_amounts = [];
+        hop_amount.forEach( function (ha) {
+            ha = parseInt(ha.value);
+            hop_amounts.push(ha);
+        });
+
+        var l = alpha_acids.length;
+        var utilization = 0;
+        var ibu = 0;
+
+        if (volume !== 0) {
+            for (let i = 0; i < l; i++) {
+                utilization = ((1 - Math.exp(-0.04 * times[i])) / 4.15) * (1.65 * Math.pow(0.000125, (og - 1.0)));
+                ibu += utilization * (0.01 * alpha_acids[i] * hop_amounts[i] / 0.035274 * 0.7489 / (volume / 3.78));
+            }
+        }
+        ibu = Math.round(ibu * 10) / 10;
+
+        {#console.log(alpha_acids);#}
+        {#console.log(times);#}
+        {#console.log(hop_amounts);#}
+
+
+        {#console.log(ibu);#}
+
+        {# calculate percentage values #}
+
+        var style_data = JSON.parse('{{style_data | tojson | safe}}');
+        var chosen_style = document.getElementById("style");
+        chosen_style = chosen_style.options[chosen_style.selectedIndex].text;
+
+
+        console.log(chosen_style);
+
+        {#console.log(Object.keys(style_data));#}
+        {#console.log(Object.keys(Object.values(style_data)[0]))#}
+        {#console.log(Object.values(Object.values(style_data)[0]))#}
+        {#console.log(Object.values(Object.values(style_data)[0])[1][0])#}
+
+        var min_abv = Object.values(Object.values(style_data)[0])[0][0];
+        var max_abv = Object.values(Object.values(style_data)[0])[0][1];
+
+        var min_fg = Object.values(Object.values(style_data)[0])[1][0];
+        var max_fg = Object.values(Object.values(style_data)[0])[1][1];
+
+        var min_ibu = Object.values(Object.values(style_data)[0])[2][0];
+        var max_ibu = Object.values(Object.values(style_data)[0])[2][1];
+
+        var min_og = Object.values(Object.values(style_data)[0])[3][0];
+        var max_og = Object.values(Object.values(style_data)[0])[3][1];
+
+        var min_srm = Object.values(Object.values(style_data)[0])[4][0];
+        var max_srm = Object.values(Object.values(style_data)[0])[4][1];
+
+
+        document.getElementById("OGspan").textContent = (min_og).toString() + ' - ' + (max_og).toString();
+        document.getElementById("FGspan").textContent = (min_fg).toString() + ' - ' + (max_fg).toString();
+        document.getElementById("IBUspan").textContent = (min_ibu).toString() + ' - ' + (max_ibu).toString();
+        document.getElementById("SRMspan").textContent = (min_srm).toString() + ' - ' + (max_srm).toString();
+        document.getElementById("ABVspan").textContent = (min_abv).toString() + ' - ' + (max_abv).toString();
+
+        document.getElementById("OG").style.width = (((og - min_og) / (max_og - min_og)) * 100).toString()+'%';
+        document.getElementById("FG").style.width = (((fg - min_fg) / (max_fg - min_fg)) * 100).toString()+'%';
+        document.getElementById("IBU").style.width = (((ibu - min_ibu) / (max_ibu - min_ibu)) * 100).toString()+'%';
+        document.getElementById("SRM").style.width = (((srm - min_srm) / (max_srm - min_srm)) * 100).toString()+'%';
+        document.getElementById("ABV").style.width = (((abv - min_abv) / (max_abv - min_abv)) * 100).toString()+'%';
+
+        document.getElementById("OGvalue").value = og.toString();
+        document.getElementById("FGvalue").value = fg.toString();
+        document.getElementById("IBUvalue").value = ibu.toString();
+        document.getElementById("SRMvalue").value = srm.toString();
+        document.getElementById("ABVvalue").value = abv.toString();
+
+        if (og < min_og || og > max_og) {
+            document.getElementById("OGvalue").style.color = "red";
+        }
+        if (fg < min_fg || fg > max_fg) {
+            document.getElementById("FGvalue").style.color = "red";
+        }
+        if (ibu < min_ibu || ibu > max_ibu) {
+            document.getElementById("IBUvalue").style.color = "red";
+        }
+        if (srm < min_srm || srm > max_srm) {
+            document.getElementById("SRMvalue").style.color = "red";
+        }
+        if (abv < min_abv || abv > max_abv) {
+            document.getElementById("ABVvalue").style.color = "red";
+        }
+
+    }
+
+    function control_fermentables() {}
+
+    </script>
+
+
 {% endblock %}
