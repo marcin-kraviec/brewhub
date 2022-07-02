@@ -1252,7 +1252,6 @@ Aroma: Low to moderate</p>
         </div>
         {% endif %}
 
-
         {% if checks['saison'] %}
         <div class="card" style="display: inline-block; width: 900px;" >
           <div class="card-body">
@@ -1418,8 +1417,247 @@ Aroma: Low to moderate</p>
         </div>
         {% endif %}
 
+        {% if checks['sahti'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Sahti</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 27A</h6>
+            <p class="card-text">A sweet, heavy, strong traditional Finnish farmhouse beer usually with rye and juniper, and a banana-clove yeast character.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Sahti') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
 
+        {% if checks['brett_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Brett Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 28A</h6>
+            <p class="card-text">Most often drier and fruitier than the base style suggests. Fruity or funky notes range from low to high, depending on the age of the beer and strains of Brett used. May possess a light non-lactic acidity.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Brett Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
 
+        {% if checks['mixed_fermentation_sour_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Mixed-Fermentation Sour Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 28B</h6>
+            <p class="card-text">A sour and funky version of a base style of beer.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Mixed-Fermentation Sour Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['wild_specialty_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Wild Specialty Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 28C</h6>
+            <p class="card-text">An American Wild Ale with fruit, herbs, spices, or other Specialty-Type Ingredients.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Wild Specialty Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['straight_sour_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Straight Sour Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 28D</h6>
+            <p class="card-text">A pale, refreshing, sour beer with a clean lactic sourness. A gentle, pale malt flavor supports the lemony sourness with moderate fruity esters.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Straight Sour Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['fruit_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Fruit Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 29A</h6>
+            <p class="card-text">A pleasant integration of fruit with beer, but still recognizable as beer. The fruit character should be evident but in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Fruit Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['fruit_and_spice_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Fruit and Spice Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 29B</h6>
+            <p class="card-text">A tasteful union of fruit, spice, and beer, but still recognizable as beer. The fruit and spice character should each be evident but in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Fruit and Spice Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['specialty_fruit_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Specialty Fruit Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 29C</h6>
+            <p class="card-text">A appealing combination of fruit, sugar, and beer, but still recognizable as a beer. The fruit and sugar character should both be evident but in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Specialty Fruit Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['grape_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Grape Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 29D</h6>
+            <p class="card-text">Combines the profile of a sparkling wine and a relatively neutral base beer allowing the aromatic qualities of the grape to blend pleasantly with hop and yeast aromatics. Can be in a range from refreshing to complex.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Grape Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['spice_herb_or_vegetable_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Spice, Herb, or Vegetable Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 30A</h6>
+            <p class="card-text">An appealing fusion of spices, herbs, or vegetables (SHVs) and beer, but still recognizable as beer. The SHV character should be evident but in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Spice, Herb, or Vegetable Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['autumn_seasonal_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Autumn Seasonal Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 30B</h6>
+            <p class="card-text">A malty, spiced beer that often has a moderately rich body and slightly warming finish suggesting a good accompaniment for the cool fall season, and often evocative of harvest or Thanksgiving traditions.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Autumn Seasonal Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['winter_seasonal_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Winter Seasonal Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 30C</h6>
+            <p class="card-text">A stronger, darker, spiced beer that often has a rich body and warming finish suggesting a good accompaniment for the cold winter season.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Winter Seasonal Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['specialty_spice_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Specialty Spice Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 30D</h6>
+            <p class="card-text">An appealing combination of spices, herbs, or vegetables (SHVs), sugars, and beer, but still recognizable as beer. The SHV and sugar character should both be evident but in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Specialty Spice Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['alternative_grain_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Alternative Grain Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 31A</h6>
+            <p class="card-text">A base beer enhanced by or featuring the character of additional grains. The specific character depends greatly on the added grains.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Alternative Grain Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['alternative_sugar_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Alternative Sugar Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 31B</h6>
+            <p class="card-text">A tasteful integration of sugar and beer, but still recognizable as beer. The sugar character should both be evident and in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Alternative Sugar Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['classic_style_smoked_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Classic Style Smoked Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 32A</h6>
+            <p class="card-text">A well-balanced fusion of the malt and hops of the base beer style with a pleasant and agreeable smoke character.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Classic Style Smoked Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['specialty_smoked_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Specialty Smoked Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 32B</h6>
+            <p class="card-text">A well-balanced fusion of the malt and hops of the base specialty beer style with a pleasant and agreeable smoke character.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Specialty Smoked Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['wood_aged_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Wood-Aged Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 33A</h6>
+            <p class="card-text">A pleasant enhancement of the base beer style with the characteristics from aging in contact with wood. The best examples will be smooth, flavorful, well-balanced, and well-aged.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Wood-Aged Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['specialty_wood_aged_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Specialty Wood-Aged Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 33B</h6>
+            <p class="card-text">An elevation of the base beer style with characteristics from aging in contact with wood, including alcoholic products previously in contact with the wood. The best examples will be smooth, flavorful, well-balanced, and well-aged.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Specialty Wood-Aged Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['commercial_specialty_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Commercial Specialty Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 34A</h6>
+            <p class="card-text">Based on declared beer.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Commercial Specialty Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['mixed_style_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Mixed-Style Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 34B</h6>
+            <p class="card-text">Based on the declared Base Styles, methods, and ingredients. As with all Specialty-Type Beers, the resulting combination of beer styles needs to be harmonious and balanced, and be pleasant to drink.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Mixed-Style Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['experimental_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Experimental Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 34C</h6>
+            <p class="card-text">Varies, but should be a unique experience.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Experimental Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
 
 
         <br/><br/>
