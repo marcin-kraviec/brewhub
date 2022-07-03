@@ -172,10 +172,10 @@
         </div>
     </div>
     <br/>
-    <button class="btn btn-primary" id="share_button" style="width: 100%">Share this recipe</button>
+    <button class="btn btn-primary" id="share_button" style="width: 100%; border: 2px solid white">Share this recipe</button>
     <br/>
-    <br/>
-    <a class="btn btn-primary" href="{{ url_for('recipes.edit_recipe_get', recipe_id=chosen_recipe[0]) }}" id="edit_button" style="width: 100%">Edit recipe</a>
+    <a class="btn btn-primary" href="{{ url_for('recipes.edit_recipe_get', recipe_id=chosen_recipe[0]) }}" id="edit_button" style="width: 100%; border: 2px solid white">Edit recipe</a>
+    <a class="btn btn-danger" href="{{ url_for('recipes.delete_recipe', recipe_id=chosen_recipe[0]) }}" id="edit_button" style="width: 100%; border: 2px solid white">Delete recipe</a>
 
         <!-- The Modal -->
     <div id="myModal" class="modal">

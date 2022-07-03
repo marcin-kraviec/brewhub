@@ -39,7 +39,8 @@ class MailService:
         file_loader = FileSystemLoader('brewhub/templates')
         env = Environment(loader=file_loader)
         template = env.get_template('email_message.html')
-        output = template.render(email=email, username=username, owner=owner, recipe_name=recipe_name, recipe_id=recipe_id)
+        output = template.render(email=email, username=username, owner=owner, recipe_name=recipe_name,
+                                 recipe_id=recipe_id)
         msg.add_alternative(output, subtype='html')
         self.smtpObj.send_message(msg)
 
@@ -195,9 +196,6 @@ def add_recipe():
         efficiency = request.form['efficiency']
         print(efficiency)
 
-        water_grain_ratio = request.form['water_grain_ratio']
-        print(water_grain_ratio)
-
         temperature_stops = request.form.getlist('mash_temperature')
         temperature_stops = ",".join(temperature_stops)
         print(temperature_stops)
@@ -230,7 +228,7 @@ def add_recipe():
         print(abv)
 
         # temporary
-        price = request.form['estimatedPrice']
+        price = 10
         print(price)
 
         # add recipe in database
@@ -480,6 +478,17 @@ def edit_recipe_post(recipe_id):
         flash('Recipe has been updated successfully')
 
     return redirect(url_for('recipes.edit_recipe_get', recipe_id=recipe_id))
+
+
+@recipes.route('/user_recipes/<int:recipe_id>/delete')
+def delete_recipe(recipe_id):
+    db = DatabaseConnector()
+    try:
+        db.delete_from_recipes("\'" + str(recipe_id) + "\'")
+        flash("Recipe has been deleted")
+    except Exception:
+        flash("Error, your recipe cannot be deleted now")
+    return redirect(url_for('recipes.show_user_recipes'))
 
 
 @recipes.route('/public_recipes', methods=['GET'])

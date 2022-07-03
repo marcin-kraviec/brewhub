@@ -411,3 +411,14 @@ class DatabaseConnector:
             DatabaseConnector.database.commit()
         except (mysql.connector.Error, AttributeError) as e:
             logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def delete_from_recipes(recipe_id):
+        query = 'DELETE FROM recipes WHERE id=%s' % recipe_id
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            DatabaseConnector.database.commit()
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
