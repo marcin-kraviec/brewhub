@@ -175,16 +175,16 @@
     <button class="btn btn-primary" id="share_button" style="width: 100%; border: 2px solid white">Share this recipe</button>
     <br/>
     <a class="btn btn-primary" href="{{ url_for('recipes.edit_recipe_get', recipe_id=chosen_recipe[0]) }}" id="edit_button" style="width: 100%; border: 2px solid white">Edit recipe</a>
-    <a class="btn btn-danger" href="{{ url_for('recipes.delete_recipe', recipe_id=chosen_recipe[0]) }}" id="edit_button" style="width: 100%; border: 2px solid white">Delete recipe</a>
+    <button class="btn btn-danger" id="delete_button" style="width: 100%; border: 2px solid white">Delete recipe</button>
 
         <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <div id="shareModal" class="modal">
 
       <!-- Modal content -->
       <div class="modal-content">
         <div class="modal-header">
             <h2>Sharing the recipe</h2>
-            <button class="close">&times;</button>
+            <button class="shareClose" style="border: none;">&times;</button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
@@ -201,6 +201,28 @@
 
     </div>
 
+            <!-- The Modal -->
+    <div id="deleteModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h2>Deleting the recipe</h2>
+            <button class="deleteClose" style="border: none;">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+              <h5>Are you sure you want to delete your recipe?</h5><br/>
+              <hr class="my-4">
+              <br/>
+                <a class="btn btn-danger" href="{{ url_for('recipes.delete_recipe', recipe_id=chosen_recipe[0]) }}" id="edit_button" style="width: 100%; border: 2px solid white">Yes, delete this recipe</a>
+                <button class="btn btn-primary" id="cancel_delete_button" style="border: 2px solid white; width: 100%">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
 
 
     </div>
@@ -210,28 +232,60 @@
 
     <script>
     // Get the modal
-    var modal = document.getElementById("myModal");
+    var modalShare = document.getElementById("shareModal");
 
     // Get the button that opens the modal
-    var btn = document.getElementById("share_button");
+    var shareBtn = document.getElementById("share_button");
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    var shareSpan = document.getElementsByClassName("shareClose")[0];
 
     // When the user clicks the button, open the modal
-    btn.onclick = function() {
-      modal.style.display = "block";
+    shareBtn.onclick = function() {
+      modalShare.style.display = "block";
     }
 
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
+    shareSpan.onclick = function() {
+      modalShare.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
+      if (event.target == modalShare) {
+        modalShare.style.display = "none";
+      }
+    }
+
+
+        // Get the modal
+    var modalDelete = document.getElementById("deleteModal");
+
+    // Get the button that opens the modal
+    var deleteBtn = document.getElementById("delete_button");
+    var cancelDeleteBtn = document.getElementById("cancel_delete_button")
+
+    // Get the <span> element that closes the modal
+    var deleteSpan = document.getElementsByClassName("deleteClose")[0];
+
+    // When the user clicks the button, open the modal
+    deleteBtn.onclick = function() {
+      modalDelete.style.display = "block";
+    }
+
+    cancelDeleteBtn.onclick = function() {
+      modalDelete.style.display = "none";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    deleteSpan.onclick = function() {
+      modalDelete.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modalShare) {
+        modalDelete.style.display = "none";
       }
     }
 
