@@ -29,9 +29,14 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Sweet </small>
                                 </label><br/>
+                              <input class="form-check-input" name='balance' type="checkbox" value="sour">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Sour </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
+
                 <div class="accordion-item" style="border: None">
                         <h2 class="accordion-header" id="headingTwo">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -52,9 +57,14 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Top-fermented </small>
                                 </label><br/>
+                              <input class="form-check-input" name='fermentation' type="checkbox" value="wild-fermentation">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Wild-fermentation </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
+
                 <div class="accordion-item" style="border: None">
                         <h2 class="accordion-header" id="headingThree">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -70,6 +80,7 @@
                           </div>
                         </div>
                 </div>
+
                 <div class="accordion-item" style="border: None">
                         <h2 class="accordion-header" id="headingFour">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -113,6 +124,10 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Eastern-Europe </small>
                                 </label><br/>
+                            <input class="form-check-input" name='region' type="checkbox" value="western-europe">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Western-Europe </small>
+                                </label><br/>
                             <input class="form-check-input" name='region' type="checkbox" value="pacific">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Pacific </small>
@@ -124,6 +139,7 @@
                           </div>
                         </div>
                 </div>
+
                 <div class="accordion-item" style="border: None">
                         <h2 class="accordion-header" id="headingSix">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
@@ -147,6 +163,7 @@
                           </div>
                         </div>
                 </div>
+
                 <div class="accordion-item" style="border: None">
                         <h2 class="accordion-header" id="headingSeven">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
@@ -207,9 +224,18 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Strong-ale-family </small>
                                 </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="specialty-family'">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Specialty-family </small>
+                                </label><br/>
+                            <input class="form-check-input" name='family' type="checkbox" value="sour-ale-family'">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Sour-ale-family </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
+
                 <div class="accordion-item" style="border: None">
                         <h2 class="accordion-header" id="headingEight">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
@@ -237,6 +263,7 @@
                           </div>
                         </div>
                 </div>
+
                 <div class="accordion-item" style="border: None">
                         <h2 class="accordion-header" id="headingNine">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
@@ -253,9 +280,14 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Craft-style </small>
                                 </label><br/>
+                            <input class="form-check-input" name='style' type="checkbox" value="historical-style">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Historical-style </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
+
                 <div class="accordion-item" style="border: None">
                         <h2 class="accordion-header" id="headingTen">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
@@ -276,6 +308,18 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <small> Aged </small>
                                 </label><br/>
+                            <input class="form-check-input" name='others' type="checkbox" value="wood">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Wood </small>
+                                </label><br/>
+                            <input class="form-check-input" name='others' type="checkbox" value="fruit">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Fruit </small>
+                                </label><br/>
+                            <input class="form-check-input" name='others' type="checkbox" value="spice">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <small> Spice </small>
+                                </label><br/>
                           </div>
                         </div>
                 </div>
@@ -287,6 +331,8 @@
 
         <br/><br/>
     </div>
+
+
 
     <div class="element col-lg-8" style="display: inline-block;">
         {% if checks['american_light_lager'] %}
@@ -1109,8 +1155,555 @@ Aroma: Low to moderate</p>
         </div>
         {% endif %}
 
+        {% if checks['american_barleywine'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">American Barleywine</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 22C</h6>
+            <p class="card-text">A very strong, malty, hoppy, bitter American ale with a rich palate, full mouthfeel, and warming aftertaste, suitable for contemplative sipping.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='American Barleywine') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
 
+        {% if checks['wheatwine'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Wheatwine</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 22D</h6>
+            <p class="card-text">A richly textured, high alcohol sipping beer with a significant grainy, bready flavor, and a sleek body. The emphasis is first on the bready, wheaty flavors with malt, hops, fruity yeast, and alcohol complexity.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Wheatwine') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
 
+        {% if checks['berliner_weisse'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Berliner Weisse</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23A</h6>
+            <p class="card-text">A very pale, refreshing, low-alcohol German wheat beer with a clean lactic sourness and a very high carbonation level. A light bread dough malt flavor supports the sourness, which shouldn’t seem artificial. A gentle fruitiness is found in the best examples.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Berliner Weisse') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['flanders_red_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Flanders Red Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23B</h6>
+            <p class="card-text">A sour and fruity oak-aged reddish-brown Belgian-style ale with supportive toasty malt flavors and fruit complexity. The dry, tannic finish supports the suggestion of a vintage red wine.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Flanders Red Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['oud_bruin'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Oud Bruin</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23C</h6>
+            <p class="card-text">A malty, fruity, aged, somewhat sour Belgian-style brown ale with a caramel-chocolate malt flavor, and often substantial alcohol.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Oud Bruin') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['lambic'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Lambic</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23D</h6>
+            <p class="card-text">A fairly sour, often moderately funky, wild Belgian wheat beer with sourness taking the place of hop bitterness in the balance. Traditionally served uncarbonated as a café drink.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Lambic') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['gueuze'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Gueuze</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23E</h6>
+            <p class="card-text">A very refreshing, highly carbonated, pleasantly sour but balanced wild Belgian wheat beer. The wild beer character can be complex and varied, combining sour, funky, and fruity flavors</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Gueuze') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['fruit_lambic'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Fruit Lambic</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23F</h6>
+            <p class="card-text">A complex, refreshing, pleasantly sour Belgian wheat beer blending a complementary fermented fruit character with a sour, funky Gueuze.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Fruit Lambic') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['gose'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Gose</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 23G</h6>
+            <p class="card-text">A tart, lightly-bittered historical central European wheat beer with a distinctive but restrained salt and coriander character. Very refreshing, with a dry finish, high carbonation, and bright flavors.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Gose') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['witbier'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Witbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 24A</h6>
+            <p class="card-text">A pale, hazy Belgian wheat beer with spices accentuating the yeast character. A delicate, lightly spiced, moderate-strength ale that is a refreshing summer drink with its high carbonation, dry finish, and light hopping.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Witbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['belgian_pale_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Belgian Pale Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 24B</h6>
+            <p class="card-text">A top-fermented, all malt, average strength Belgian ale that is moderately bitter, not dry-hopped, and without strong flavors. The copper-colored beer lacks the aggressive yeast character or sourness of many Belgian beers, but has a well-balanced, malty, fruity, and often bready and toasty profile.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Belgian Pale Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['biere_de_garde'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Bière de Garde</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 24C</h6>
+            <p class="card-text">A family of smooth, fairly strong, malty, lagered artisanal French beer with a range of malt flavors appropriate for the blond, amber, or brown color. All are malty yet dry, with clean flavors. Darker versions have more malt character, while paler versions can have more hops while still remaining malt-focused beers.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Bière de Garde') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['belgian_blond_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Belgian Blond Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 25A</h6>
+            <p class="card-text">A golden, moderately-strong Belgian ale with a pleasantly subtle citrusy-spicy yeast complexity, smooth malty palate, and dry, soft finish.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Belgian Blond Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['saison'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Saison</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 25B</h6>
+            <p class="card-text">A family of refreshing, highly attenuated, hoppy, and fairly bitter Belgian ales with a very dry finish and high carbonation. Characterized by a fruity, spicy, sometimes phenolic fermentation profile, and the use of cereal grains and sometimes spices for complexity. Several variations in strength and color exist.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Saison') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['belgian_golden_strong_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Belgian Golden Strong Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 25C</h6>
+            <p class="card-text">A very pale, highly attenuated, strong Belgian ale that is more fruity and hoppy than spicy. Complex and delicate, the dry finish, light body, and high carbonation accentuate the yeast and hop character. Sparkling carbonation and effervescent, forming a rocky white head.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Belgian Golden Strong Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks[''] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title"></h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 25C</h6>
+            <p class="card-text"></p>
+            <a href="{{ url_for('views.beer_styles_2', s='') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['belgian_single'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Belgian Single</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 26A</h6>
+            <p class="card-text">A blond, bitter, hoppy table beer that is very dry and highly carbonated. The aggressive fruity-spicy Belgian yeast character and high bitterness is forward in the balance, with a soft, supportive grainy-sweet malt palate, and a spicy-floral hop profile.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Belgian Single') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['belgian_dubbel'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Belgian Dubbel</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 26B</h6>
+            <p class="card-text">A deep reddish-copper, moderately strong, malty, complex Belgian ale with rich malty flavors, dark or dried fruit esters, and light alcohol blended together in a malty presentation that still finishes fairly dry.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Belgian Dubbel') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['belgian_tripel'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Belgian Tripel</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 26C</h6>
+            <p class="card-text">A strong, pale, somewhat spicy Belgian ale with a pleasant rounded malt flavor, firm bitterness, and dry finish. Quite aromatic, with spicy, fruity, and light alcohol notes combining with the supportive clean malt character to produce a surprisingly drinkable beverage considering the high alcohol content.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Belgian Tripel') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['belgian_dark_strong_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Belgian Dark Strong Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 26D</h6>
+            <p class="card-text">A dark, complex, very strong Belgian ale with a delicious blend of malt richness, dark fruit flavors, and spicy notes. Complex, rich, smooth, and dangerous.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Belgian Dark Strong Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['kellerbier'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Kellerbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 27A</h6>
+            <p class="card-text">An unfiltered, unpasteurized, fully-attenuated German lager traditionally served from lagering vessels. May be a little richer, more robust, and rustic than the base styles. A fresh beer without fermentation defects associated with young, green (unfinished) beer.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Kellerbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['kentucky_common'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Kentucky Common</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 27A</h6>
+            <p class="card-text">Amber-orange to brown in color. Typically clear, but may have some light haze. Foam stand may not be long lasting, and is usually white to beige in color.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Kentucky Common') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['lichtenhainer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Lichtenhainer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 27A</h6>
+            <p class="card-text">A sour, smoked, lower-gravity historical central European wheat beer. Complex yet refreshing character due to high attenuation and carbonation, along with low bitterness and moderate sourness.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Lichtenhainer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['london_brown_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">London Brown Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 27A</h6>
+            <p class="card-text">A luscious, sweet, malty, low-alcohol dark brown ale, with caramel and toffee malt complexity and a sweet-tasting finish.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='London Brown Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['piwo_grodziskie'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Piwo Grodziskie</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 27A</h6>
+            <p class="card-text">A low-gravity, bitter, oak-smoked historical central European wheat beer with a clean fermentation profile and no sourness. Highly carbonated, dry, crisp, and refreshing.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Piwo Grodziskie') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['pre_prohibition_lager'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Pre-Prohibition Lager</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 27A</h6>
+            <p class="card-text">A bitter and hoppy pale American adjunct lager, often with a robust, corny flavor profile, although more crisp and neutral-tasting versions exist.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Pre-Prohibition Lager') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['pre_probition_porter'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Pre-Prohibition Porter</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 27A</h6>
+            <p class="card-text">A historical American adaptation of English Porter by German immigrants using American ingredients, including adjuncts.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Pre-Prohibition Porter') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['roggenbier'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Roggenbier</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 27A</h6>
+            <p class="card-text">A Dunkles Weissbier made with rye rather than wheat, but with a greater body and light finishing hops. The rye gives a bready and peppery flavor, a creamy body, and a dry, grainy finish that blends with the distinctive banana-and-clove weizen yeast character.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Roggenbier') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['sahti'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Sahti</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 27A</h6>
+            <p class="card-text">A sweet, heavy, strong traditional Finnish farmhouse beer usually with rye and juniper, and a banana-clove yeast character.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Sahti') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['brett_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Brett Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 28A</h6>
+            <p class="card-text">Most often drier and fruitier than the base style suggests. Fruity or funky notes range from low to high, depending on the age of the beer and strains of Brett used. May possess a light non-lactic acidity.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Brett Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['mixed_fermentation_sour_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Mixed-Fermentation Sour Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 28B</h6>
+            <p class="card-text">A sour and funky version of a base style of beer.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Mixed-Fermentation Sour Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['wild_specialty_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Wild Specialty Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 28C</h6>
+            <p class="card-text">An American Wild Ale with fruit, herbs, spices, or other Specialty-Type Ingredients.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Wild Specialty Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['straight_sour_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Straight Sour Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 28D</h6>
+            <p class="card-text">A pale, refreshing, sour beer with a clean lactic sourness. A gentle, pale malt flavor supports the lemony sourness with moderate fruity esters.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Straight Sour Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['fruit_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Fruit Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 29A</h6>
+            <p class="card-text">A pleasant integration of fruit with beer, but still recognizable as beer. The fruit character should be evident but in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Fruit Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['fruit_and_spice_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Fruit and Spice Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 29B</h6>
+            <p class="card-text">A tasteful union of fruit, spice, and beer, but still recognizable as beer. The fruit and spice character should each be evident but in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Fruit and Spice Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['specialty_fruit_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Specialty Fruit Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 29C</h6>
+            <p class="card-text">A appealing combination of fruit, sugar, and beer, but still recognizable as a beer. The fruit and sugar character should both be evident but in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Specialty Fruit Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['grape_ale'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Grape Ale</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 29D</h6>
+            <p class="card-text">Combines the profile of a sparkling wine and a relatively neutral base beer allowing the aromatic qualities of the grape to blend pleasantly with hop and yeast aromatics. Can be in a range from refreshing to complex.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Grape Ale') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['spice_herb_or_vegetable_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Spice, Herb, or Vegetable Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 30A</h6>
+            <p class="card-text">An appealing fusion of spices, herbs, or vegetables (SHVs) and beer, but still recognizable as beer. The SHV character should be evident but in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Spice, Herb, or Vegetable Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['autumn_seasonal_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Autumn Seasonal Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 30B</h6>
+            <p class="card-text">A malty, spiced beer that often has a moderately rich body and slightly warming finish suggesting a good accompaniment for the cool fall season, and often evocative of harvest or Thanksgiving traditions.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Autumn Seasonal Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['winter_seasonal_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Winter Seasonal Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 30C</h6>
+            <p class="card-text">A stronger, darker, spiced beer that often has a rich body and warming finish suggesting a good accompaniment for the cold winter season.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Winter Seasonal Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['specialty_spice_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Specialty Spice Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 30D</h6>
+            <p class="card-text">An appealing combination of spices, herbs, or vegetables (SHVs), sugars, and beer, but still recognizable as beer. The SHV and sugar character should both be evident but in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Specialty Spice Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['alternative_grain_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Alternative Grain Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 31A</h6>
+            <p class="card-text">A base beer enhanced by or featuring the character of additional grains. The specific character depends greatly on the added grains.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Alternative Grain Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['alternative_sugar_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Alternative Sugar Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 31B</h6>
+            <p class="card-text">A tasteful integration of sugar and beer, but still recognizable as beer. The sugar character should both be evident and in balance with the beer, not so forward as to suggest an artificial product.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Alternative Sugar Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['classic_style_smoked_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Classic Style Smoked Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 32A</h6>
+            <p class="card-text">A well-balanced fusion of the malt and hops of the base beer style with a pleasant and agreeable smoke character.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Classic Style Smoked Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['specialty_smoked_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Specialty Smoked Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 32B</h6>
+            <p class="card-text">A well-balanced fusion of the malt and hops of the base specialty beer style with a pleasant and agreeable smoke character.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Specialty Smoked Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['wood_aged_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Wood-Aged Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 33A</h6>
+            <p class="card-text">A pleasant enhancement of the base beer style with the characteristics from aging in contact with wood. The best examples will be smooth, flavorful, well-balanced, and well-aged.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Wood-Aged Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['specialty_wood_aged_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Specialty Wood-Aged Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 33B</h6>
+            <p class="card-text">An elevation of the base beer style with characteristics from aging in contact with wood, including alcoholic products previously in contact with the wood. The best examples will be smooth, flavorful, well-balanced, and well-aged.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Specialty Wood-Aged Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['commercial_specialty_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Commercial Specialty Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 34A</h6>
+            <p class="card-text">Based on declared beer.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Commercial Specialty Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['mixed_style_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Mixed-Style Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 34B</h6>
+            <p class="card-text">Based on the declared Base Styles, methods, and ingredients. As with all Specialty-Type Beers, the resulting combination of beer styles needs to be harmonious and balanced, and be pleasant to drink.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Mixed-Style Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if checks['experimental_beer'] %}
+        <div class="card" style="display: inline-block; width: 900px;" >
+          <div class="card-body">
+            <h4 class="card-title">Experimental Beer</h4>
+            <h6 class="card-subtitle mb-2 text-muted">CODE: 34C</h6>
+            <p class="card-text">Varies, but should be a unique experience.</p>
+            <a href="{{ url_for('views.beer_styles_2', s='Experimental Beer') }}" class="btn btn-primary btn-sm">More</a>
+          </div>
+        </div>
+        {% endif %}
 
 
         <br/><br/>
