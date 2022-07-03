@@ -608,6 +608,8 @@ def public_recipe(recipe_id):
     db = DatabaseConnector()
     chosen_recipe = db.select_from_recipes_by_id("\'" + str(recipe_id) + "\'")[0]
     likes_amount = len(db.select_from_likes("\'" + str(recipe_id) + "\'"))
+    author = db.select_from_users_by_id("\'" + str(chosen_recipe[1]) + "\'")[0][1]
+
     if_liked = False
     if (str(recipe_id), session['id']) in db.select_from_likes("\'" + str(recipe_id) + "\'"):
         if_liked = True
@@ -637,7 +639,7 @@ def public_recipe(recipe_id):
 
     return render_template('public_recipe.html', chosen_recipe=chosen_recipe,
                            likes_amount=likes_amount, if_liked=if_liked, users_who_like=users_who_like,
-                           comments=comments, users_who_comment=users_who_comment)
+                           comments=comments, users_who_comment=users_who_comment, author=author)
 
 
 @recipes.route('/public_recipes/<int:recipe_id>/comments', methods=['GET', 'POST'])
