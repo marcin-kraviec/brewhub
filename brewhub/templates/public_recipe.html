@@ -6,7 +6,7 @@
     <div class="card">
     <div class="card-body">
 
-        <h3>{{ recipe_name }}</h3>
+        <h3>{{ chosen_recipe[2] }}</h3>
         <br/>
         <table class="table">
               <tbody>
@@ -180,9 +180,9 @@
     <br/><br/>
     <div class="d-flex justify-content-between align-items-center" style="alignment: center">
     {% if if_liked %}
-        <a class="btn btn-primary" id="like_it" style="background: #FBB03B; width: 49%" onclick="like('{{ chosen_recipe[2] }}')">You like it!</a>
+        <a class="btn btn-primary" id="like_it" style="background: #FBB03B; width: 49%" onclick="like('{{ chosen_recipe[0] }}')">You like it!</a>
     {% else %}
-        <a class="btn btn-primary" id="like_it" style="width: 49%;" onclick="like('{{ chosen_recipe[2] }}')">Like it</a>
+        <a class="btn btn-primary" id="like_it" style="width: 49%;" onclick="like('{{ chosen_recipe[0] }}')">Like it</a>
     {% endif %}
     <!-- Trigger/Open The Modal -->
     <button class="btn btn-primary" id="comments" style="width: 49%;">Comments</button>
@@ -208,7 +208,7 @@
                               <div>
                               <small>{{ comment[4] }}&nbsp;&nbsp;&nbsp;</small>
                                   {% if comment[1] == session['id'] %}
-                                        <button class="btn-primary" onclick="delete_comment('{{ recipe_name }}','{{ comment[4] }}')">Delete</button>
+                                        <button class="btn-primary" onclick="delete_comment('{{ chosen_recipe[0] }}','{{ comment[4] }}')">Delete</button>
                                   {% else %}
                                         <button id="delete_comment" class="btn-primary" style="border: none; background: #fefefe; color: #fefefe" disabled>Delete</button>
                                   {% endif %}
@@ -221,7 +221,7 @@
               <div class="form-group">
                   <small id="comment_alert" style="color: #FBB03B"></small><br/>
                   <input type="text" id="comment_input" class="form-control mb-2" placeholder="Write here your comment" name="new_comment" maxlength="80" required>
-                  <button onclick="add_comment('{{ chosen_recipe[2] }}')" class="btn btn-primary" style="width: 100%;">Add comment</button>
+                  <button onclick="add_comment('{{ chosen_recipe[0] }}')" class="btn btn-primary" style="width: 100%;">Add comment</button>
               </div>
         </div>
       </div>
@@ -258,12 +258,12 @@
         }
 
 
-        function like(recipe_name) {
+        function like(recipe_id) {
             const like_count = document.getElementById('like_count');
             const like_button = document.getElementById('like_it');
             const tooltip = document.getElementById('tooltip_likes')
 
-            fetch(`/public_recipes/like/${recipe_name}`, {method: 'POST'})
+            fetch(`/public_recipes/like/${recipe_id}`, {method: 'POST'})
                 .then((res) => res.json())
                 .then((data) => {
                     like_count.innerHTML = data['likes'] + ' likes';
@@ -280,7 +280,7 @@
 
         }
 
-        function add_comment(recipe_name) {
+        function add_comment(recipe_id) {
             let content = document.getElementById("comment_input").value;
             const current_comments  = document.getElementById('current_comments');
             const comment_count = document.getElementById('comment_count')
@@ -292,7 +292,7 @@
 
             if (content !== '' && regex.test(content)) {
 
-                fetch(`/public_recipes/${recipe_name}/comments`,
+                fetch(`/public_recipes/${recipe_id}/comments`,
                     {
                         method: 'POST',
                         body: JSON.stringify({
@@ -305,7 +305,7 @@
                     .then((res) => res.json())
                     .then((data) => {
                         comment_alert.innerHTML = "Comment has been added";
-                        current_comments.innerHTML += ('<div class="container-fluid d-flex justify-content-between align-items-center" id="comment-' + data['date_created'] + '"><div><h5 style="display: inline-block">' + data['user_who_add_comment'] + ': ' + '&nbsp;&nbsp;&nbsp;</h5><a style="display: inline-block">' + content + '</a></div><div><small>' + data['date_created'] + '&nbsp;&nbsp;&nbsp;&nbsp;</small><button class="btn-primary" onclick="delete_comment(' + "\'" + recipe_name + "\'" + ',' + "\'" + data['date_created'] + "\'" + ')">Delete</button></div></div><br id="space_between_comments-' + data['date_created'] + '"/>');
+                        current_comments.innerHTML += ('<div class="container-fluid d-flex justify-content-between align-items-center" id="comment-' + data['date_created'] + '"><div><h5 style="display: inline-block">' + data['user_who_add_comment'] + ': ' + '&nbsp;&nbsp;&nbsp;</h5><a style="display: inline-block">' + content + '</a></div><div><small>' + data['date_created'] + '&nbsp;&nbsp;&nbsp;&nbsp;</small><button class="btn-primary" onclick="delete_comment(' + "\'" + recipe_id + "\'" + ',' + "\'" + data['date_created'] + "\'" + ')">Delete</button></div></div><br id="space_between_comments-' + data['date_created'] + '"/>');
                         console.log(data['date_created']);
                         comment_count.innerHTML = " | " + data['comments'] + ' comments';
                         comment_count.title = data['users_who_comment']
@@ -317,7 +317,7 @@
             }
         }
 
-        function delete_comment(recipe_name, date) {
+        function delete_comment(recipe_id, date) {
             const comment_to_delete = document.getElementById("comment-" + date)
             const space_between_comments = document.getElementById("space_between_comments-" + date)
             const comment_count = document.getElementById('comment_count')
@@ -325,7 +325,7 @@
 
             console.log(comment_to_delete.id)
 
-            fetch(`/public_recipes/${recipe_name}/comments/${date}`, {
+            fetch(`/public_recipes/${recipe_id}/comments/${date}`, {
                 method: 'DELETE',
             })
             .then((res) => res.json())

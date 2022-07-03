@@ -6,7 +6,7 @@
     <div class="card">
     <div class="card-body">
 
-        <h3>{{ recipe_name }}</h3>
+        <h3>{{ chosen_recipe[2] }}</h3>
         <br/>
         <table class="table">
               <tbody>
@@ -194,7 +194,7 @@
               <br/>
               <hr class="my-4">
               <br/>
-                  <button onclick="share_recipe('{{ recipe_name }}', {{ existing_users_usernames }})" class="btn btn-primary" style="width: 100%;">Share recipe</button>
+                  <button onclick="share_recipe({{ chosen_recipe[0] }}, {{ existing_users_usernames }})" class="btn btn-primary" style="width: 100%;">Share recipe</button>
           </div>
         </div>
       </div>
@@ -235,7 +235,7 @@
       }
     }
 
-    function share_recipe(recipe_name, existing_users_usernames){
+    function share_recipe(recipe_id, existing_users_usernames){
         const username = document.getElementById('username_to_share_input');
         const share_alert = document.getElementById('share_alert')
         let x = Boolean(false);
@@ -247,7 +247,7 @@
         }
 
         if(x) {
-            fetch(`/user_recipe/share/${recipe_name}/${username.value}`, {method: 'POST'})
+            fetch(`/user_recipe/share/${recipe_id}/${username.value}`, {method: 'POST'})
             .then((data)=> {
                 share_alert.innerText = "Recipe has been shared"
                 share_alert.style.color = "yellowgreen"
