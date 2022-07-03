@@ -91,7 +91,7 @@ def add_recipe():
     others_for_combobox = []
     for i in range(len(others)):
         (name, info, price) = others[i]
-        other = str(name) + ' ' + str(info)
+        other = str(name)
         others_for_combobox.append(other)
 
     # get all yeasts hops from database
@@ -453,7 +453,7 @@ def edit_recipe_post(recipe_id):
         print(abv)
 
         # temporary
-        price = "0"
+        price = request.form["estimatedPrice"]
         print(price)
 
         # add recipe in database

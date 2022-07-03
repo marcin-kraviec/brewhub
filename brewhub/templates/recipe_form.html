@@ -522,23 +522,23 @@
             }
         });
 
-        {#var others = flaskData.others;#}
-        {#var others_names = flaskData.others_names;#}
-        {#var other = document.getElementsByName("other");#}
-        {#var other_amount = document.getElementsByName("other_amount");#}
-        {#var other_amounts = [];#}
-        {#console.log('Other:', other)#}
-        {#console.log('Hop:', hop)#}
-        {#other_amount.forEach( function (oa) {#}
-        {#    oa = parseInt(oa.value);#}
-        {#    other_amounts.push(oa);});#}
-        {#console.log('Others:', others)#}
-        {#other.forEach(function (o) {#}
-        {#    o = o.options[o.selectedIndex].text;#}
-        {#    var index = others_names.indexOf(o);#}
-        {#    if (o !== "Choose other") {#}
-        {#        price += others[index][2] * other_amounts[index] / 100;#}
-        {#    }});#}
+        var others = flaskData.others;
+        var others_names = flaskData.others_names;
+        var other = document.getElementsByName("other");
+        var other_amount = document.getElementsByName("other_amount");
+        var other_amounts = [];
+        console.log('Other:', other)
+        console.log('Hop:', hop)
+        other_amount.forEach( function (oa) {
+            oa = parseInt(oa.value);
+            other_amounts.push(oa);});
+        console.log('Others:', others)
+        other.forEach(function (o) {
+            o = o.options[o.selectedIndex].text;
+            var index = others_names.indexOf(o);
+            if (o !== "Choose ingredient") {
+                price += others[index][2] * other_amounts[index] / 100;
+            }});
 
         var l = alpha_acids.length;
         var utilization = 0;
