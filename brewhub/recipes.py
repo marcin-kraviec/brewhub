@@ -757,6 +757,7 @@ def add_ingredients():
 
         db.insert_into_fermentables(user_id, "\'" + fermentable_name + "\'", fermentable_color, gravity_contribution,
                                     fermentable_price)
+        flash(fermentable_name + " has been added")
 
     if request.method == 'POST' and 'hop_name' in request.form:
         hop_name = request.form['hop_name']
@@ -769,6 +770,7 @@ def add_ingredients():
         print(hop_price)
 
         db.insert_into_hops(user_id, "\'" + hop_name + "\'", alpha_acids, hop_price)
+        flash(hop_name + " has been added")
 
     if request.method == 'POST' and 'yeast_name' in request.form:
         yeast_name = request.form['yeast_name']
@@ -781,6 +783,7 @@ def add_ingredients():
         print(yeast_price)
 
         db.insert_into_yeasts(user_id, "\'" + yeast_name + "\'", "\'" + yeast_attenuation + "\'", yeast_price)
+        flash(yeast_name + " has been added")
 
     if request.method == 'POST' and 'other_name' in request.form:
         other_name = request.form['other_name']
@@ -793,5 +796,8 @@ def add_ingredients():
         print(other_price)
 
         db.insert_into_others(user_id, "\'" + other_name + "\'", "\'" + optional_info + "\'", other_price)
+        flash(other_name + " has been added")
+
+
 
     return render_template('ingredients_form.html')
