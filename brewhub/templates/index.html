@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 <br/>
-<figure class="text-center">
-  <blockquote class="blockquote">
-    <p class="mb-0">Piwo moje paliwooo!</p>
-  </blockquote>
-  <figcaption class="blockquote-footer">
-    Students from <cite title="Source Title">AGH University od Science and Technology in Cracow</cite>
-  </figcaption>
-</figure>
+    <div class="container">
+        <h1>About webside</h1>
+        <hr class="my-4">
+        <h4>Gain knowledge</h4>
+        <hr class="my-4">
+        <h4>Create own recipes</h4>
+        <hr class="my-4">
+        <h4>Share recipes with friends</h4>
+        <hr class="my-4">
+        <h4>Explore other recipes</h4>
+        <hr class="my-4">
+        </br>
+        <h5 style="text-align:center">Get access to all functionalities right now</h5>
+        </br>
+        <button  class="btn btn-success btn-lg" style="width: 100%" name="fermentable_submit" value="fermentable_submit" onclick="location.href='/register';">Create account</button>
+    </div>
 <br/>
 {% endblock %}

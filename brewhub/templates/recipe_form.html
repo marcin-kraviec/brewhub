@@ -69,8 +69,6 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-warning" onclick="calculate_size()">Calculate</button>
-            <button type="button" class="btn btn-warning" onclick="gravity()">Calculate</button>
         </div>
 
         <hr class="my-4">
@@ -106,7 +104,6 @@
             </table>
             <button type="button" class="btn btn-warning" onclick="add_row('fermentablesTable')" style="width: 150px">Add row</button>
             <button type="button" class="btn btn-danger" onclick="delete_row('fermentablesTable')" style="width: 150px">Delete row</button>
-            <button type="button" class="btn btn-danger" onclick="control_fermentables()" style="width: 150px">control</button>
         <hr class="my-4">
         <h4>Hops</h4>
             <table class="table table-hover" id="hopTable">
@@ -168,7 +165,7 @@
                 <tbody>
                     <tr class="table-secondary">
                         <th scope="row">
-                            <select class="form-select" id="exampleSelect1" onchange="gravity()" name="other" required>
+                            <select class="form-select" id="other" onchange="gravity()" name="other" required>
                                 <option value="" disabled selected>Choose ingredient</option>
                                 {% for other in others_for_combobox %}
                                 <option>{{ other }}</option>
@@ -177,7 +174,7 @@
                         </th>
                         <td>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" placeholder="Enter amount" onchange="gravity()" name="other_amount" min="0" max="5000" required>
+                                <input type="number" class="form-control" placeholder="Enter amount" onchange="gravity()" id="other_amount" name="other_amount" min="0" max="5000" required>
                                 <span class="input-group-text">g</span>
                             </div>
                         </td>
@@ -263,7 +260,7 @@
         <div>
             <div>
                 <span>Original gravity: <input class="form-control" name="OGvalue" id="OGvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
-                <span id="OGspan" style="float: right;">1.020 - 1.030</span>
+                <span id="OGspan" style="float: right;"></span>
             </div>
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="OG" role="progressbar" style="width: 0%;"></div>
@@ -271,7 +268,7 @@
             <br>
             <div>
                 <span>Final gravity: <input class="form-control" name="FGvalue" id="FGvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
-                <span id="FGspan" style="float: right;">1.005 - 1.010 </span>
+                <span id="FGspan" style="float: right;"></span>
             </div>
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="FG" role="progressbar" style="width: 0%;"></div>
@@ -279,7 +276,7 @@
             <br>
             <div>
                 <span>IBU: <input class="form-control" name="IBUvalue" id="IBUvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
-                <span id="IBUspan" style="float: right;">20 - 30 </span>
+                <span id="IBUspan" style="float: right;"></span>
             </div>
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="IBU" role="progressbar" style="width: 0%;"></div>
@@ -287,7 +284,7 @@
             <br>
             <div>
                 <span>SRM: <input class="form-control" name="SRMvalue" id="SRMvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
-                <span id="SRMspan" style="float: right;">10 - 15</span>
+                <span id="SRMspan" style="float: right;"></span>
             </div>
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="SRM" role="progressbar" style="width: 0%;"></div>
@@ -295,12 +292,15 @@
             <br>
             <div>
                 <span>ABV: <input class="form-control" name="ABVvalue" id="ABVvalue" style="color: green; display: inline-block; width: auto; background: white" disabled></span>
-                <span id="ABVspan" style="float: right;">4 - 5</span>
+                <span id="ABVspan" style="float: right;"></span>
             </div>
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="ABV" role="progressbar" style="width: 0%;"></div>
             </div>
-        </div>
+            <hr class="my-4">
+            <div>
+                <h4>Estimated price: <input class="form-control" name="estimatedPrice" id="estimatedPrice" style="color: green; display: inline-block; width: auto; background: white" disabled></h4>
+            </div>
         <hr class="my-4">
         <h4>Notes</h4>
         <div class="form-group">
@@ -309,6 +309,7 @@
         </div>
       <br>
       <button type="submit" class="btn btn-primary" style="width: 100%" name="submit" value="submit">Save recipe</button>
+        </div>
       </form>
     </div>
 
@@ -383,6 +384,7 @@
             attenuation = 0
         } else {
             attenuation = yeasts[index][1]
+            price += yeasts[index][2]
         }
         {#console.log(attenuation)#}
 
@@ -416,6 +418,7 @@
         var fermentable = document.getElementsByName("fermentable");
         var gravity_contributions = []
         var srms = []
+        var price = 0
         var fermentables_names = flaskData.fermentables_names;
         var fermentables = flaskData.fermentables;
         var index = fermentables_names.indexOf(fermentable)
@@ -429,9 +432,11 @@
             } else {
                 gravity_contributions.push(fermentables[index][2]);
                 srms.push(fermentables[index][1]);
+                price += fermentables[index][3] * fermentable_amounts[index]
+
             }
         });
-        {#console.log(gravity_contributions)#}
+        console.log('Price', price)
 
         var gravity_points = [];
         gravity_contributions.forEach( function (g) {
@@ -493,15 +498,7 @@
         var hops_names = flaskData.hops_names;
         var hops = flaskData.hops;
         var hop = document.getElementsByName("hop");
-        hop.forEach(function (h) {
-            h = h.options[h.selectedIndex].text;
-            var index = hops_names.indexOf(h);
-            if (h === "Choose hop") {
-                alpha_acids.push(0);
-            } else {
-                alpha_acids.push(hops[index][1]);
-            }
-        });
+
         var hop_time = document.getElementsByName("hop_time");
         var times = [];
         hop_time.forEach( function (t) {
@@ -515,6 +512,38 @@
             ha = parseInt(ha.value);
             hop_amounts.push(ha);
         });
+
+        hop.forEach(function (h) {
+            h = h.options[h.selectedIndex].text;
+            var index = hops_names.indexOf(h);
+            if (h === "Choose hop") {
+                alpha_acids.push(0);
+            } else {
+                alpha_acids.push(hops[index][1]);
+                price += hops[index][2] * hop_amounts[index] / 100;
+            }
+        });
+        {#
+        var others = flaskData.others;
+        var others_names = flaskData.others_names;
+        var other = document.getElementsByName("other");
+        var other_amount = document.getElementsByName("other_amount");
+        var other_amounts = [];
+        console.log('Other:', other)
+        console.log('Hop:', hop)
+        other_amount.forEach( function (oa) {
+            oa = parseInt(oa.value);
+            other_amounts.push(oa);
+        });
+        console.log('Others:', others)
+        other.forEach(function (o) {
+            o = o.options[o.selectedIndex].text;
+            var index = others_names.indexOf(o);
+            if (o !== "Choose other") {
+                price += others[index][2] * other_amounts[index] / 100;
+            }
+        });
+        #}
 
         var l = alpha_acids.length;
         var utilization = 0;
@@ -564,6 +593,28 @@
         var min_srm = Object.values(Object.values(style_data)[0])[4][0];
         var max_srm = Object.values(Object.values(style_data)[0])[4][1];
 
+        var style = document.getElementsByName("recipe_style");
+        style.forEach(function (s) {
+            s = s.options[s.selectedIndex].text;
+            console.log('S ', s)
+            console.log('ss ', style_data)
+            var keys = Object.keys(style_data)
+            var index = keys.indexOf(s)
+
+            if (s !== "Choose style") {
+                min_abv = Object.values(Object.values(style_data)[index])[0][0];
+                max_abv = Object.values(Object.values(style_data)[index])[0][1];
+                min_fg = Object.values(Object.values(style_data)[index])[1][0];
+                max_fg = Object.values(Object.values(style_data)[index])[1][1];
+                min_ibu = Object.values(Object.values(style_data)[index])[2][0];
+                max_ibu = Object.values(Object.values(style_data)[index])[2][1];
+                min_og = Object.values(Object.values(style_data)[index])[3][0];
+                max_og = Object.values(Object.values(style_data)[index])[3][1];
+                min_srm = Object.values(Object.values(style_data)[index])[4][0];
+                max_srm = Object.values(Object.values(style_data)[index])[4][1];
+
+            }
+        });
 
         document.getElementById("OGspan").textContent = (min_og).toString() + ' - ' + (max_og).toString();
         document.getElementById("FGspan").textContent = (min_fg).toString() + ' - ' + (max_fg).toString();
@@ -582,21 +633,32 @@
         document.getElementById("IBUvalue").value = ibu.toString();
         document.getElementById("SRMvalue").value = srm.toString();
         document.getElementById("ABVvalue").value = abv.toString();
+        document.getElementById("estimatedPrice").value = price.toString() + ' PLN';
 
         if (og < min_og || og > max_og) {
             document.getElementById("OGvalue").style.color = "red";
+        } else {
+            document.getElementById("OGvalue").style.color = "green";
         }
         if (fg < min_fg || fg > max_fg) {
             document.getElementById("FGvalue").style.color = "red";
+        } else {
+            document.getElementById("FGvalue").style.color = "green";
         }
         if (ibu < min_ibu || ibu > max_ibu) {
             document.getElementById("IBUvalue").style.color = "red";
+        } else {
+            document.getElementById("IBUvalue").style.color = "green";
         }
         if (srm < min_srm || srm > max_srm) {
             document.getElementById("SRMvalue").style.color = "red";
+        } else {
+            document.getElementById("SRMvalue").style.color = "green";
         }
         if (abv < min_abv || abv > max_abv) {
             document.getElementById("ABVvalue").style.color = "red";
+        } else {
+            document.getElementById("ABVvalue").style.color = "green";
         }
 
     }

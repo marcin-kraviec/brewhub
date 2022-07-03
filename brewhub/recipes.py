@@ -109,7 +109,9 @@ def add_recipe():
         'fermentables_names': fermentables_for_combobox,
         'fermentables': fermentables,
         'hops_names': hops_for_combobox,
-        'hops': hops
+        'hops': hops,
+        'others_names': others_for_combobox,
+        'others': others
     }
 
     if request.method == 'POST':
