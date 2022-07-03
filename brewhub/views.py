@@ -19,11 +19,6 @@ def categories():
     return render_template('categories.html')
 
 
-@views.route('/test')
-def test():
-    return render_template('test.html')
-
-
 @views.route('/beer_styles', methods=['GET', 'POST'])
 def beer_styles():
     american_light_lager =      {'balance': 'balanced', 'fermentation': 'bottom-fermented', 'lager': 'lagered', 'feeling': '-',     'region': 'north-america',  'color': 'pale-color',  'family': 'pale-lager-family',  'strength': 'session-strength',   'style': 'traditional-style', 'others': '-'}
