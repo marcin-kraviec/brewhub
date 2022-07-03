@@ -293,7 +293,7 @@
             </div>
             <hr class="my-4">
             <div>
-                <h4>Estimated price: <input class="form-control" name="estimatedPrice" id="estimatedPrice" style="color: green; display: inline-block; width: auto; background: white" disabled></h4>
+                <h4>Estimated price: <input class="form-control" name="estimatedPrice" id="estimatedPrice" style="color: green; display: inline-block; width: auto; background: white" disabled>&nbsp;PLN</h4>
             </div>
         <hr class="my-4">
         <h4>Notes</h4>
@@ -308,6 +308,10 @@
     </div>
 
     <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      gravity();
+      hops_usage_choice();
+    });
 
     function add_row(tableID){
         var table=document.getElementById(tableID)
@@ -518,25 +522,23 @@
             }
         });
 
-        var others = flaskData.others;
-        var others_names = flaskData.others_names;
-        var other = document.getElementsByName("other");
-        var other_amount = document.getElementsByName("other_amount");
-        var other_amounts = [];
-        console.log('Other:', other)
-        console.log('Hop:', hop)
-        other_amount.forEach( function (oa) {
-            oa = parseInt(oa.value);
-            other_amounts.push(oa);
-        });
-        console.log('Others:', others)
-        other.forEach(function (o) {
-            o = o.options[o.selectedIndex].text;
-            var index = others_names.indexOf(o);
-            if (o !== "Choose other") {
-                price += others[index][2] * other_amounts[index] / 100;
-            }
-        });
+        {#var others = flaskData.others;#}
+        {#var others_names = flaskData.others_names;#}
+        {#var other = document.getElementsByName("other");#}
+        {#var other_amount = document.getElementsByName("other_amount");#}
+        {#var other_amounts = [];#}
+        {#console.log('Other:', other)#}
+        {#console.log('Hop:', hop)#}
+        {#other_amount.forEach( function (oa) {#}
+        {#    oa = parseInt(oa.value);#}
+        {#    other_amounts.push(oa);});#}
+        {#console.log('Others:', others)#}
+        {#other.forEach(function (o) {#}
+        {#    o = o.options[o.selectedIndex].text;#}
+        {#    var index = others_names.indexOf(o);#}
+        {#    if (o !== "Choose other") {#}
+        {#        price += others[index][2] * other_amounts[index] / 100;#}
+        {#    }});#}
 
         var l = alpha_acids.length;
         var utilization = 0;
@@ -626,7 +628,7 @@
         document.getElementById("IBUvalue").value = ibu.toString();
         document.getElementById("SRMvalue").value = srm.toString();
         document.getElementById("ABVvalue").value = abv.toString();
-        document.getElementById("estimatedPrice").value = price.toString() + ' PLN';
+        document.getElementById("estimatedPrice").value = price.toString();
 
         if (og < min_og || og > max_og) {
             document.getElementById("OGvalue").style.color = "red";
@@ -655,8 +657,6 @@
         }
 
     }
-
-    function control_fermentables() {}
 
     </script>
 

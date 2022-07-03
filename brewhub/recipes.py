@@ -228,7 +228,7 @@ def add_recipe():
         print(abv)
 
         # temporary
-        price = 10
+        price = request.form["estimatedPrice"]
         print(price)
 
         # add recipe in database
@@ -247,7 +247,7 @@ def add_recipe():
                                "\'" + efficiency + "\'", "\'" + temperature_stops + "\'",
                                "\'" + stops_timings + "\'",
                                "\'" + og + "\'", "\'" + fg + "\'", "\'" + ibu + "\'", "\'" + srm + "\'",
-                               "\'" + abv + "\'", "\'" + notes + "\'", "\'" + str(price) + "\'")
+                               "\'" + abv + "\'", "\'" + notes + "\'", "\'" + price + "\'")
 
         flash('Recipe has been added successfully')
 

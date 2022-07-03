@@ -333,7 +333,7 @@
             </div>
             <hr class="my-4">
             <div>
-                <h4>Estimated price: <input class="form-control" name="estimatedPrice" id="estimatedPrice" style="color: green; display: inline-block; width: auto; background: white" disabled></h4>
+                <h4>Estimated price: <input class="form-control" name="estimatedPrice" id="estimatedPrice" style="color: green; display: inline-block; width: auto; background: white" disabled>&nbsp;PLN</h4>
             </div>
         </div>
         <hr class="my-4">
@@ -525,6 +525,7 @@
             attenuation = 0
         } else {
             attenuation = yeasts[index][1]
+            price += yeasts[index][2]
         }
         {#console.log(attenuation)#}
 
@@ -558,6 +559,7 @@
         var fermentable = document.getElementsByName("fermentable");
         var gravity_contributions = []
         var srms = []
+        var price = 0
         var fermentables_names = flaskData.fermentables_names;
         var fermentables = flaskData.fermentables;
         var index = fermentables_names.indexOf(fermentable)
@@ -571,9 +573,11 @@
             } else {
                 gravity_contributions.push(fermentables[index][2]);
                 srms.push(fermentables[index][1]);
+                price += fermentables[index][3] * fermentable_amounts[index]
+
             }
         });
-        {#console.log(gravity_contributions)#}
+        console.log('Price', price)
 
         var gravity_points = [];
         gravity_contributions.forEach( function (g) {
@@ -635,15 +639,7 @@
         var hops_names = flaskData.hops_names;
         var hops = flaskData.hops;
         var hop = document.getElementsByName("hop");
-        hop.forEach(function (h) {
-            h = h.options[h.selectedIndex].text;
-            var index = hops_names.indexOf(h);
-            if (h === "Choose hop") {
-                alpha_acids.push(0);
-            } else {
-                alpha_acids.push(hops[index][1]);
-            }
-        });
+
         var hop_time = document.getElementsByName("hop_time");
         var times = [];
         hop_time.forEach( function (t) {
@@ -657,6 +653,35 @@
             ha = parseInt(ha.value);
             hop_amounts.push(ha);
         });
+
+        hop.forEach(function (h) {
+            h = h.options[h.selectedIndex].text;
+            var index = hops_names.indexOf(h);
+            if (h === "Choose hop") {
+                alpha_acids.push(0);
+            } else {
+                alpha_acids.push(hops[index][1]);
+                price += hops[index][2] * hop_amounts[index] / 100;
+            }
+        });
+
+        {#var others = flaskData.others;#}
+        {#var others_names = flaskData.others_names;#}
+        {#var other = document.getElementsByName("other");#}
+        {#var other_amount = document.getElementsByName("other_amount");#}
+        {#var other_amounts = [];#}
+        {#console.log('Other:', other)#}
+        {#console.log('Hop:', hop)#}
+        {#other_amount.forEach( function (oa) {#}
+        {#    oa = parseInt(oa.value);#}
+        {#    other_amounts.push(oa);});#}
+        {#console.log('Others:', others)#}
+        {#other.forEach(function (o) {#}
+        {#    o = o.options[o.selectedIndex].text;#}
+        {#    var index = others_names.indexOf(o);#}
+        {#    if (o !== "Choose other") {#}
+        {#        price += others[index][2] * other_amounts[index] / 100;#}
+        {#    }});#}
 
         var l = alpha_acids.length;
         var utilization = 0;
@@ -706,6 +731,28 @@
         var min_srm = Object.values(Object.values(style_data)[0])[4][0];
         var max_srm = Object.values(Object.values(style_data)[0])[4][1];
 
+        var style = document.getElementsByName("recipe_style");
+        style.forEach(function (s) {
+            s = s.options[s.selectedIndex].text;
+            console.log('S ', s)
+            console.log('ss ', style_data)
+            var keys = Object.keys(style_data)
+            var index = keys.indexOf(s)
+
+            if (s !== "Choose style") {
+                min_abv = Object.values(Object.values(style_data)[index])[0][0];
+                max_abv = Object.values(Object.values(style_data)[index])[0][1];
+                min_fg = Object.values(Object.values(style_data)[index])[1][0];
+                max_fg = Object.values(Object.values(style_data)[index])[1][1];
+                min_ibu = Object.values(Object.values(style_data)[index])[2][0];
+                max_ibu = Object.values(Object.values(style_data)[index])[2][1];
+                min_og = Object.values(Object.values(style_data)[index])[3][0];
+                max_og = Object.values(Object.values(style_data)[index])[3][1];
+                min_srm = Object.values(Object.values(style_data)[index])[4][0];
+                max_srm = Object.values(Object.values(style_data)[index])[4][1];
+
+            }
+        });
 
         document.getElementById("OGspan").textContent = (min_og).toString() + ' - ' + (max_og).toString();
         document.getElementById("FGspan").textContent = (min_fg).toString() + ' - ' + (max_fg).toString();
@@ -724,26 +771,35 @@
         document.getElementById("IBUvalue").value = ibu.toString();
         document.getElementById("SRMvalue").value = srm.toString();
         document.getElementById("ABVvalue").value = abv.toString();
+        document.getElementById("estimatedPrice").value = price.toString();
 
         if (og < min_og || og > max_og) {
             document.getElementById("OGvalue").style.color = "red";
+        } else {
+            document.getElementById("OGvalue").style.color = "green";
         }
         if (fg < min_fg || fg > max_fg) {
             document.getElementById("FGvalue").style.color = "red";
+        } else {
+            document.getElementById("FGvalue").style.color = "green";
         }
         if (ibu < min_ibu || ibu > max_ibu) {
             document.getElementById("IBUvalue").style.color = "red";
+        } else {
+            document.getElementById("IBUvalue").style.color = "green";
         }
         if (srm < min_srm || srm > max_srm) {
             document.getElementById("SRMvalue").style.color = "red";
+        } else {
+            document.getElementById("SRMvalue").style.color = "green";
         }
         if (abv < min_abv || abv > max_abv) {
             document.getElementById("ABVvalue").style.color = "red";
+        } else {
+            document.getElementById("ABVvalue").style.color = "green";
         }
 
     }
-
-    function control_fermentables() {}
 
     </script>
 
