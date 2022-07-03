@@ -628,7 +628,7 @@
         document.getElementById("IBUvalue").value = ibu.toString();
         document.getElementById("SRMvalue").value = srm.toString();
         document.getElementById("ABVvalue").value = abv.toString();
-        document.getElementById("estimatedPrice").value = price.toString();
+        document.getElementById("estimatedPrice").value = (Math.round(price * 100) / 100).toString();
 
         if (og < min_og || og > max_og) {
             document.getElementById("OGvalue").style.color = "red";
