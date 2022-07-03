@@ -755,9 +755,19 @@ def add_ingredients():
         fermentable_price = request.form['fermentable_price']
         print(fermentable_price)
 
-        db.insert_into_fermentables(user_id, "\'" + fermentable_name + "\'", fermentable_color, gravity_contribution,
-                                    fermentable_price)
-        flash(fermentable_name + " has been added")
+        possibility_to_add_fermentable = True
+        current_fermentables = db.select_from_fermentables("\'" + str(user_id) + "\'")
+        for fermentable in current_fermentables:
+            if fermentable_name == fermentable[0]:
+                possibility_to_add_fermentable = False
+
+        if possibility_to_add_fermentable:
+            db.insert_into_fermentables(user_id, "\'" + fermentable_name + "\'", fermentable_color,
+                                        gravity_contribution,
+                                        fermentable_price)
+            flash(fermentable_name + " has been added")
+        else:
+            flash("You already have ingredient with this name")
 
     if request.method == 'POST' and 'hop_name' in request.form:
         hop_name = request.form['hop_name']
@@ -769,8 +779,17 @@ def add_ingredients():
         hop_price = request.form['hop_price']
         print(hop_price)
 
-        db.insert_into_hops(user_id, "\'" + hop_name + "\'", alpha_acids, hop_price)
-        flash(hop_name + " has been added")
+        possibility_to_add_hop = True
+        current_hops = db.select_from_hops("\'" + str(user_id) + "\'")
+        for hop in current_hops:
+            if hop_name == hop[0]:
+                possibility_to_add_hop = False
+
+        if possibility_to_add_hop:
+            db.insert_into_hops(user_id, "\'" + hop_name + "\'", alpha_acids, hop_price)
+            flash(hop_name + " has been added")
+        else:
+            flash("You already have ingredient with this name")
 
     if request.method == 'POST' and 'yeast_name' in request.form:
         yeast_name = request.form['yeast_name']
@@ -782,8 +801,17 @@ def add_ingredients():
         yeast_price = request.form['yeast_price']
         print(yeast_price)
 
-        db.insert_into_yeasts(user_id, "\'" + yeast_name + "\'", "\'" + yeast_attenuation + "\'", yeast_price)
-        flash(yeast_name + " has been added")
+        possibility_to_add_yeast = True
+        current_yeasts = db.select_from_yeasts("\'" + str(user_id) + "\'")
+        for yeast in current_yeasts:
+            if yeast_name == yeast[0]:
+                possibility_to_add_yeast = False
+
+        if possibility_to_add_yeast:
+            db.insert_into_yeasts(user_id, "\'" + yeast_name + "\'", "\'" + yeast_attenuation + "\'", yeast_price)
+            flash(yeast_name + " has been added")
+        else:
+            flash("You already have ingredient with this name")
 
     if request.method == 'POST' and 'other_name' in request.form:
         other_name = request.form['other_name']
@@ -795,8 +823,18 @@ def add_ingredients():
         other_price = request.form['other_price']
         print(other_price)
 
-        db.insert_into_others(user_id, "\'" + other_name + "\'", "\'" + optional_info + "\'", other_price)
-        flash(other_name + " has been added")
+        possibility_to_add_other = True
+        current_others = db.select_from_others("\'" + str(user_id) + "\'")
+        for other in current_others:
+            print(other)
+            if other_name == other[0]:
+                possibility_to_add_other = False
+
+        if possibility_to_add_other:
+            db.insert_into_others(user_id, "\'" + other_name + "\'", "\'" + optional_info + "\'", other_price)
+            flash(other_name + " has been added")
+        else:
+            flash("You already have ingredient with this name")
 
 
 
