@@ -126,7 +126,7 @@ class DatabaseConnector:
 
     @staticmethod
     def select_from_fermentables(user_id):
-        query = 'SELECT name, color, contribution, price FROM fermentables WHERE user_id=%s' % (user_id)
+        query = 'SELECT name, color, contribution, price, id FROM fermentables WHERE user_id=%s' % (user_id)
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -152,7 +152,7 @@ class DatabaseConnector:
 
     @staticmethod
     def select_from_hops(user_id):
-        query = 'SELECT name, alpha_acids, price FROM hops WHERE user_id=%s' % (user_id)
+        query = 'SELECT name, alpha_acids, price, id FROM hops WHERE user_id=%s' % (user_id)
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -178,7 +178,7 @@ class DatabaseConnector:
 
     @staticmethod
     def select_from_others(user_id):
-        query = 'SELECT name, info, price FROM others WHERE user_id=%s' % (user_id)
+        query = 'SELECT name, info, price, id FROM others WHERE user_id=%s' % (user_id)
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -204,7 +204,7 @@ class DatabaseConnector:
 
     @staticmethod
     def select_from_yeasts(user_id):
-        query = 'SELECT name, attenuation, price FROM yeasts WHERE user_id=%s' % (user_id)
+        query = 'SELECT name, attenuation, price, id FROM yeasts WHERE user_id=%s' % (user_id)
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()
@@ -415,6 +415,17 @@ class DatabaseConnector:
     @staticmethod
     def delete_from_recipes(recipe_id):
         query = 'DELETE FROM recipes WHERE id=%s' % recipe_id
+        print(query)
+        try:
+            cursor = DatabaseConnector.database.cursor()
+            cursor.execute(query)
+            DatabaseConnector.database.commit()
+        except (mysql.connector.Error, AttributeError) as e:
+            logging.error('Query has not been executed: ' + str(e))
+
+    @staticmethod
+    def delete_from_ingredients(table_name, id):
+        query = 'DELETE FROM %s WHERE id=%s' % (table_name, id)
         print(query)
         try:
             cursor = DatabaseConnector.database.cursor()

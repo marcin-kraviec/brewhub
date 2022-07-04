@@ -72,7 +72,7 @@ def add_recipe():
     # put fermantables into combobox in creating recipe form
     fermentables_for_combobox = []
     for i in range(len(fermentables)):
-        (name, color, gravity_contibution, price) = fermentables[i]
+        (name, color, gravity_contibution, price, id) = fermentables[i]
         fermentable = str(name)
         fermentables_for_combobox.append(fermentable)
 
@@ -81,7 +81,7 @@ def add_recipe():
     # put hops into combobox in creating recipe form
     hops_for_combobox = []
     for i in range(len(hops)):
-        (name, alpha_acids, price) = hops[i]
+        (name, alpha_acids, price, id) = hops[i]
         hop = str(name)
         hops_for_combobox.append(hop)
 
@@ -90,7 +90,7 @@ def add_recipe():
     # put others into combobox in creating recipe form
     others_for_combobox = []
     for i in range(len(others)):
-        (name, info, price) = others[i]
+        (name, info, price, id) = others[i]
         other = str(name)
         others_for_combobox.append(other)
 
@@ -99,7 +99,7 @@ def add_recipe():
     # put yeats into combobox in creating recipe form
     yeasts_for_combobox = []
     for i in range(len(yeasts)):
-        (name, attenuation, price) = yeasts[i]
+        (name, attenuation, price, id) = yeasts[i]
         # yeast = str(name) + ' ' + str(float(attenuation)) +' %'
         yeast = str(name)
         yeasts_for_combobox.append(yeast)
@@ -284,7 +284,7 @@ def edit_recipe_get(recipe_id):
     # put fermantables into combobox in creating recipe form
     fermentables_for_combobox = []
     for i in range(len(fermentables)):
-        (name, color, gravity_contibution, price) = fermentables[i]
+        (name, color, gravity_contibution, price, id) = fermentables[i]
         fermentable = str(name)
         fermentables_for_combobox.append(fermentable)
 
@@ -293,7 +293,7 @@ def edit_recipe_get(recipe_id):
     # put hops into combobox in creating recipe form
     hops_for_combobox = []
     for i in range(len(hops)):
-        (name, alpha_acids, price) = hops[i]
+        (name, alpha_acids, price, id) = hops[i]
         hop = str(name)
         hops_for_combobox.append(hop)
 
@@ -302,7 +302,7 @@ def edit_recipe_get(recipe_id):
     # put others into combobox in creating recipe form
     others_for_combobox = []
     for i in range(len(others)):
-        (name, info, price) = others[i]
+        (name, info, price, id) = others[i]
         other = str(name)
         others_for_combobox.append(other)
 
@@ -311,7 +311,7 @@ def edit_recipe_get(recipe_id):
     # put yeats into combobox in creating recipe form
     yeasts_for_combobox = []
     for i in range(len(yeasts)):
-        (name, attenuation, price) = yeasts[i]
+        (name, attenuation, price, id) = yeasts[i]
         # yeast = str(name) + ' ' + str(float(attenuation)) +' %'
         yeast = str(name)
         yeasts_for_combobox.append(yeast)
@@ -738,7 +738,7 @@ def like_recipe(recipe_id):
         {"likes": len(current_likes_this_recipe), "liked": (not possibility_to_like), "users_who_like": users_who_like})
 
 
-@recipes.route('/add_ingredients', methods=['GET', 'POST'])
+@recipes.route('/add_ingredients', methods=['POST'])
 def add_ingredients():
     db = DatabaseConnector()
     user_id = session['id']
@@ -838,6 +838,84 @@ def add_ingredients():
         else:
             flash("You already have ingredient with this name")
 
+    return redirect(url_for("recipes.ingredients"))
 
 
-    return render_template('ingredients_form.html')
+@recipes.route('/add_ingredients', methods=['GET'])
+def ingredients():
+    db = DatabaseConnector()
+    user_id = session['id']
+    fermentables = db.select_from_fermentables("\'" + str(user_id) + "\'")
+    hops = db.select_from_hops("\'" + str(user_id) + "\'")
+    yeasts = db.select_from_yeasts("\'" + str(user_id) + "\'")
+    others = db.select_from_others("\'" + str(user_id) + "\'")
+
+    return render_template('ingredients_form.html', fermentables=fermentables, hops=hops, yeasts=yeasts, others=others)
+
+
+@recipes.route('/delete_fermentable/<int:fermentable_id>')
+def delete_fermentable(fermentable_id):
+    db = DatabaseConnector()
+    user_id = session['id']
+    fermentables = db.select_from_fermentables("\'" + str(user_id) + "\'")
+    possibility_to_delete = False
+    for f in fermentables:
+        if f[4] == fermentable_id:
+            possibility_to_delete = True
+    if possibility_to_delete:
+        db.delete_from_ingredients('fermentables', "\'" + str(fermentable_id) + "\'")
+        flash("Ingredient has been deleted")
+    else:
+        flash("Error, you cannot delete this ingredient right now")
+    return redirect(url_for("recipes.ingredients"))
+
+
+@recipes.route('/delete_hop/<int:hop_id>')
+def delete_hop(hop_id):
+    db = DatabaseConnector()
+    user_id = session['id']
+    hops = db.select_from_hops("\'" + str(user_id) + "\'")
+    possibility_to_delete = False
+    for h in hops:
+        if h[3] == hop_id:
+            possibility_to_delete = True
+    if possibility_to_delete:
+        db.delete_from_ingredients('hops', "\'" + str(hop_id) + "\'")
+        flash("Ingredient has been deleted")
+    else:
+        flash("Error, you cannot delete this ingredient right now")
+    return redirect(url_for("recipes.ingredients"))
+
+
+@recipes.route('/delete_yeast/<int:yeast_id>')
+def delete_yeast(yeast_id):
+    db = DatabaseConnector()
+    user_id = session['id']
+    yeasts = db.select_from_yeasts("\'" + str(user_id) + "\'")
+    possibility_to_delete = False
+    for y in yeasts:
+        if y[3] == yeast_id:
+            possibility_to_delete = True
+    if possibility_to_delete:
+        db.delete_from_ingredients('yeasts', "\'" + str(yeast_id) + "\'")
+        flash("Ingredient has been deleted")
+    else:
+        flash("Error, you cannot delete this ingredient right now")
+    return redirect(url_for("recipes.ingredients"))
+
+
+@recipes.route('/delete_other/<int:other_id>')
+def delete_other(other_id):
+    db = DatabaseConnector()
+    user_id = session['id']
+    others = db.select_from_others("\'" + str(user_id) + "\'")
+    possibility_to_delete = False
+    for o in others:
+        if o[3] == other_id:
+            possibility_to_delete = True
+    if possibility_to_delete:
+        db.delete_from_ingredients('others', "\'" + str(other_id) + "\'")
+        flash("Ingredient has been deleted")
+    else:
+        flash("Error, you cannot delete this ingredient right now")
+    return redirect(url_for("recipes.ingredients"))

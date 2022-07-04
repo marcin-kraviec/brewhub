@@ -4,7 +4,52 @@
     <div class="container">
     <br/>
       <form action="{{ url_for('recipes.add_ingredients') }}" method="post" name="form_" value="fermentable_form">
-        <h4>Fermentable</h4>
+          <div>
+              <h3>Fermentables</h3>
+          </div>
+          <div class="mb-3" id="current_fermentables" style="overflow-y:scroll; overflow-x:hidden; height:300px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                          <th>
+                             <h5>Name &nbsp;&nbsp;&nbsp;</h5>
+                          </th>
+                          <th>
+                             <h5>Color</h5>
+                          </th>
+                          <th>
+                             <h5>Contribution</h5>
+                          </th>
+                          <th>
+                             <h5>Price</h5>
+                          </th>
+                      </tr>
+                </thead>
+                <tbody>
+                  {% for fermentable in fermentables %}
+                      <tr>
+                          <td>
+                                  <a>{{ fermentable[0] }} &nbsp;&nbsp;&nbsp;</a>
+                          </td>
+                          <td>
+                                  <a>{{ fermentable[1] }}</a>
+                          </td>
+                          <td>
+                                  <a>{{ fermentable[2] }}</a>
+                          </td>
+                          <td>
+                                  <a>{{ fermentable[3] }}</a>
+                          </td>
+                          <td>
+                                  <a class="btn btn-danger btn-sm" href="{{ url_for('recipes.delete_fermentable', table_name='fermentables', fermentable_id = fermentable[4]) }}">Delete</a>
+                          </td>
+                      </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+          </div>
+      <br>
+        <h4>Add new fermentable</h4>
             <div class="form-group" style="display: inline-block; width:410px">
                 <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="fermentable_name" class="form-control" placeholder="Enter fermentable name" required>
             </div>
@@ -23,18 +68,63 @@
             </div>
             <div class="form-group" style="display: inline-block; width:290px">
                 <div class="input-group mb-3" style="width:290px">
-                    <input type="number" name="fermentable_price" class="form-control" placeholder="Enter price" required>
+                    <input type="number" name="fermentable_price" class="form-control" placeholder="Enter price" min="0" required>
                     <span class="input-group-text">zł/kg</span>
                 </div>
             </div>
-
-      <br>
-      <br>
+      <br/>
+      <br/>
       <button type="submit" class="btn btn-primary" style="width: 100%" name="fermentable_submit" value="fermentable_submit">Save fermentable</button>
       </form>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+
+
       <hr class="my-4">
+
       <form action="{{ url_for('recipes.add_ingredients') }}" method="post" name="form_" value="hop_form">
-        <h4>Hop</h4>
+          <div>
+              <h3>Hops</h3>
+          </div>
+          <div class="mb-3" id="current_hops" style="overflow-y:scroll; overflow-x:hidden; height:300px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                          <th>
+                             <h5>Name &nbsp;&nbsp;&nbsp;</h5>
+                          </th>
+                          <th>
+                             <h5>Alpha acids</h5>
+                          </th>
+                          <th>
+                             <h5>Price</h5>
+                          </th>
+                      </tr>
+                </thead>
+                <tbody>
+                  {% for hop in hops %}
+                      <tr>
+                          <td>
+                                  <a>{{ hop[0] }} &nbsp;&nbsp;&nbsp;</a>
+                          </td>
+                          <td>
+                                  <a>{{ hop[1] }}</a>
+                          </td>
+                          <td>
+                                  <a>{{ hop[2] }}</a>
+                          </td>
+                          <td>
+                                  <a class="btn btn-danger btn-sm" href="{{ url_for('recipes.delete_hop', table_name='hops', hop_id = hop[3]) }}">Delete</a>
+                          </td>
+                      </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+          </div>
+      <br>
+        <h4>Add new hop</h4>
             <div class="form-group" style="display: inline-block; width:600px">
                 <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="hop_name" class="form-control" placeholder="Enter hop name" required>
             </div>
@@ -55,9 +145,54 @@
       <br>
       <button type="submit" class="btn btn-primary" style="width: 100%" name="hop_submit" value="hop_submit">Save Hop</button>
       </form>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+
       <hr class="my-4">
+
       <form action="{{ url_for('recipes.add_ingredients') }}" method="post">
-        <h4>Yeast</h4>
+          <div>
+              <h3>Yeasts</h3>
+          </div>
+          <div class="mb-3" id="current_yeasts" style="overflow-y:scroll; overflow-x:hidden; height:300px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                          <th>
+                             <h5>Name &nbsp;&nbsp;&nbsp;</h5>
+                          </th>
+                          <th>
+                             <h5>Attenuation</h5>
+                          </th>
+                          <th>
+                             <h5>Price</h5>
+                          </th>
+                      </tr>
+                </thead>
+                <tbody>
+                  {% for yeast in yeasts %}
+                      <tr>
+                          <td>
+                                  <a>{{ yeast[0] }} &nbsp;&nbsp;&nbsp;</a>
+                          </td>
+                          <td>
+                                  <a>{{ yeast[1] }}</a>
+                          </td>
+                          <td>
+                                  <a>{{ yeast[2] }}</a>
+                          </td>
+                          <td>
+                                  <a class="btn btn-danger btn-sm" href="{{ url_for('recipes.delete_yeast', table_name='yeasts', yeast_id = yeast[3]) }}">Delete</a>
+                          </td>
+                      </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+          </div>
+      <br>
+        <h4>Add new yeast</h4>
             <div class="form-group" style="display: inline-block; width:600px">
                 <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="yeast_name" class="form-control" placeholder="Enter yeast name" required>
             </div>
@@ -78,9 +213,54 @@
       <br>
       <button type="submit" class="btn btn-primary" style="width: 100%">Save Yeast</button>
       </form>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+
       <hr class="my-4">
+
       <form action="{{ url_for('recipes.add_ingredients') }}" method="post">
-        <h4>Other</h4>
+          <div>
+              <h3>Others</h3>
+          </div>
+          <div class="mb-3" id="current_others" style="overflow-y:scroll; overflow-x:hidden; height:300px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                          <th>
+                             <h5>Name &nbsp;&nbsp;&nbsp;</h5>
+                          </th>
+                          <th>
+                             <h5>Info</h5>
+                          </th>
+                          <th>
+                             <h5>Price</h5>
+                          </th>
+                      </tr>
+                </thead>
+                <tbody>
+                  {% for other in others %}
+                      <tr>
+                          <td>
+                                  <a>{{ other[0] }} &nbsp;&nbsp;&nbsp;</a>
+                          </td>
+                          <td>
+                                  <a>{{ other[1] }}</a>
+                          </td>
+                          <td>
+                                  <a>{{ other[2] }}</a>
+                          </td>
+                          <td>
+                                  <a class="btn btn-danger btn-sm" href="{{ url_for('recipes.delete_other', table_name='others', other_id = other[3]) }}">Delete</a>
+                          </td>
+                      </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+          </div>
+      <br>
+        <h4>Add new other</h4>
             <div class="form-group" style="display: inline-block; width:600px">
                 <input type="text" pattern="^[a-zA-Z\s]+[a-zA-Z]$" name="other_name" class="form-control" placeholder="Enter name" required>
             </div>
@@ -101,6 +281,8 @@
       <button type="submit" class="btn btn-primary" style="width: 100%">Save Other</button>
       </form>
       <hr class="my-4">
+      <br/>
+      <br/>
     </div>
 
 {% endblock %}
