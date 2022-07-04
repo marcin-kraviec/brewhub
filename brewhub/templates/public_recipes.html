@@ -26,7 +26,6 @@
                 <p class="card-text"> - <br/></p>
             {% endif %}
             <h6 class="card-subtitle mb-2 text-muted"><h6 style="display: inline-block">STYLE:</h6> {{ recipe[3] }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted"><h6 style="display: inline-block">AUTHOR:</h6> {{ recipe[1] }}</h6>
             <h6 class="card-subtitle mb-2 text-muted"><h6 style="display: inline-block">ADDED:</h6> {{ recipe[6] }}</h6>
               <br/><br/>
             <a href="{{ url_for('recipes.public_recipe', recipe_id=recipe[0]) }}" class="btn btn-primary btn-sm" style="display: inline-block; width: 100%">Open</a>

@@ -87,7 +87,7 @@ def register():
 
         # If account exists show error and validation checks
         if username in existing_users:
-            flash('Account already exists!')
+            flash('Account with this username already exists!')
 
         elif not re.match(r'^[A-Za-z0-9]+[A-Za-z0-9]$', username):
             flash('Username must contain only characters and numbers!')

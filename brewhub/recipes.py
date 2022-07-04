@@ -175,6 +175,7 @@ def add_recipe():
         (name, info, price, id) = others[i]
         other = str(name)
         others_for_combobox.append(other)
+    print(others)
 
     # get all yeasts hops from database
     yeasts = db.select_from_yeasts(user_id)
@@ -313,25 +314,33 @@ def add_recipe():
         price = request.form["estimatedPrice"]
         print(price)
 
-        # add recipe in database
-        db.insert_into_recipes("\'" + str(user_id) + "\'", "\'" + recipe_name + "\'", "\'" + recipe_style + "\'",
-                               "\'" + recipe_type + "\'", "\'" + visibility + "\'", "\'" + str(recipe_date) + "\'",
-                               "\'" + str(batch_size) + "\'",
-                               "\'" + boiling_time + "\'", "\'" + evaporation + "\'",
-                               "\'" + boiling_losses + "\'", "\'" + fermentation_losses + "\'", "\'" + boil_size + "\'",
-                               "\'" + wort_size + "\'", "\'" + fermentables1 + "\'",
-                               "\'" + fermentables_amounts + "\'",
-                               "\'" + hops + "\'", "\'" + hops_usages + "\'", "\'" + hops_timings + "\'",
-                               "\'" + hops_amounts + "\'", "\'" + others + "\'", "\'" + others_amounts + "\'",
-                               "\'" + others_infos + "\'",
-                               "\'" + yeast + "\'",
-                               "\'" + primary_fermentation + "\'", "\'" + secondary_fermentation + "\'",
-                               "\'" + efficiency + "\'", "\'" + temperature_stops + "\'",
-                               "\'" + stops_timings + "\'",
-                               "\'" + og + "\'", "\'" + fg + "\'", "\'" + ibu + "\'", "\'" + srm + "\'",
-                               "\'" + abv + "\'", "\'" + notes + "\'", "\'" + price + "\'")
+        all_recipes = db.select_all('recipes')
+        possibility_to_create_recipe = True
+        for r in all_recipes:
+            if recipe_name == r[2]:
+                possibility_to_create_recipe = False
 
-        flash('Recipe has been added successfully')
+        # add recipe in database
+        if possibility_to_create_recipe:
+            db.insert_into_recipes("\'" + str(user_id) + "\'", "\'" + recipe_name + "\'", "\'" + recipe_style + "\'",
+                                   "\'" + recipe_type + "\'", "\'" + visibility + "\'", "\'" + str(recipe_date) + "\'",
+                                   "\'" + str(batch_size) + "\'",
+                                   "\'" + boiling_time + "\'", "\'" + evaporation + "\'",
+                                   "\'" + boiling_losses + "\'", "\'" + fermentation_losses + "\'", "\'" + boil_size + "\'",
+                                   "\'" + wort_size + "\'", "\'" + fermentables1 + "\'",
+                                   "\'" + fermentables_amounts + "\'",
+                                   "\'" + hops + "\'", "\'" + hops_usages + "\'", "\'" + hops_timings + "\'",
+                                   "\'" + hops_amounts + "\'", "\'" + others + "\'", "\'" + others_amounts + "\'",
+                                   "\'" + others_infos + "\'",
+                                   "\'" + yeast + "\'",
+                                   "\'" + primary_fermentation + "\'", "\'" + secondary_fermentation + "\'",
+                                   "\'" + efficiency + "\'", "\'" + temperature_stops + "\'",
+                                   "\'" + stops_timings + "\'",
+                                   "\'" + og + "\'", "\'" + fg + "\'", "\'" + ibu + "\'", "\'" + srm + "\'",
+                                   "\'" + abv + "\'", "\'" + notes + "\'", "\'" + price + "\'")
+            flash('Recipe has been added successfully')
+        else:
+            flash('Recipe with this name already exists')
 
     return render_template('recipe_form.html', styles=styles, fermentables_for_combobox=fermentables_for_combobox,
                            hops_for_combobox=hops_for_combobox, others_for_combobox=others_for_combobox,
