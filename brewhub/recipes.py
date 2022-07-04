@@ -150,7 +150,7 @@ def add_recipe():
     styles = style_data.keys()
 
     # get all user fermentables from database
-    fermentables = db.select_from_fermentables(user_id)
+    fermentables = db.select_from_fermentables("\'"+str(user_id)+"\'")
     # put fermantables into combobox in creating recipe form
     fermentables_for_combobox = []
     for i in range(len(fermentables)):
@@ -159,7 +159,7 @@ def add_recipe():
         fermentables_for_combobox.append(fermentable)
 
     # get all user hops from database
-    hops = db.select_from_hops(user_id)
+    hops = db.select_from_hops("\'"+str(user_id)+"\'")
     # put hops into combobox in creating recipe form
     hops_for_combobox = []
     for i in range(len(hops)):
@@ -168,7 +168,7 @@ def add_recipe():
         hops_for_combobox.append(hop)
 
     # get all others hops from database
-    others = db.select_from_others(user_id)
+    others = db.select_from_others("\'"+str(user_id)+"\'")
     # put others into combobox in creating recipe form
     others_for_combobox = []
     for i in range(len(others)):
@@ -178,7 +178,7 @@ def add_recipe():
     print(others)
 
     # get all yeasts hops from database
-    yeasts = db.select_from_yeasts(user_id)
+    yeasts = db.select_from_yeasts("\'"+str(user_id)+"\'")
     # put yeats into combobox in creating recipe form
     yeasts_for_combobox = []
     for i in range(len(yeasts)):
