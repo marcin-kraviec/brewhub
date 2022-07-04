@@ -10,7 +10,7 @@ class DatabaseConnector:
         database = mysql.connector.connect(host=HOST, user=USER, password=PASSWORD, database=DATABASE,
                                            auth_plugin='mysql_native_password')
 
-        print('DUPA')
+
     except mysql.connector.Error as e:
         logging.critical('Connection to database has not been established: ' + str(e))
         sys.exit()

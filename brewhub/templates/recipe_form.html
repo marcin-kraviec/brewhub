@@ -371,7 +371,7 @@
 
     function gravity() {
         var flaskData = JSON.parse('{{data | tojson | safe}}');
-
+        var price = 0
         {# attenuation is ready #}
         var yeast = document.getElementById("yeast");
         yeast = yeast.options[yeast.selectedIndex].text;
@@ -417,7 +417,6 @@
         var fermentable = document.getElementsByName("fermentable");
         var gravity_contributions = []
         var srms = []
-        var price = 0
         var fermentables_names = flaskData.fermentables_names;
         var fermentables = flaskData.fermentables;
         var index = fermentables_names.indexOf(fermentable)
