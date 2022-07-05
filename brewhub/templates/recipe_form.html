@@ -414,6 +414,7 @@
         {#console.log(volume)#}
 
         {# gravity_contributions is ready #}
+        var fermentable_amount_index = 0;
         var fermentable = document.getElementsByName("fermentable");
         var gravity_contributions = []
         var srms = []
@@ -430,8 +431,8 @@
             } else {
                 gravity_contributions.push(fermentables[index][2]);
                 srms.push(fermentables[index][1]);
-                price += fermentables[index][3] * fermentable_amounts[index]
-
+                price += fermentables[index][3] * fermentable_amounts[fermentable_amount_index]
+                fermentable_amount_index += 0
             }
         });
         console.log('Price', price)
@@ -511,6 +512,7 @@
             hop_amounts.push(ha);
         });
 
+        var hop_amount_index = 0
         hop.forEach(function (h) {
             h = h.options[h.selectedIndex].text;
             var index = hops_names.indexOf(h);
@@ -518,9 +520,12 @@
                 alpha_acids.push(0);
             } else {
                 alpha_acids.push(hops[index][1]);
-                price += hops[index][2] * hop_amounts[index] / 100;
+                console.log('dupaaaaaaaaa',hops[index][2])
+                price += hops[index][2] * hop_amounts[hop_amount_index] / 100;
+                hop_amount_index += 1;
             }
         });
+
 
         var others = flaskData.others;
         var others_names = flaskData.others_names;
@@ -533,12 +538,15 @@
             oa = parseInt(oa.value);
             other_amounts.push(oa);});
         console.log('Others:', others)
+        var other_amount_index = 0;
         other.forEach(function (o) {
             o = o.options[o.selectedIndex].text;
             var index = others_names.indexOf(o);
             if (o !== "Choose ingredient") {
-                price += others[index][2] * other_amounts[index] / 100;
-            }});
+                price += others[index][2] * other_amounts[other_amount_index] / 100;
+                other_amount_index += 1;
+            }
+        });
 
         var l = alpha_acids.length;
         var utilization = 0;
