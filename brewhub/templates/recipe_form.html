@@ -103,7 +103,7 @@
                 </tbody>
             </table>
             <button type="button" class="btn btn-warning" onclick="add_row('fermentablesTable')" style="width: 150px">Add row</button>
-            <button type="button" class="btn btn-danger" onclick="delete_row('fermentablesTable')" style="width: 150px">Delete row</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('fermentablesTable'); gravity()" style="width: 150px">Delete row</button>
         <hr class="my-4">
         <h4>Hops</h4>
             <table class="table table-hover" id="hopTable">
@@ -151,7 +151,7 @@
                 </tbody>
             </table>
             <button type="button" class="btn btn-warning" onclick="add_row('hopTable')" style="width: 150px">Add row</button>
-            <button type="button" class="btn btn-danger" onclick="delete_row('hopTable')" style="width: 150px">Delete row</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('hopTable'); gravity()" style="width: 150px">Delete row</button>
         <hr class="my-4">
         <h4>Others</h4>
             <table class="table table-hover" id="othersTable">
@@ -187,7 +187,7 @@
                 </tbody>
             </table>
             <button type="button" class="btn btn-warning" onclick="add_row('othersTable')" style="width: 150px">Add row</button>
-            <button type="button" class="btn btn-danger" onclick="delete_row('othersTable')" style="width: 150px">Delete row</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('othersTable'); gravity()" style="width: 150px">Delete row</button>
         <hr class="my-4">
         <h4>Fermentation</h4>
         <div>
@@ -247,7 +247,7 @@
                 </tbody>
             </table>
             <button type="button" class="btn btn-warning" onclick="add_row('mashTable')" style="width: 150px">Add step</button>
-            <button type="button" class="btn btn-danger" onclick="delete_row('mashTable')" style="width: 150px">Delete row</button>
+            <button type="button" class="btn btn-danger" onclick="delete_row('mashTable'); gravity()" style="width: 150px">Delete row</button>
 
         <hr class="my-4">
         <h4>Details</h4>
@@ -414,27 +414,31 @@
         {#console.log(volume)#}
 
         {# gravity_contributions is ready #}
-        var fermentable_amount_index = 0;
         var fermentable = document.getElementsByName("fermentable");
         var gravity_contributions = []
         var srms = []
         var fermentables_names = flaskData.fermentables_names;
         var fermentables = flaskData.fermentables;
         var index = fermentables_names.indexOf(fermentable)
-        fermentable.forEach(function (f) {
-            f = f.options[f.selectedIndex].text;
-            var index = fermentables_names.indexOf(f)
 
-            if (f === "Choose ingredient") {
+        var f = []
+        for (let i=0; i<fermentable.length; i++) {
+            console.log('oooo', fermentable[i])
+            f.push(fermentable[i].options[fermentable[i].selectedIndex].text);
+            console.log('ffff', f[i])
+            var index = fermentables_names.indexOf(f[i])
+            if (f[i] === "Choose ingredient") {
                 gravity_contributions.push(0)
                 srms.push(0)
             } else {
+                if (isNaN(fermentable_amounts[i])) {
+                    fermentable_amounts[i] = 0;
+                }
                 gravity_contributions.push(fermentables[index][2]);
                 srms.push(fermentables[index][1]);
-                price += fermentables[index][3] * fermentable_amounts[fermentable_amount_index]
-                fermentable_amount_index += 0
+                price += fermentables[index][3] * fermentable_amounts[i]
             }
-        });
+        }
         console.log('Price', price)
 
         var gravity_points = [];
@@ -512,19 +516,20 @@
             hop_amounts.push(ha);
         });
 
-        var hop_amount_index = 0
-        hop.forEach(function (h) {
-            h = h.options[h.selectedIndex].text;
-            var index = hops_names.indexOf(h);
-            if (h === "Choose hop") {
+        var h = []
+        for (let i=0; i<hop.length; i++) {
+            h.push(hop[i].options[hop[i].selectedIndex].text);
+            var index = hops_names.indexOf(h[i]);
+            if (h[i] === "Choose hop") {
                 alpha_acids.push(0);
             } else {
+                if (isNaN(hop_amounts[i])) {
+                    hop_amounts[i] = 0;
+                }
                 alpha_acids.push(hops[index][1]);
-                console.log('dupaaaaaaaaa',hops[index][2])
-                price += hops[index][2] * hop_amounts[hop_amount_index] / 100;
-                hop_amount_index += 1;
+                price += hops[index][2] * hop_amounts[i] / 100;
             }
-        });
+        }
 
 
         var others = flaskData.others;
@@ -538,15 +543,18 @@
             oa = parseInt(oa.value);
             other_amounts.push(oa);});
         console.log('Others:', others)
-        var other_amount_index = 0;
-        other.forEach(function (o) {
-            o = o.options[o.selectedIndex].text;
-            var index = others_names.indexOf(o);
-            if (o !== "Choose ingredient") {
-                price += others[index][2] * other_amounts[other_amount_index] / 100;
-                other_amount_index += 1;
+
+        var o = []
+        for ( let i=0; i<other.length; i++) {
+            o.push(other[i].options[other[i].selectedIndex].text);
+            var index = others_names.indexOf(o[i]);
+            if (o[i] !== "Choose ingredient") {
+                if (isNaN(other_amounts[i])) {
+                    other_amounts[i] = 0;
+                }
+                price += others[index][2] * other_amounts[i] / 100;
             }
-        });
+        }
 
         var l = alpha_acids.length;
         var utilization = 0;
@@ -663,10 +671,8 @@
         } else {
             document.getElementById("ABVvalue").style.color = "green";
         }
-
     }
 
     </script>
-
 
 {% endblock %}
