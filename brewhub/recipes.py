@@ -991,8 +991,10 @@ def public_recipe(recipe_id):
     author = db.select_from_users_by_id("\'" + str(chosen_recipe[1]) + "\'")[0][1]
 
     if_liked = False
-    if (str(recipe_id), session['id']) in db.select_from_likes("\'" + str(recipe_id) + "\'"):
+    if (recipe_id, session['id']) in db.select_from_likes("\'" + str(recipe_id) + "\'"):
         if_liked = True
+    print()
+    print(if_liked)
 
     # list of users who likes this recipe
     current_likes_this_recipe = db.select_from_likes("\'" + str(recipe_id) + "\'")
