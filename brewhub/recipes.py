@@ -650,30 +650,10 @@ def edit_recipe_get(recipe_id):
                   "Roggenbier": {"IBU": [10, 20], "SRM": [14, 19], "OG": [1.046, 1.056], "FG": [1.010, 1.014],
                                  "ABV": [4.5, 6]},
                   "Sahti": {"IBU": [0, 15], "SRM": [4, 22], "OG": [1.076, 1.120], "FG": [1.016, 1.038], "ABV": [7, 11]},
-                  "Brett Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Mixed-Fermentation Sour Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Wild Specialty Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
                   "Straight Sour Beer": {"IBU": [3, 8], "SRM": [2, 3], "OG": [1.048, 1.065], "FG": [1.006, 1.013],
                                          "ABV": [4.5, 7]},
-                  "Fruit Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Fruit and Spice Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Specialty Fruit Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
                   "Grape Ale": {"IBU": [10, 30], "SRM": [4, 8], "OG": [1.059, 1.075], "FG": [1.004, 1.013],
-                                "ABV": [6, 8.5]},
-                  "Spiced Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Spice, Herb, or Vegetable Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Autumn Seasonal Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Winter Seasonal Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Specialty Spice Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Alternative Grain Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Alternative Sugar Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Classic Style Smoked Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Specialty Smoked Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Wood-Aged Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Specialty Wood-Aged Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Commercial Specialty Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Mixed-Style Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []},
-                  "Experimental Beer": {"IBU": [], "SRM": [], "OG": [], "FG": [], "ABV": []}}
+                                "ABV": [6, 8.5]}}
 
 
     # get beer style names from style_data

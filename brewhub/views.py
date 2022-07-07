@@ -238,7 +238,7 @@ def edit_profile():
             flash('There is nothing to update')
 
         else:
-            db.update('users', "\'" + session['username'] + "\'", "\'" + new_username + "\'", "\'" + new_email + "\'",
+            db.update_users('users', "\'" + session['username'] + "\'", "\'" + new_username + "\'", "\'" + new_email + "\'",
                       "\'" + new_bio + "\'")
 
             session['username'] = new_username
